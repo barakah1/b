@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "609073563149",
+    "firebase_url": "https://barakah-9e7cb.firebaseio.com",
+    "project_id": "barakah-9e7cb",
+    "storage_bucket": "barakah-9e7cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609073563149:android:81a6e0da36b20e29517744",
+        "android_client_info": {
+          "package_name": "com.example.barakah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609073563149-la91lhlevk0l18huun9q9m3isb1gg766.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barakah",
+            "certificate_hash": "c15b224434c7684089d4bb8f98df741fafe37d98"
+          }
+        },
+        {
+          "client_id": "609073563149-57pr211h47lupnq74vhtpqa59e8agl2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barakah",
+            "certificate_hash": "a9eecd765ecbc047a740462d300e9c6308b01520"
+          }
+        },
+        {
+          "client_id": "609073563149-fuks95b3s5306ghtj83n71jdu2ob7ma0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoUUnylCvDzQSR0MOGX-ur4z5-S7PfI4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609073563149-fuks95b3s5306ghtj83n71jdu2ob7ma0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

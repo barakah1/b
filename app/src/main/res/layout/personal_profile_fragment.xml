@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_twenty"
+            android:layout_marginEnd="@dimen/dp_twenty"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="142dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="@dimen/thirty_five"
+                android:text="الملف الشخصي"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sixty"
+                android:background="@drawable/et_bg"
+
+                android:ems="10"
+                android:hint="name"
+                android:inputType="textPersonName"
+                android:padding="@dimen/dp_ten" />
+
+            <EditText
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
+                android:background="@drawable/et_bg"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="textPersonName"
+                android:padding="@dimen/dp_ten"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.482"
+                tools:layout_editor_absoluteX="100dp" />
+
+            <EditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
+
+                android:background="@drawable/et_bg"
+                android:ems="10"
+                android:hint="mobile number"
+                android:inputType="textPersonName"
+                android:padding="@dimen/dp_ten" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
+
+                android:background="@drawable/et_bg"
+                android:ems="10"
+                android:hint="email"
+                android:inputType="textPersonName"
+                android:padding="@dimen/dp_ten" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
+                android:background="@drawable/et_bg"
+                android:ems="10"
+                android:hint="address"
+                android:inputType="textPersonName"
+
+                android:padding="@dimen/dp_ten"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.782"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.247" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fifteen"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnHealth"
+                    android:layout_width="161dp"
+                    android:layout_height="40dp"
+                    android:hint="اختر"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/medical"
+                    android:layout_width="118dp"
+                    android:layout_height="39dp"
+                    android:text="الحالة الصحية*"
+                    android:textColor="#FF7BBD7F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/thirty_five"
+                android:background="@drawable/bg"
+                android:text="حفظ التعديلات" />
+
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/dp_twenty"
+                android:layout_marginBottom="@dimen/thirty_five"
+                android:background="@drawable/bg"
+                android:text="تسجيل خروج" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

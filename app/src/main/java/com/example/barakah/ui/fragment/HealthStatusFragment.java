@@ -1,0 +1,157 @@
+package com.example.barakah.ui.fragment;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.example.barakah.R;
+import com.example.barakah.models.HealthStatusModel;
+import com.example.barakah.models.RegisterModel;
+import com.example.barakah.ui.adapters.AdapterHealthStatus;
+import com.example.barakah.utils.BarakahConstants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+public class HealthStatusFragment extends Fragment {
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    public static String TAG="HealthStatusFragment";
+    private String mParam1;
+    private String mParam2;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private AdapterHealthStatus mAdapter;
+    private Button btnSubmit;
+
+
+    public HealthStatusFragment() {
+        // Required empty public constructor
+    }
+
+    public static HealthStatusFragment newInstance() {
+        HealthStatusFragment fragment = new HealthStatusFragment();
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_health_status, container, false);
+        initializeView(view);
+        return view;
+    }
+
+    private void initializeView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.rcvHealth);
+        btnSubmit = (Button) view.findViewById(R.id.btnSignin);
+        // use a linear layout manager
+        layoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        // specify an adapter (see also next example)
+        mAdapter = new AdapterHealthStatus(getActivity());
+        recyclerView.setAdapter(mAdapter);
+
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
+        arrayList.add(new HealthStatusModel("POCS", "1", false));
+        arrayList.add(new HealthStatusModel("HYPOTHYROLDISM", "2", false));
+        arrayList.add(new HealthStatusModel("PRESSURE DIESEASE", "3", false));
+        arrayList.add(new HealthStatusModel("PRESSURE", "4", false));
+        arrayList.add(new HealthStatusModel("CHOLESTORL", "5", false));
+        arrayList.add(new HealthStatusModel("THYROID ACTIVITY", "6", false));
+        arrayList.add(new HealthStatusModel("ACIDITY", "7", false));
+        arrayList.add(new HealthStatusModel("PMS", "8", false));
+        arrayList.add(new HealthStatusModel("PREGNANCY", "9", false));
+        arrayList.add(new HealthStatusModel("COUGH", "10", false));
+        arrayList.add(new HealthStatusModel("THOMSOSIS", "11", false));
+        arrayList.add(new HealthStatusModel("NAUSEA", "12", false));
+        arrayList.add(new HealthStatusModel("IRRITABLE BOWEL SYNDROME", "13", false));
+        arrayList.add(new HealthStatusModel("INDIGESTION", "14", false));
+        arrayList.add(new HealthStatusModel("CONSTIPATION", "15", false));
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Object register =dataSnapshot.getValue();
+                    System.out.println(register);
+
+                }
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mAdapter.setData(arrayList);
+        mAdapter.notifyDataSetChanged();
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<HealthStatusModel> arrayList = mAdapter.getData();
+                if (arrayList.size() > 0) {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra(BarakahConstants.HEALTH_STATUS_DATA, arrayList);
+                    getActivity().setResult(BarakahConstants.GET_HEALTH_STATUS, resultIntent);
+                    getActivity().finish();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+
+}
