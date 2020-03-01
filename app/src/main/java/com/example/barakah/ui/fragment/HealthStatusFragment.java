@@ -31,11 +31,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class HealthStatusFragment extends Fragment {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    public static String TAG="HealthStatusFragment";
+    public static String TAG = "HealthStatusFragment";
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
@@ -89,7 +91,7 @@ public class HealthStatusFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
+        final ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
         arrayList.add(new HealthStatusModel("POCS", "1", false));
         arrayList.add(new HealthStatusModel("HYPOTHYROLDISM", "2", false));
         arrayList.add(new HealthStatusModel("PRESSURE DIESEASE", "3", false));
@@ -111,10 +113,24 @@ public class HealthStatusFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    Object register =dataSnapshot.getValue();
+                    HashMap<String, String> register = (HashMap<String, String>) dataSnapshot.getValue();
                     System.out.println(register);
+                    Collection<String> strList = register.values();
+                    for (String list : strList) {
 
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (arrayList.get(i).getId().equals(list)) {
+                                arrayList.get(i).setChecked(true);
+                            }
+                        }
+                    }
+                    mAdapter.setData(arrayList);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    mAdapter.setData(arrayList);
+                    mAdapter.notifyDataSetChanged();
                 }
+
 
             }
 
@@ -125,8 +141,6 @@ public class HealthStatusFragment extends Fragment {
             }
         });
 
-        mAdapter.setData(arrayList);
-        mAdapter.notifyDataSetChanged();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

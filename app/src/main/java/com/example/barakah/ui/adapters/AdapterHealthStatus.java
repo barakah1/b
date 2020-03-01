@@ -6,17 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.barakah.R;
 import com.example.barakah.models.HealthStatusModel;
-
 import java.util.ArrayList;
 
 public class AdapterHealthStatus extends RecyclerView.Adapter<AdapterHealthStatus.MyViewHolder> {
-
     private final Context context;
     private ArrayList<HealthStatusModel> data;
 
@@ -57,8 +53,10 @@ public class AdapterHealthStatus extends RecyclerView.Adapter<AdapterHealthStatu
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (data != null && data.size() > 0) {
             HealthStatusModel model = data.get(position);
+            if (model.getChecked()) {
+                holder.checkobx.setChecked(true);
+            } else holder.checkobx.setChecked(false);
             holder.checkobx.setText(model.getName());
-
             holder.checkobx.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

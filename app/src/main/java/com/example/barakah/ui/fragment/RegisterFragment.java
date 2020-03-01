@@ -1,5 +1,6 @@
 package com.example.barakah.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import com.example.barakah.models.RegisterModel;
 import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.ui.activity.MainActivity;
 import com.example.barakah.utils.BarakahConstants;
+import com.example.barakah.utils.BarakahUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -52,6 +54,7 @@ public class RegisterFragment extends Fragment {
     private RegisterModel registerModel;
     private TextView medical;
     private ArrayList<HealthStatusModel> arrayList;
+    private Dialog progressDialog;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -152,6 +155,7 @@ public class RegisterFragment extends Fragment {
             registerModel.setName(name);
             registerModel.setEmail(email);
             registerModel.setMobile(mobile);
+            progressDialog = BarakahUtils.customProgressDialog(getActivity());
             login(email, password);
         }
     }
@@ -174,19 +178,23 @@ public class RegisterFragment extends Fragment {
 
                                     }
                                 }
+                                closeProgress();
+
                                 Toast.makeText(getActivity(), getResources().getString(R.string.reg_success), Toast.LENGTH_SHORT).show();
 
                                 startActivity(new Intent(getActivity(), MainActivity.class));
                                 getActivity().finish();
 
                             } else {
+                                closeProgress();
 
                                 Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_SHORT).show();
 
                             }
-                        }else{
-                            System.out.println("something"+ task.getException().getMessage());
-                            System.out.println("something"+task);
+                        } else {
+                            closeProgress();
+                            System.out.println("something" + task.getException().getMessage());
+                            System.out.println("something" + task);
                         }
                     }
                 });
@@ -211,6 +219,12 @@ public class RegisterFragment extends Fragment {
             if (data != null) {
                 arrayList = (ArrayList<HealthStatusModel>) data.getExtras().getSerializable(BarakahConstants.HEALTH_STATUS_DATA);
             }
+        }
+    }
+
+    public void closeProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.barakah.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,17 +33,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class LoginFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static String TAG = "LoginFragment";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Dialog progressDialog;
+
     private EditText etEmail;
     private EditText etPassowrd;
     private Button loginBtn;
@@ -126,6 +124,7 @@ public class LoginFragment extends Fragment {
         } else if (password.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();
         } else {
+            progressDialog = BarakahUtils.customProgressDialog(getActivity());
             login(email, password);
         }
     }
@@ -137,11 +136,13 @@ public class LoginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            closeProgress();
                             Toast.makeText(getActivity(), getResources().getString(R.string.success_login), Toast.LENGTH_SHORT).show();
                             BarakahUtils.putPrefBoolean(BarakahConstants.USER_PREF.IS_LOGEDIN, true, getActivity());
                             startActivity(new Intent(getActivity(), MainActivity.class));
                             getActivity().finish();
                         } else {
+                            closeProgress();
                             System.out.println("something" + task);
                             Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -156,5 +157,9 @@ public class LoginFragment extends Fragment {
         loginBtn = view.findViewById(R.id.btnSignin);
     }
 
-
+    public void closeProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 }

@@ -92,7 +92,7 @@ public class BarakahUtils {
     public static void deletesharedData(Context context) {
         if (context == null)
             return;
-                    SharedPreferences  preferences = PreferenceManager
+        SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();

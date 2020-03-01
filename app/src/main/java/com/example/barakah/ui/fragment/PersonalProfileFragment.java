@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -45,6 +46,7 @@ public class PersonalProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private ArrayList<HealthStatusModel> arrayList;
     private RegisterModel registerModel;
+    private Dialog progressDialog;
 
     // public static PersonalProfileFragment newInstance() {
    /*     return new PersonalProfileFragment();
@@ -115,17 +117,20 @@ public class PersonalProfileFragment extends Fragment {
     }
 
     private void setUserData() {
+        progressDialog = BarakahUtils.customProgressDialog(getActivity());
+
         FirebaseUser user = mAuth.getCurrentUser();
         mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                 RegisterModel register =dataSnapshot.getValue(RegisterModel.class);
+                    RegisterModel register = dataSnapshot.getValue(RegisterModel.class);
                     System.out.println();
                     binding.etMobile.setText(register.getMobile());
                     binding.etAddress.setText(register.getAddress());
                     binding.etName.setText(register.getName());
                     binding.etEmail.setText(register.getEmail());
+                    closeProgress();
                 }
 
             }
@@ -133,7 +138,7 @@ public class PersonalProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                closeProgress();
             }
         });
 
@@ -162,6 +167,7 @@ public class PersonalProfileFragment extends Fragment {
             registerModel.setName(name);
             registerModel.setEmail(email);
             registerModel.setMobile(mobile);
+            progressDialog = BarakahUtils.customProgressDialog(getActivity());
             login(email, password);
         }
     }
@@ -177,9 +183,11 @@ public class PersonalProfileFragment extends Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {
                                 updateUserData(user);
-                            }
+                            } else closeProgress();
                         }
                     });
+                } else {
+                    closeProgress();
                 }
             }
         });
@@ -199,8 +207,9 @@ public class PersonalProfileFragment extends Fragment {
 
                 }
             }
-            Toast.makeText(getActivity(), getResources().getString(R.string.profile_update_success), Toast.LENGTH_SHORT).show();
+            closeProgress();
 
+            Toast.makeText(getActivity(), getResources().getString(R.string.profile_update_success), Toast.LENGTH_SHORT).show();
            /* startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();*/
         }
@@ -217,4 +226,11 @@ public class PersonalProfileFragment extends Fragment {
             }
         }
     }
+
+    public void closeProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
 }
