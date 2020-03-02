@@ -40,7 +40,7 @@
                 android:background="@drawable/et_bg"
 
                 android:ems="10"
-                android:hint="name"
+                android:hint="اسم"
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten" />
 
@@ -51,7 +51,7 @@
                 android:layout_marginTop="@dimen/dp_ten"
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="password"
+                android:hint="كلمه السر"
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +67,7 @@
 
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="mobile number"
+                android:hint="رقم الهاتف المحمول"
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten" />
 
@@ -79,7 +79,7 @@
 
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="email"
+                android:hint="البريد الإلكتروني"
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten" />
 
@@ -90,7 +90,7 @@
                 android:layout_marginTop="@dimen/dp_ten"
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="address"
+                android:hint="عنوان"
                 android:inputType="textPersonName"
 
                 android:padding="@dimen/dp_ten"
