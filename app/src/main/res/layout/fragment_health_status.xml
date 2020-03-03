@@ -20,7 +20,9 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dp_ten"
                 android:text="الأمراض التي تعاني منها:"
+
                 android:textSize="18dp"
                 android:textStyle="bold" />
 

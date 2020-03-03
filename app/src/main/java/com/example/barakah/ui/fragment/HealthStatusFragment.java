@@ -109,37 +109,42 @@ public class HealthStatusFragment extends Fragment {
         arrayList.add(new HealthStatusModel("غثيان", "15", false));
 
         FirebaseUser user = mAuth.getCurrentUser();
-        mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    HashMap<String, String> register = (HashMap<String, String>) dataSnapshot.getValue();
-                    System.out.println(register);
-                    Collection<String> strList = register.values();
-                    for (String list : strList) {
+        if (user != null) {
+            mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        HashMap<String, String> register = (HashMap<String, String>) dataSnapshot.getValue();
+                        System.out.println(register);
+                        Collection<String> strList = register.values();
+                        for (String list : strList) {
 
-                        for (int i = 0; i < arrayList.size(); i++) {
-                            if (arrayList.get(i).getId().equals(list)) {
-                                arrayList.get(i).setChecked(true);
+                            for (int i = 0; i < arrayList.size(); i++) {
+                                if (arrayList.get(i).getId().equals(list)) {
+                                    arrayList.get(i).setChecked(true);
+                                }
                             }
                         }
+                        mAdapter.setData(arrayList);
+                        mAdapter.notifyDataSetChanged();
+                    } else {
+                        mAdapter.setData(arrayList);
+                        mAdapter.notifyDataSetChanged();
                     }
-                    mAdapter.setData(arrayList);
-                    mAdapter.notifyDataSetChanged();
-                } else {
-                    mAdapter.setData(arrayList);
-                    mAdapter.notifyDataSetChanged();
+
+
                 }
 
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
+        } else {
+            mAdapter.setData(arrayList);
+            mAdapter.notifyDataSetChanged();
+        }
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
