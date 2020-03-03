@@ -92,21 +92,21 @@ public class HealthStatusFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
-        arrayList.add(new HealthStatusModel("POCS", "1", false));
-        arrayList.add(new HealthStatusModel("HYPOTHYROLDISM", "2", false));
-        arrayList.add(new HealthStatusModel("PRESSURE DIESEASE", "3", false));
-        arrayList.add(new HealthStatusModel("PRESSURE", "4", false));
-        arrayList.add(new HealthStatusModel("CHOLESTORL", "5", false));
-        arrayList.add(new HealthStatusModel("THYROID ACTIVITY", "6", false));
-        arrayList.add(new HealthStatusModel("ACIDITY", "7", false));
-        arrayList.add(new HealthStatusModel("PMS", "8", false));
-        arrayList.add(new HealthStatusModel("PREGNANCY", "9", false));
-        arrayList.add(new HealthStatusModel("COUGH", "10", false));
-        arrayList.add(new HealthStatusModel("THOMSOSIS", "11", false));
-        arrayList.add(new HealthStatusModel("NAUSEA", "12", false));
-        arrayList.add(new HealthStatusModel("IRRITABLE BOWEL SYNDROME", "13", false));
-        arrayList.add(new HealthStatusModel("INDIGESTION", "14", false));
-        arrayList.add(new HealthStatusModel("CONSTIPATION", "15", false));
+        arrayList.add(new HealthStatusModel("الضغط", "1", false));
+        arrayList.add(new HealthStatusModel("السكر", "2", false));
+        arrayList.add(new HealthStatusModel("الكوليسترول", "3", false));
+        arrayList.add(new HealthStatusModel("خمول الغدة الدرقية", "4", false));
+        arrayList.add(new HealthStatusModel("الحموضة", "5", false));
+        arrayList.add(new HealthStatusModel("نشاط الغدة الدرقية", "6", false));
+        arrayList.add(new HealthStatusModel("الدورة الشهرية", "7", false));
+        arrayList.add(new HealthStatusModel("الحمل", "8", false));
+        arrayList.add(new HealthStatusModel("الجلطة", "9", false));
+        arrayList.add(new HealthStatusModel("الكحة", "10", false));
+        arrayList.add(new HealthStatusModel("متلازمة تكيس المبايض", "11", false));
+        arrayList.add(new HealthStatusModel("القولون العصبي", "12", false));
+        arrayList.add(new HealthStatusModel("امساك", "13", false));
+        arrayList.add(new HealthStatusModel("عسر الهضم", "14", false));
+        arrayList.add(new HealthStatusModel("غثيان", "15", false));
 
         FirebaseUser user = mAuth.getCurrentUser();
         mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

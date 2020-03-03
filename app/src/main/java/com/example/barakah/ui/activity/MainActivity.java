@@ -109,28 +109,28 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.home:
-                    toolbar.setTitle("Home");
+                    toolbar.setTitle("الصفحة الرئيسية");
                     fragment = FragmentHome.newInstance();
                     loadFragment(fragment);
                     return true;
                 case R.id.cart:
-                    toolbar.setTitle("Cart");
+                    toolbar.setTitle("السلة");
                     fragment = CartFragment.newInstance();
                     loadFragment(fragment);
                     return true;
                 case R.id.favourite:
-                    toolbar.setTitle("Favourite");
+                    toolbar.setTitle("المفضلة");
                     ;
                     fragment = FavouriteFragment.newInstance();
                     loadFragment(fragment);
                     return true;
                 case R.id.orders:
-                    toolbar.setTitle("Orders");
+                    toolbar.setTitle("الطلبات");
                     fragment = OrdersFragment.newInstance();
                     loadFragment(fragment);
                     return true;
                 case R.id.navProfile:
-                    toolbar.setTitle("Profile");
+                    toolbar.setTitle("الصفحة الرئيسية");
                     fragment = PersonalProfileFragment.newInstance();
                     loadFragment(fragment);
                     return true;
