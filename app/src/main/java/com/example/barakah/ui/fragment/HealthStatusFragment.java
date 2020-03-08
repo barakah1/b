@@ -2,7 +2,6 @@ package com.example.barakah.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,8 +18,7 @@ import android.widget.Button;
 
 import com.example.barakah.R;
 import com.example.barakah.models.HealthStatusModel;
-import com.example.barakah.models.RegisterModel;
-import com.example.barakah.ui.adapters.AdapterHealthStatus;
+import com.example.barakah.adapters.AdapterHealthStatus;
 import com.example.barakah.utils.BarakahConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

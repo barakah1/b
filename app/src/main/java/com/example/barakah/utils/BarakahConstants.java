@@ -10,6 +10,8 @@ public class BarakahConstants {
     public interface DbTABLE {
         String EMAIL = "CUSTOMER";
         String CUSTOMER = "CUSTOMER";
+        String HERB = "HERB";
+
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
 
     }

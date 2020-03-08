@@ -100,7 +100,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         });
 */
-
+        toolbar.setTitle("الصفحة الرئيسية");
+        fragment = FragmentHome.newInstance();
+        loadFragment(fragment);
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

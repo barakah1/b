@@ -8,4 +8,6 @@
     <dimen name="fifteen">15dp</dimen>
     <dimen name="two_dp">2dp</dimen>
     <dimen name="dp_four">4dp</dimen>
+    <dimen name="dp_fifty">50dp</dimen>
+    <dimen name="twenty">20dp</dimen>
 </resources>

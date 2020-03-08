@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.FragmentHome">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.FragmentHome">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_fifty"
+            android:layout_marginStart="@dimen/fifteen"
+            android:layout_marginTop="@dimen/dp_ten"
+            android:layout_marginEnd="@dimen/fifteen"
+            android:background="@color/very_light_gray"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/dp_ten"
+            android:paddingTop="10dp"
+            android:paddingEnd="@dimen/dp_ten"
+            android:weightSum="3">
 
-</FrameLayout>
+            <EditText
+                android:id="@+id/et_Search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:background="@android:color/transparent"
+                android:ellipsize="end"
+                android:hint="@string/search"
+                android:lines="1"
+                android:maxLength="40"
+                android:maxLines="1"
+                android:paddingTop="@dimen/dp_ten"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/fifteen" />
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/twenty"
+                android:layout_weight="0.5"
+                android:src="@drawable/ic_search" />
+
+        </LinearLayout>
+      <!--  <EditText
+            android:id="@+id/et_Search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/search"
+            android:lines="1"
+            android:maxLength="40"
+            android:maxLines="1"
+            android:paddingTop="@dimen/dp_ten"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/fifteen" />-->
+     <androidx.recyclerview.widget.RecyclerView
+         android:layout_marginTop="@dimen/dp_ten"
+         android:layout_width="match_parent"
+         android:id="@+id/rcvHome"
+         android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</layout>

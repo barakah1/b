@@ -1,4 +1,4 @@
-package com.example.barakah.ui.adapters;
+package com.example.barakah.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
