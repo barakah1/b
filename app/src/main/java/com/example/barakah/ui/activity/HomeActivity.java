@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.barakah.R;
+import com.example.barakah.models.HerbsModel;
 import com.example.barakah.ui.fragment.HealthStatusFragment;
+import com.example.barakah.ui.fragment.HerbsDetailFragment;
 import com.example.barakah.ui.fragment.LoginFragment;
 import com.example.barakah.ui.fragment.RegisterFragment;
 import com.example.barakah.utils.BarakahConstants;
@@ -19,6 +21,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     private String fragmentType;
     private Fragment fragment;
+    private HerbsModel herbModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             fragmentType = bundle.getString(BarakahConstants.HOME_ACTIVITY);
+            herbModel = (HerbsModel) bundle.getSerializable(BarakahConstants.HERBS_MODEL);
         }
 
         setFragment();
@@ -39,6 +43,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         HealthStatusFragment.newInstance(), HealthStatusFragment.TAG
+                );
+            }
+          if (fragmentType.equals(BarakahConstants.HERBS_DETAILS)) {
+                BarakahUtils.setCurrentFragment(
+                        HomeActivity.this, R.id.homeContainer,
+                        HerbsDetailFragment.newInstance(herbModel), HerbsDetailFragment.TAG
                 );
             }
         }

@@ -6,6 +6,8 @@ public class BarakahConstants {
     public static final String HEALTH_STATUS_DATA = "HEALTH_STATUS_DATA";
     public static final int GET_HEALTH_STATUS = 600;
     public static String EMAIL = "EMAIL";
+    public static String HERBS_MODEL = "HERBS_MODEL";
+    public static String HERBS_DETAILS = "HERBS_DETAILS";
 
     public interface DbTABLE {
         String EMAIL = "CUSTOMER";

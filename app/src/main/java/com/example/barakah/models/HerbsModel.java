@@ -3,7 +3,9 @@ package com.example.barakah.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HerbsModel {
+import java.io.Serializable;
+
+public class HerbsModel implements Serializable {
     @SerializedName("benefit")
     @Expose
     private String benefit;

@@ -1,6 +1,7 @@
 package com.example.barakah.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.barakah.R;
 import com.example.barakah.databinding.AdapterHomeBinding;
 import com.example.barakah.models.HerbsModel;
+import com.example.barakah.ui.activity.HomeActivity;
+import com.example.barakah.utils.BarakahConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,14 +72,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
             holder.binding.rvTitle.setText(herbsList.get(position).getName());
             Glide.with(mContext).load(herbsList.get(position).getImage()).into(holder.binding.imgHome);
             holder.binding.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mContext, HomeActivity.class);
+                    intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.HERBS_DETAILS);
+                    intent.putExtra(BarakahConstants.HERBS_MODEL, herbsList.get(position));
+                    mContext.startActivity(intent);
                 }
             });
         }
