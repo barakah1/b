@@ -9,21 +9,25 @@ public class HerbsModel implements Serializable {
     @SerializedName("benefit")
     @Expose
     private String benefit;
+    @SerializedName("id")
+    @Expose
+    private String id;
+
     @SerializedName("description")
     @Expose
     private String description;
 
-     @SerializedName("image")
+    @SerializedName("image")
     @Expose
     private String image;
-     @SerializedName("interaction")
+    @SerializedName("interaction")
     @Expose
     private String interaction;
 
     @SerializedName("name")
     @Expose
     private String name;
- @SerializedName("side_effect")
+    @SerializedName("side_effect")
     @Expose
     private String side_effect;
 
@@ -67,9 +71,10 @@ public class HerbsModel implements Serializable {
         this.side_effect = side_effect;
     }
 
-    public HerbsModel(){
+    public HerbsModel() {
 
     }
+
     public String getName() {
         return name;
     }
@@ -78,5 +83,11 @@ public class HerbsModel implements Serializable {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }

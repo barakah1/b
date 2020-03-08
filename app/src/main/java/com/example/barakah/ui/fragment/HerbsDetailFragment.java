@@ -3,6 +3,7 @@ package com.example.barakah.ui.fragment;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -13,18 +14,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.barakah.R;
 import com.example.barakah.databinding.FragmentHerbsDetailBinding;
+import com.example.barakah.models.FavouriteModel;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.utils.BarakahConstants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HerbsDetailFragment extends Fragment {
-
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
     private FragmentHerbsDetailBinding binding;
     private HerbsModel herbsModel;
 
@@ -48,6 +62,9 @@ public class HerbsDetailFragment extends Fragment {
         if (getArguments() != null) {
             herbsModel = (HerbsModel) getArguments().getSerializable(BarakahConstants.HERBS_MODEL);
         }
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
@@ -71,10 +88,18 @@ public class HerbsDetailFragment extends Fragment {
             binding.btnAddToFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    addToFavourite();
                 }
             });
         }
+
+    }
+
+    private void addToFavourite() {
+        final FirebaseUser user = mAuth.getCurrentUser();
+        FavouriteModel fav = new FavouriteModel(herbsModel.getId(), true);
+        mDatabase.child(BarakahConstants.DbTABLE.FAVOURITE).child(user.getUid()).child(herbsModel.getId()).setValue(fav);
+        Toast.makeText(getActivity(), getResources().getText(R.string.herb_fav_success), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -85,7 +110,6 @@ public class HerbsDetailFragment extends Fragment {
         binding.tvTitle.setText(herbsModel.getName());
         binding.herbInfo.setText(herbsModel.getDescription());
         Glide.with(getActivity()).load(herbsData.getImage()).into(binding.herbPic);
-
 
     }
 

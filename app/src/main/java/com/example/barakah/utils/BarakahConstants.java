@@ -13,7 +13,7 @@ public class BarakahConstants {
         String EMAIL = "CUSTOMER";
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";
-
+        String FAVOURITE = "FAVOURITE";
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
 
     }

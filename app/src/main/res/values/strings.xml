@@ -19,4 +19,5 @@
     <string name="benefit">"الاستفادة من عشب "</string>
     <string name="site_effect">"الآثار الجانبية "</string>
     <string name="conflict">النزاع</string>
+    <string name="herb_fav_success">عشبة المفضلة بنجاح</string>
 </resources>
