@@ -2,13 +2,18 @@ package com.example.barakah.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.barakah.R;
+import com.example.barakah.databinding.ActivityHomeBinding;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.ui.fragment.HealthStatusFragment;
 import com.example.barakah.ui.fragment.HerbsDetailFragment;
@@ -22,11 +27,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
     private String fragmentType;
     private Fragment fragment;
     private HerbsModel herbModel;
+    private ActivityHomeBinding binding;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = DataBindingUtil.setContentView(HomeActivity.this, R.layout.activity_home);
+        toolbar = findViewById(R.id.toolbarHome);
+        toolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             fragmentType = bundle.getString(BarakahConstants.HOME_ACTIVITY);
@@ -45,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                         HealthStatusFragment.newInstance(), HealthStatusFragment.TAG
                 );
             }
-          if (fragmentType.equals(BarakahConstants.HERBS_DETAILS)) {
+            if (fragmentType.equals(BarakahConstants.HERBS_DETAILS)) {
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         HerbsDetailFragment.newInstance(herbModel), HerbsDetailFragment.TAG
@@ -54,7 +65,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         }
 
     }
-
 
 
     @Override

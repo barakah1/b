@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="@dimen/dp_fifty"
-
+                android:layout_marginBottom="@dimen/thirty_five"
                 android:orientation="horizontal">
 
                 <Button

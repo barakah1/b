@@ -3,6 +3,9 @@ package com.example.barakah.ui.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,8 +13,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.barakah.R;
+import com.example.barakah.databinding.ActivityLoginBinding;
 import com.example.barakah.ui.fragment.LoginFragment;
 import com.example.barakah.ui.fragment.RegisterFragment;
 import com.example.barakah.utils.BarakahConstants;
@@ -20,11 +25,18 @@ import com.example.barakah.utils.BarakahUtils;
 public class LoginActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
     private Fragment fragment;
+    private ActivityLoginBinding binding;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        //  setContentView(R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.activity_login);
+        toolbar = findViewById(R.id.toolbarHome);
+        toolbar.setTitleTextAppearance(this, R.style.MyTitleTextApperance);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("");
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         boolean isLogedIn = BarakahUtils.getPrefBoolean(BarakahConstants.USER_PREF.IS_LOGEDIN, LoginActivity.this);
         if (isLogedIn) {

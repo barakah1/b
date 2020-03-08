@@ -72,34 +72,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
         binding.navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-    /*  binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-          @Override
-          public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-              return false;
-          }
-      });*/
-      /*  mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        signUpnNameTextInput = findViewById(R.id.nameF);
-        signUpPasswordTextInput = findViewById(R.id.passF);
-        signUpEmailTextInput = findViewById(R.id.EmailF);
-        signUpPhoneTextInput = findViewById(R.id.PhoneF);
-        signUpaddresTextInput = findViewById(R.id.addreddF);
-        signUpButton = findViewById(R.id.signinB);
-        errorView = findViewById(R.id.signUpErrorView);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                checkValidation();
-
-
-            }
-
-
-        });
-*/
         toolbar.setTitle("الصفحة الرئيسية");
         fragment = FragmentHome.newInstance();
         loadFragment(fragment);
