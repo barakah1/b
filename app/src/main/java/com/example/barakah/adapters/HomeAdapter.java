@@ -20,7 +20,6 @@ import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> implements Filterable {
     private final Context mContext;
@@ -35,7 +34,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         AdapterHomeBinding binding;
 
         public MyViewHolder(AdapterHomeBinding binding) {
@@ -44,33 +42,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public HomeAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
-        // create a new view
-     /*   TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_home, parent, false);
-
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;*/
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         AdapterHomeBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_home, parent, false);
-        /*.inflate<AdapterHomeBinding>(
-                layoutInflater,
-        R.layout.adapter_home,
-                parent,
-                false
-        );*/
         return new MyViewHolder(binding);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
@@ -86,10 +69,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 }
             });
         }
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        //  holder.textView.setText(mDataset[position]);
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -112,8 +91,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                     ArrayList<HerbsModel> filteredList = new ArrayList<>();
                     for (HerbsModel row : herbsList) {
 
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
+
                         if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
@@ -131,7 +109,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 contactListFiltered = (ArrayList<HerbsModel>) filterResults.values;
 
-                // refresh the list with filtered data
                 notifyDataSetChanged();
             }
         };

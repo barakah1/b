@@ -52,21 +52,7 @@
                 android:src="@drawable/ic_search" />
 
         </LinearLayout>
-      <!--  <EditText
-            android:id="@+id/et_Search"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:background="@android:color/transparent"
-            android:ellipsize="end"
-            android:hint="@string/search"
-            android:lines="1"
-            android:maxLength="40"
-            android:maxLines="1"
-            android:paddingTop="@dimen/dp_ten"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/black"
-            android:textSize="@dimen/fifteen" />-->
+
      <androidx.recyclerview.widget.RecyclerView
          android:layout_marginTop="@dimen/dp_ten"
          android:layout_width="match_parent"
