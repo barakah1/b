@@ -16,4 +16,7 @@
     <string name="profile">الملف الشخصي</string>
     <string name="profile_update_success">تحديث الملف الشخصي بنجاح!!</string>
     <string name="search">Search</string>
+    <string name="benefit">"الاستفادة من عشب "</string>
+    <string name="site_effect">"الآثار الجانبية "</string>
+    <string name="conflict">النزاع</string>
 </resources>

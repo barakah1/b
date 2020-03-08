@@ -7,9 +7,13 @@
 
     </data>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,10 +22,12 @@
 
             <ImageView
                 android:id="@+id/herb_pic"
-                android:layout_width="332dp"
+                android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/sixteen"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="@dimen/sixteen"
                 android:scaleType="fitXY"
 
                 android:src="@drawable/herb_pic">
@@ -29,209 +35,84 @@
             </ImageView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="اسم العشبه"
-                android:textSize="20dp"
+                android:layout_marginStart="@dimen/sixteen"
+                android:layout_marginTop="@dimen/dp_five"
+                android:layout_marginEnd="@dimen/sixteen"
+                android:layout_marginBottom="@dimen/dp_five"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingRight="15dp"></TextView>
+                android:text="اسم العشبه"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/herb_info"
-                android:layout_width="300dp"
-                android:layout_height="64dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/sixteen"
+
+                android:layout_marginEnd="@dimen/sixteen"
                 android:background="@drawable/textview_border"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="@dimen/dp_five"
+                android:paddingBottom="@dimen/dp_five"
                 android:text=" (معلومات العشبه)"
                 android:textColor="@color/lightGray"
-                android:textSize="17dp"></TextView>
+                android:textSize="17dp" />
 
-            <LinearLayout
+            <net.theluckycoder.expandablecardview.ExpandableCardView
+                android:id="@+id/cardBenefit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp">
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="@dimen/dp_five"
+                app:expand_duration="300"
+                app:expanded="false"
+                app:title="@string/benefit" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cardview1"
-                    android:paddingBottom="12dp"
+            <net.theluckycoder.expandablecardview.ExpandableCardView
+                android:id="@+id/cardEffects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
 
-                    >
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="@dimen/dp_five"
+                app:expand_duration="300"
+                app:expanded="false"
+                app:title="@string/site_effect" />
 
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_arrow_drop_down"
-                        android:layout_gravity="right"
-                        android:id="@+id/btn_expand1"></Button>
+            <net.theluckycoder.expandablecardview.ExpandableCardView
+                android:id="@+id/cardConflict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="@dimen/dp_five"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycleritem_name1"
-                        android:text="فوائد العشبه "
-                        android:layout_gravity="right"
-                        android:layout_marginRight="40dp"
-                        android:textSize="17dp"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/expandablelayout1"
-                        android:layout_marginTop="30dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="herb info "
-                            android:textSize="15dp"
-
-                            ></TextView>
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/bottomnav"
-                    android:id="@+id/cardview2"
-                    android:paddingBottom="12dp">
-
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_arrow_drop_down"
-                        android:layout_gravity="right"
-                        android:id="@+id/btn_expand2"></Button>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycleritem_name2"
-                        android:text="التاٌثير الجانبي"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="40dp"
-                        android:textSize="17dp"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/expandablelayout2"
-                        android:layout_marginTop="30dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="herb info"
-                            android:textSize="15dp"
-
-                            ></TextView>
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cardview3"
-                    android:paddingBottom="12dp">
-
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_arrow_drop_down"
-                        android:layout_gravity="right"
-                        android:id="@+id/btn_expand3"></Button>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycleritem_name3"
-                        android:text="التعارضات"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="40dp"
-                        android:textSize="17dp"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/expandablelayout3"
-                        android:layout_marginTop="30dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="herb info "
-                            android:textSize="15dp"
-
-                            ></TextView>
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cardview4"
-                    android:paddingBottom="12dp">
-
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_arrow_drop_down"
-                        android:layout_gravity="right"
-                        android:id="@+id/btn_expand4"></Button>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycleritem_name4"
-                        android:text="البائعين والاسعار"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="40dp"
-                        android:textSize="17dp"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/expandablelayout4"
-                        android:layout_marginTop="30dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="herb info "
-                            android:textSize="15dp"
-
-                            ></TextView>
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
+                app:expand_duration="300"
+                app:expanded="false"
+                app:title="@string/conflict" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="bottom">
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/dp_fifty"
+
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_add"
@@ -243,6 +124,7 @@
                     android:text="اضافه الي السله"></Button>
 
                 <ImageButton
+                    android:id="@+id/btnAddToFav"
                     android:layout_width="46dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -254,5 +136,5 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </ScrollView>
 </layout>

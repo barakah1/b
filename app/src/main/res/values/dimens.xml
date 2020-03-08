@@ -10,4 +10,6 @@
     <dimen name="dp_four">4dp</dimen>
     <dimen name="dp_fifty">50dp</dimen>
     <dimen name="twenty">20dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="eighteen">18dp</dimen>
 </resources>
