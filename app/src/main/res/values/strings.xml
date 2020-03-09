@@ -2,24 +2,25 @@
     <string name="app_name">بركة</string>
     <string name="name_req">الاسم مطلوب</string>
     <string name="pass_req">كلمة المرور مطلوبة</string>
-    <string name="email_req">البريد الإلكتروني (مطلوب</string>
+    <string name="email_req">البريد الإلكتروني مطلوب</string>
     <string name="address_req">العنوان مطلوب</string>
     <string name="mobile_req">رقم الجوال مطلوب</string>
 
     <string name="hello_blank_fragment"> blank fragment</string>
-    <string name="success_login">تم تسجيل الدخول بنجاح!</string>
-    <string name="reg_success">تسجيل بنجاح!</string>
+    <string name="success_login">تم تسجيل الدخول بنجاح</string>
+    <string name="reg_success">تم التسجيل بنجاح</string>
     <string name="home">الصفحة الرئيسية</string>
-    <string name="cart">عربة التسوق</string>
+    <string name="cart">السلة</string>
     <string name="fav">المفضلة</string>
     <string name="orders">الطلبات </string>
     <string name="profile">الملف الشخصي</string>
-    <string name="profile_update_success">تحديث الملف الشخصي بنجاح!!</string>
+    <string name="profile_update_success">تم تحديث الملف الشخصي بنجاح</string>
     <string name="search">بحث</string>
-    <string name="benefit">"الاستفادة من عشب "</string>
-    <string name="site_effect">"الآثار الجانبية "</string>
-    <string name="conflict">النزاع</string>
-    <string name="herb_fav_success">عشبة المفضلة بنجاح</string>
+    <string name="benefit">"فوائدها "</string>
+    <string name="site_effect">"استخدامها  "</string>
+    <string name="conflict">التعارضات</string>
+    <string name="herb_fav_success">تم الاضافة الى المفضلة بنجاح </string>
     <string name="health_status_title">الحالة الصحية</string>
-    <string name="herb_details">عشب التفاصيل</string>
+    <string name="herb_details">عن العشبة</string>
+
 </resources>
