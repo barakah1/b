@@ -22,5 +22,10 @@
     <string name="herb_fav_success">تم الاضافة الى المفضلة بنجاح </string>
     <string name="health_status_title">الحالة الصحية</string>
     <string name="herb_details">عن العشبة</string>
+    <string name="current_orders">Current Orders</string>
+    <string name="previous_orders">Previous Orders</string>
+    <string name="ok">OK</string>
+    <string name="capsule">Capsule</string>
+    <string name="raw">Raw</string>
 
 </resources>

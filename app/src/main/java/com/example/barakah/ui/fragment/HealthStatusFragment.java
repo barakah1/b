@@ -20,6 +20,7 @@ import android.widget.Button;
 import com.example.barakah.R;
 import com.example.barakah.models.HealthStatusModel;
 import com.example.barakah.adapters.AdapterHealthStatus;
+import com.example.barakah.models.HerbsModel;
 import com.example.barakah.utils.BarakahConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class HealthStatusFragment extends Fragment {
     private DatabaseReference mDatabase;
@@ -92,7 +94,7 @@ public class HealthStatusFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
+       /* final ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
         arrayList.add(new HealthStatusModel("الضغط", "1", false));
         arrayList.add(new HealthStatusModel("السكر", "2", false));
         arrayList.add(new HealthStatusModel("الكوليسترول", "3", false));
@@ -108,6 +110,77 @@ public class HealthStatusFragment extends Fragment {
         arrayList.add(new HealthStatusModel("امساك", "13", false));
         arrayList.add(new HealthStatusModel("عسر الهضم", "14", false));
         arrayList.add(new HealthStatusModel("غثيان", "15", false));
+*/
+
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<HealthStatusModel> arrayList = mAdapter.getData();
+                if (arrayList.size() > 0) {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra(BarakahConstants.HEALTH_STATUS_DATA, arrayList);
+                    getActivity().setResult(BarakahConstants.GET_HEALTH_STATUS, resultIntent);
+                    getActivity().finish();
+                }
+            }
+        });
+
+        getMedicalHistoryData();
+    }
+
+    private void getMedicalHistoryData() {
+
+        mDatabase.child(BarakahConstants.DbTABLE.MEDICAL_HISTORY).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    System.out.print(dataSnapshot.getValue());
+                    ArrayList<HealthStatusModel> herbsModels = new ArrayList<>();
+                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                    while (data.hasNext()) {
+                        HealthStatusModel model = data.next().getValue(HealthStatusModel.class);
+                        System.out.println(model);
+                        herbsModels.add(model);
+                    }
+                    if (herbsModels.size() > 0) {
+                        getUserMedicalHistoryData(herbsModels);
+                    }
+                  /*  adapter.setData(herbsModels);
+                    adapter.notifyDataSetChanged();
+                    if (progressDialog != null) {
+                        progressDialog.dismiss();
+                    }*/
+                }
+              /*      HashMap<String, String> register = (HashMap<String, String>) dataSnapshot.getValue();
+                    System.out.println(register);
+                    Collection<String> strList = register.values();
+                    for (String list : strList) {
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (arrayList.get(i).getId().equals(list)) {
+                                arrayList.get(i).setChecked(true);
+                            }
+                        }
+                    }
+                    mAdapter.setData(arrayList);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    mAdapter.setData(arrayList);
+                    mAdapter.notifyDataSetChanged();
+                }*/
+
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getUserMedicalHistoryData(final ArrayList<HealthStatusModel> arrayList) {
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -119,7 +192,6 @@ public class HealthStatusFragment extends Fragment {
                         System.out.println(register);
                         Collection<String> strList = register.values();
                         for (String list : strList) {
-
                             for (int i = 0; i < arrayList.size(); i++) {
                                 if (arrayList.get(i).getId().equals(list)) {
                                     arrayList.get(i).setChecked(true);
@@ -147,19 +219,6 @@ public class HealthStatusFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
 
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<HealthStatusModel> arrayList = mAdapter.getData();
-                if (arrayList.size() > 0) {
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra(BarakahConstants.HEALTH_STATUS_DATA, arrayList);
-                    getActivity().setResult(BarakahConstants.GET_HEALTH_STATUS, resultIntent);
-                    getActivity().finish();
-                }
-            }
-        });
     }
 
     @Override

@@ -14,7 +14,7 @@ public class HealthStatusModel implements Serializable {
     @Expose
     private String id;
 
-    private Boolean isChecked;
+    private Boolean isChecked=false;
 
 
     public HealthStatusModel() {

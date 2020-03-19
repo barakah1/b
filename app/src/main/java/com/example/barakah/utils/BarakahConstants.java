@@ -8,13 +8,15 @@ public class BarakahConstants {
     public static String EMAIL = "EMAIL";
     public static String HERBS_MODEL = "HERBS_MODEL";
     public static String HERBS_DETAILS = "HERBS_DETAILS";
+    public static  String quantity = "quantity";
 
     public interface DbTABLE {
-        String EMAIL = "CUSTOMER";
+        String CART = "CART";
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";
         String FAVOURITE = "FAVOURITE";
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
+        String MEDICAL_HISTORY = "MEDICAL_HISTORY";
 
     }
 

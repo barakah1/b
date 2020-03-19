@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:padding="16dp">
+
+
+            <ImageButton
+                android:id="@+id/btn_remove"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="70dp"
+                android:background="#00000000"
+                android:padding="@dimen/dp_five"
+                android:src="@drawable/ic_delete" />
+
+
+            <TextView
+                android:id="@+id/herb_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/imageIv"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="herb name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/herbType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/herb_name"
+                android:layout_toLeftOf="@id/imageIv"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="herb type"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                >
+
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/imageIv"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/herb_pic" />
+
+            <LinearLayout
+                android:id="@+id/linear_cart"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_plus"
+
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/tv_Minus"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/btn_plus"
+                    android:text="-"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/tvCount"
+                    android:layout_width="40dp"
+                    android:layout_height="25dp"
+                    android:background="@color/white"
+                    android:text="1"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/tv_Plus"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/btn_plus"
+                    android:text="+"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
