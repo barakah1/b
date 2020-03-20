@@ -3,11 +3,18 @@ package com.example.barakah.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CartModel {
+import java.io.Serializable;
+
+public class CartModel implements Serializable {
+
+    @SerializedName("id")
+    @Expose
+    String id;
 
     @SerializedName("herb_id")
     @Expose
     String herb_id;
+
     @SerializedName("herb_type")
     @Expose
     String herb_type;
@@ -37,5 +44,13 @@ public class CartModel {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

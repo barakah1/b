@@ -56,12 +56,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         return new MyViewHolder(binding);
     }
 
+    public ArrayList<CartHerbModel> getHerbCartList() {
+        return herbsList;
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
             final HerbsModel herb = herbsList.get(position).getHerbModel();
             final CartModel cart = herbsList.get(position).getCartModel();
             holder.binding.herbName.setText(herb.getName());
+            holder.binding.tvCount.setText(String.valueOf(cart.getQuantity()));
             holder.binding.herbType.setText(cart.getHerb_type());
             Glide.with(mContext).load(herb.getImage()).into(holder.binding.imageIv);
             holder.binding.btnRemove.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +75,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     final FirebaseUser user = mAuth.getCurrentUser();
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(user.getUid()).child(cart.getId()).removeValue();
                     herbsList.remove(herbsList.get(position));
                     notifyItemChanged(position);
                 }
@@ -82,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     } else {
                         int count = Integer.valueOf((String) holder.binding.tvCount.getText());
                         cart.setQuantity(count - 1);
-                        holder.binding.tvCount.setText(cart.getQuantity());
+                        holder.binding.tvCount.setText(String.valueOf(cart.getQuantity()));
                     }
 
                 }
@@ -93,9 +99,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     if (cart.getQuantity() <= 1) {
                         cart.setQuantity(1);
                     } else {
-                       // int count = holder.binding.tvCount.getText();
-                       // cart.setQuantity(count + 1);
-                        holder.binding.tvCount.setText(cart.getQuantity());
+                        int count = Integer.valueOf((String) holder.binding.tvCount.getText());
+                        cart.setQuantity(count + 1);
+                        holder.binding.tvCount.setText(String.valueOf(cart.getQuantity()));
                     }
                 }
             });

@@ -1,16 +1,20 @@
 package com.example.barakah.ui.fragment;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.barakah.R;
 import com.example.barakah.adapters.CartAdapter;
@@ -19,6 +23,7 @@ import com.example.barakah.databinding.FragmentCartBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.CartModel;
 import com.example.barakah.models.HerbsModel;
+import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,6 +84,46 @@ public class CartFragment extends Fragment {
         progressDialog = BarakahUtils.customProgressDialog(getActivity());
 
         getCardData();
+
+        binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupAlertDialog();
+
+            }
+        });
+    }
+
+    public void popupAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //Uncomment the below code to Set the message and title from the strings.xml file
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+
+        //Setting message manually and performing action on button click
+        builder.setMessage("Do you want to close this application ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ArrayList<CartHerbModel> cartHerbModels = adapter.getHerbCartList();
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.SELECT_HERBS_VENDOR);
+                        intent.putExtra(BarakahConstants.CART_DATA,cartHerbModels);
+                        //  intent.putExtra(BarakahConstants.HERBS_MODEL, herbsList.get(position));
+                        startActivity(intent);
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        dialog.cancel();
+                    }
+                });
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("AlertDialogExample");
+        alert.show();
     }
 
     private void getCardData() {
@@ -139,7 +184,13 @@ public class CartFragment extends Fragment {
                         }
 
                     }
+                    if (herbsCartModels.size() > 0) {
+                        binding.btnAddToCart.setVisibility(View.VISIBLE);
 
+
+                    } else {
+                        binding.btnAddToCart.setVisibility(View.GONE);
+                    }
                     adapter.setData(herbsCartModels);
                     adapter.notifyDataSetChanged();
                     if (progressDialog != null) {

@@ -1,8 +1,12 @@
 package com.example.barakah.models;
 
-public class CartHerbModel {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class CartHerbModel implements Serializable {
     CartModel cartModel;
     HerbsModel herbModel;
+    ArrayList<VendorStoreItemModel> vendor;
 
 
     public CartModel getCartModel() {
@@ -19,5 +23,13 @@ public class CartHerbModel {
 
     public void setHerbModel(HerbsModel herbModel) {
         this.herbModel = herbModel;
+    }
+
+    public ArrayList<VendorStoreItemModel> getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(ArrayList<VendorStoreItemModel> vendor) {
+        this.vendor = vendor;
     }
 }

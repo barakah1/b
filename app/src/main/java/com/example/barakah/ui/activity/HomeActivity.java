@@ -14,13 +14,17 @@ import android.view.View;
 
 import com.example.barakah.R;
 import com.example.barakah.databinding.ActivityHomeBinding;
+import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.ui.fragment.HealthStatusFragment;
 import com.example.barakah.ui.fragment.HerbsDetailFragment;
 import com.example.barakah.ui.fragment.LoginFragment;
 import com.example.barakah.ui.fragment.RegisterFragment;
+import com.example.barakah.ui.fragment.SelectHerbVendorFragment;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -29,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
     private HerbsModel herbModel;
     private ActivityHomeBinding binding;
     private Toolbar toolbar;
+    private ArrayList<CartHerbModel> cartHerbList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         if (bundle != null) {
             fragmentType = bundle.getString(BarakahConstants.HOME_ACTIVITY);
             herbModel = (HerbsModel) bundle.getSerializable(BarakahConstants.HERBS_MODEL);
+            cartHerbList = (ArrayList<CartHerbModel>) bundle.getSerializable(BarakahConstants.CART_DATA);
         }
 
         setFragment();
@@ -62,6 +68,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                         HerbsDetailFragment.newInstance(herbModel), HerbsDetailFragment.TAG
                 );
             }
+            if (fragmentType.equals(BarakahConstants.SELECT_HERBS_VENDOR)) {
+                BarakahUtils.setCurrentFragment(
+                        HomeActivity.this, R.id.homeContainer,
+                        SelectHerbVendorFragment.newInstance(cartHerbList), SelectHerbVendorFragment.TAG
+                );
+            }
+
         }
 
     }

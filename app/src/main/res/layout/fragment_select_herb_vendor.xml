@@ -10,22 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.CurrentOrdersFragment">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvCurrentOrders"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/btnAddToCart"
-            android:layout_width="257dp"
-            android:layout_height="55dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="@dimen/twenty"
-            android:background="#FF7BBD7F"
-            android:hint="تسجيل الدخول"
-
-            />
     </FrameLayout>
 </layout>

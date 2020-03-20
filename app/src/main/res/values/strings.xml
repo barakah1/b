@@ -27,5 +27,18 @@
     <string name="ok">OK</string>
     <string name="capsule">Capsule</string>
     <string name="raw">Raw</string>
-
+    <string name="dialog_title">Dialog Title</string>
+    <string name="dialog_message">Dialog Body</string>
+    <string name="select_vendor">Select vendor for product</string>
+    <string name="select_deilvery_method">Select Delivery Method</string>
+    <string name="receive_from_home">Receive From Home</string>
+    <string name="home_delivery">Home Delivery</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="herb">Herb</string>
+    <string-array name="stepLabels">
+        <item>Delivered</item>
+        <item>Under Process</item>
+        <item>The order has been Confirmed</item>
+    </string-array>
 </resources>

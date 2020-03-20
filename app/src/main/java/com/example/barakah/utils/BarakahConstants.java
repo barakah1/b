@@ -9,9 +9,12 @@ public class BarakahConstants {
     public static String HERBS_MODEL = "HERBS_MODEL";
     public static String HERBS_DETAILS = "HERBS_DETAILS";
     public static  String quantity = "quantity";
+    public static  String SELECT_HERBS_VENDOR = "SELECT_HERBS_VENDOR";
+    public static  String CART_DATA = "CART_DATA";
 
     public interface DbTABLE {
         String CART = "CART";
+        String STOREITEM = "STOREITEM";
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";
         String FAVOURITE = "FAVOURITE";
