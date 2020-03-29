@@ -116,11 +116,11 @@ public class HerbsDetailFragment extends Fragment {
         final FirebaseUser user = mAuth.getCurrentUser();
         FavouriteModel fav = new FavouriteModel(herbsModel.getId(), true);
         mDatabase.child(BarakahConstants.DbTABLE.FAVOURITE).child(user.getUid()).child(herbsModel.getId()).setValue(fav);
-        if(getActivity()!=null){
+        if (getActivity() != null) {
 
             Toast.makeText(getActivity(), getResources().getText(R.string.herb_fav_success), Toast.LENGTH_SHORT).show();
 
-    }
+        }
     }
 
     public void setHerbsData(HerbsModel herbsData) {
@@ -134,34 +134,34 @@ public class HerbsDetailFragment extends Fragment {
     }
 
     private void showAlertDialog() {
-        if(getActivity()!=null){
+        if (getActivity() != null) {
 
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
-        String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
-        final int checkedItem = 0;
-        alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        checkUserMedicalHistory(which);
-                        dialog.dismiss();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+            alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
+            String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
+            final int checkedItem = 0;
+            alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0:
+                            checkUserMedicalHistory(which);
+                            dialog.dismiss();
 
-                        break;
-                    case 1:
-                        checkUserMedicalHistory(which);
-                        dialog.dismiss();
-                        break;
+                            break;
+                        case 1:
+                            checkUserMedicalHistory(which);
+                            dialog.dismiss();
+                            break;
+                    }
                 }
-            }
-        });
+            });
 
-        AlertDialog alert = alertDialog.create();
-        alert.setCanceledOnTouchOutside(false);
-        alert.show();
-    }
+            AlertDialog alert = alertDialog.create();
+            alert.setCanceledOnTouchOutside(false);
+            alert.show();
+        }
     }
 
     private void checkUserMedicalHistory(final int which) {
@@ -205,46 +205,66 @@ public class HerbsDetailFragment extends Fragment {
 
 
     private void addHerbToCart(final String uid, final int which) {
-        if(getActivity()!=null){
+        if (getActivity() != null) {
 
             String herbType = "";
-        if (which == 0) {
-            herbType = getResources().getString(R.string.capsule);
-        } else if (which == 1) {
-            herbType = getResources().getString(R.string.raw);
+            if (which == 0) {
+                herbType = getResources().getString(R.string.capsule);
+            } else if (which == 1) {
+                herbType = getResources().getString(R.string.raw);
 
-        }
-        final String finalHerbType = herbType;
-        mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    System.out.println(dataSnapshot.getChildrenCount());
-                    ArrayList<CartModel> herbsModels = new ArrayList<CartModel>();
-                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
-                    System.out.println(data);
-                    boolean isAddNewItem = true;
+            }
+            final String finalHerbType = herbType;
+            mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        System.out.println(dataSnapshot.getChildrenCount());
+                        ArrayList<CartModel> herbsModels = new ArrayList<CartModel>();
+                        Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                        System.out.println(data);
+                        boolean isAddNewItem = true;
 
-                    while (data.hasNext()) {
-                        DataSnapshot da = data.next();
-                        System.out.println(da.getValue());
-                        CartModel model = da.getValue(CartModel.class);
-                        if (model.getHerb_id().equalsIgnoreCase(herbsModel.getId())) {
-                            if (model.getHerb_type().trim().equalsIgnoreCase(finalHerbType.trim())) {
-                                String key = da.getKey();
-                                isAddNewItem = false;
-                                int quantity = model.getQuantity() + 1;
-                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity);
+                        while (data.hasNext()) {
+                            DataSnapshot da = data.next();
+                            System.out.println(da.getValue());
+                            CartModel model = da.getValue(CartModel.class);
+                            if (model.getHerb_id().equalsIgnoreCase(herbsModel.getId())) {
+                                if (model.getHerb_type().trim().equalsIgnoreCase(finalHerbType.trim())) {
+                                    String key = da.getKey();
+                                    isAddNewItem = false;
+                                    int quantity = model.getQuantity() + 1;
+                                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity);
 
 
-                                break;
-                            } else {
-                                isAddNewItem = true;
+                                    break;
+                                } else {
+                                    isAddNewItem = true;
+                                }
+
                             }
-
                         }
-                    }
-                    if (isAddNewItem) {
+                        if (isAddNewItem) {
+                            CartModel cartModel = new CartModel();
+                            cartModel.setHerb_id(herbsModel.getId());
+                            cartModel.setHerb_type(finalHerbType);
+                            DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
+                            cartModel.setId(dr.getKey());
+                            mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isComplete()) {
+                                        if (getActivity() != null) {
+                                            BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.added_to_cart), Toast.LENGTH_LONG);
+
+                                        }
+                                    }
+                                }
+                            });
+                        }
+
+                    } else {
+                        //add herb to cart
                         CartModel cartModel = new CartModel();
                         cartModel.setHerb_id(herbsModel.getId());
                         cartModel.setHerb_type(finalHerbType);
@@ -253,52 +273,33 @@ public class HerbsDetailFragment extends Fragment {
                         mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isComplete()){
-                                    if(getActivity()!=null){
-                                        BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+                                if (task.isComplete()) {
+                                    if (getActivity() != null) {
+                                        BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.added_to_cart), Toast.LENGTH_LONG);
 
-                                    }                                }
+                                    }
+                                }
                             }
                         });
                     }
-
-                } else {
-                    //add herb to cart
-                    CartModel cartModel = new CartModel();
-                    cartModel.setHerb_id(herbsModel.getId());
-                    cartModel.setHerb_type(finalHerbType);
-                    DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
-                    cartModel.setId(dr.getKey());
-                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isComplete()){
-                                if(getActivity()!=null){
-                                    BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
-
-                                }
-                            }
-                        }
-                    });
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-    }
+                }
+            });
+        }
     }
 
 
     private void showConflict() {
-        if(getActivity()!=null){
+        if (getActivity() != null) {
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
-        String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
-        final int checkedItem = 0;
+            alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
+            String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
+            final int checkedItem = 0;
     /*    alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -316,10 +317,10 @@ public class HerbsDetailFragment extends Fragment {
             }
         });*/
 
-        AlertDialog alert = alertDialog.create();
-        alert.setCanceledOnTouchOutside(false);
-        alert.show();
-    }
+            AlertDialog alert = alertDialog.create();
+            alert.setCanceledOnTouchOutside(false);
+            alert.show();
+        }
     }
 
 
@@ -359,42 +360,49 @@ public class HerbsDetailFragment extends Fragment {
             for (HealthStatusModel herb : herbsModels) {
                 if (herb.getConflict() != null && herb.getConflict().size() > 0) {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
-                        if(herb.getId().equalsIgnoreCase(health.trim())){
+                        if (herb.getId().equalsIgnoreCase(health.trim())) {
                             result.add(true);
 
                         }
 
-                            //   result.add(herb.getConflict().values().)
+                        //   result.add(herb.getConflict().values().)
                     }
                 }
             }
         }
         if (result.size() > 0) {
-            doalogConflict();
+            doalogConflict(uid,which);
         } else {
             addHerbToCart(uid, which);
 
         }
     }
 
-    private void doalogConflict() {
-        if(getActivity()!=null){
+    private void doalogConflict(final String uid, final int which) {
+        if (getActivity() != null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title)
-                .setCancelable(false)
-                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+            builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title)
+                    .setCancelable(false)
+                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            addHerbToCart(uid, which);
 
 
-                    }
-                });
+                        }
+                    }).setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
 
-        AlertDialog alert = builder.create();
-        alert.setTitle(getResources().getString(R.string.conflict_title));
-        alert.show();
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
 
-    }
+
+            AlertDialog alert = builder.create();
+            alert.setTitle(getResources().getString(R.string.conflict_title));
+            alert.show();
+
+        }
     }
 }

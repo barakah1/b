@@ -46,6 +46,7 @@
     <string name="conflict_title">Conflict !</string>
     <string name="order_placed_successfully">Order Placed Successfully!</string>
     <string name="added_to_cart">Added to Cart</string>
+    <string name="cancel">Cancel</string>
     <string-array name="stepLabels">
         <item>The order has been Confirmed</item>
         <item>Under Process</item>
