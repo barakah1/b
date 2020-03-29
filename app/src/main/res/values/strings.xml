@@ -36,6 +36,8 @@
     <string name="quantity">Quantity</string>
     <string name="price">Price</string>
     <string name="herb">Herb</string>
+    <string name="select_herb_title">SELECT HERB TYPE</string>
+    <string name="total_price">Total Price: %s</string>
     <string-array name="stepLabels">
         <item>Delivered</item>
         <item>Under Process</item>

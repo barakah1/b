@@ -149,10 +149,7 @@ public class FavouriteFragment extends Fragment {
                         herbsModels.add(model);
                     }
                     getFavData();
-
-
                 }
-
             }
 
             @Override

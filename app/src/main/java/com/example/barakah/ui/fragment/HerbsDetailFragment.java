@@ -125,15 +125,14 @@ public class HerbsDetailFragment extends Fragment {
 
     private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle("SELECT HERB TYPE");
-        String[] items = {"Capsule", "Raw"};
+        alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
+        String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
         final int checkedItem = 0;
         alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-
                         checkUserMedicalHistory(which);
                         dialog.dismiss();
 
@@ -157,8 +156,9 @@ public class HerbsDetailFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    System.out.println(dataSnapshot.getChildren().iterator());
-                    addHerbToCart(firebaseUser.getUid(), which);
+                    Iterator<DataSnapshot> dataSnapshotIterator = dataSnapshot.getChildren().iterator();
+                    //  System.out.println(dataSnapshot.getChildren().iterator());
+                    //addHerbToCart(firebaseUser.getUid(), which);
 
                 } else {
                     //add herb to cart
@@ -232,8 +232,34 @@ public class HerbsDetailFragment extends Fragment {
 
             }
         });
-
     }
 
+
+    private void showConflict() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
+        String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
+        final int checkedItem = 0;
+    /*    alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        checkUserMedicalHistory(which);
+                        dialog.dismiss();
+
+                        break;
+                    case 1:
+                        checkUserMedicalHistory(which);
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        });*/
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+    }
 
 }

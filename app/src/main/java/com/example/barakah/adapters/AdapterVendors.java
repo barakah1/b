@@ -21,24 +21,12 @@ import java.util.ArrayList;
 public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHolder> {
     private final Context context;
     private final ArrayList<VendorStoreItemModel> data;
-    // private ArrayList<HealthStatusModel> data;
 
-    /*public AdapterVendors(FragmentActivity activity, Context context, ArrayList<VendorStoreItemModel> data) {
-        this.context = context;
-
-        //   this.data = activity;
-
-        this.data = data;
-    }*/
 
     public AdapterVendors(FragmentActivity mContext, ArrayList<VendorStoreItemModel> cartHerbModel) {
         this.context = mContext;
         this.data = cartHerbModel;
     }
-
-  /*  public void setData(ArrayList<HealthStatusModel> data) {
-        this.data = data;
-    }*/
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +45,6 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
-        // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_vendor, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
@@ -102,18 +89,4 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
             return data.size();
         } else return 0;
     }
-
- /*   public ArrayList<HealthStatusModel> getData() {
-        ArrayList<HealthStatusModel> arrayList = new ArrayList<>();
-
-        if (data != null) {
-            for (VendorStoreItemModel hl : data
-            ) {
-                if (hl.getChecked()) {
-                    arrayList.add(hl);
-                }
-            }
-        }
-        return arrayList;
-    }*/
 }

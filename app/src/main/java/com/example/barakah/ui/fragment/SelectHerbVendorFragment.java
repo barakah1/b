@@ -86,8 +86,6 @@ public class SelectHerbVendorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ArrayList<CartHerbModel> cartherb = adapter.getHerbCartList();
-               /* for (CartHerbModel cart:
-                     cartherb) {*/
                 for (int i = 0; i < cartherb.size(); i++) {
                     for (VendorStoreItemModel vendor :
                             cartherb.get(i).getVendors()) {
@@ -115,8 +113,6 @@ public class SelectHerbVendorFragment extends Fragment {
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
                         String key = da.getKey();
-                       /* for (CartHerbModel model : cartHerbList
-                        ) {*/
                         for (int i = 0; i < cartHerbList.size(); i++) {
                             if (cartHerbList.get(i).getCartModel().getHerb_id().equalsIgnoreCase(key)) {
                                 if (da.hasChildren()) {

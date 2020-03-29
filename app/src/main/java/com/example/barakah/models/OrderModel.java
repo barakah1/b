@@ -31,9 +31,13 @@ public class OrderModel implements Serializable {
     @SerializedName("order_price")
     @Expose
     private String order_price;
- @SerializedName("herb_type")
+    @SerializedName("herb_type")
     @Expose
     private String herb_type;
+    @SerializedName("order_id")
+    @Expose
+    private String order_id;
+
 
     public String getId() {
         return id;
@@ -105,5 +109,13 @@ public class OrderModel implements Serializable {
 
     public void setHerb_type(String herb_type) {
         this.herb_type = herb_type;
+    }
+
+    public String getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
     }
 }
