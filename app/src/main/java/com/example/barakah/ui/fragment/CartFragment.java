@@ -105,7 +105,6 @@ public class CartFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                         intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.SELECT_HERBS_VENDOR);
                         intent.putExtra(BarakahConstants.CART_DATA,cartHerbModels);
-                        //  intent.putExtra(BarakahConstants.HERBS_MODEL, herbsList.get(position));
                         startActivity(intent);
 
                     }

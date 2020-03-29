@@ -1,5 +1,6 @@
 package com.example.barakah.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.barakah.R;
 import com.example.barakah.adapters.HerbOfVendorAdapter;
@@ -17,6 +19,7 @@ import com.example.barakah.adapters.SelectVendorAdapter;
 import com.example.barakah.databinding.FragmentDeliveryTypeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.OrderModel;
+import com.example.barakah.ui.activity.MainActivity;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -109,35 +112,17 @@ public class FragmentDeliveryType extends Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {
                                 mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
-
+                                BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
+                                Intent intentt = new Intent(getActivity(), MainActivity.class);
+                                intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentt);
+                                getActivity().finish();
                             }
                         }
                     });
                 }
-                /* @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("herb_id")
-    @Expose
-    private String herb_id;
-    @SerializedName("vendor_id")
-    @Expose
-    private String vendor_id;
-    @SerializedName("quantity")
-    @Expose
-    private String quantity;
-    @SerializedName("herb_name")
-    @Expose
-    private String herb_name;
-    @SerializedName("vendor_name")
-    @Expose
-    private String vendor_name;*/
-
-               /* ArrayList<CartHerbModel> cartherb= adapter.getHerbCartList();
-                BarakahUtils.setCurrentFragment(
-                        getActivity(), R.id.homeContainer,
-                        HerbsDetailFragment.newInstance(cartherb), HerbsDetailFragment.TAG
-                );*/
             }
         });
         adapter.setData(cartHerbList);

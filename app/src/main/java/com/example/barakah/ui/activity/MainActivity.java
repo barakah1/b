@@ -115,64 +115,11 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     };
 
     private void loadFragment(Fragment fragment) {
-        // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-/*
-
-    private void checkValidation() {
-
-        String name = signUpnNameTextInput.getText().toString().trim();
-        String password = signUpPasswordTextInput.getText().toString().trim();
-        String email = signUpEmailTextInput.getText().toString().trim();
-        String address = signUpaddresTextInput.getText().toString().trim();
-        String mobile = signUpPhoneTextInput.getText().toString().trim();
-
-
-        if (name.isEmpty()) {
-            Toast.makeText(this, getResources().getString(R.string.name_req), Toast.LENGTH_SHORT).show();
-        } else if (password.isEmpty()) {
-            Toast.makeText(this, getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();
-
-        } else if (email.isEmpty()) {
-            Toast.makeText(this, getResources().getString(R.string.email_req), Toast.LENGTH_SHORT).show();
-
-        } else if (address.isEmpty()) {
-            Toast.makeText(this, getResources().getString(R.string.address_req), Toast.LENGTH_SHORT).show();
-
-        } else if (mobile.isEmpty()) {
-            Toast.makeText(this, getResources().getString(R.string.mobile_req), Toast.LENGTH_SHORT).show();
-
-        } else {
-            registerModel = new RegisterModel();
-            registerModel.setAddress(address);
-            registerModel.setName(name);
-            registerModel.setEmail(email);
-            registerModel.setMobile(mobile);
-            login(email, password);
-        }
-    }
-
-    private void login(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if (registerModel != null) {
-                                mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).setValue(registerModel);
-                            }
-                        } else {
-                            //show error
-                        }
-                    }
-                });
-    }
-*/
 
 
     @Override
@@ -193,33 +140,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public void onBackStackChanged() {
         fragment = getSupportFragmentManager().findFragmentById(R.id.loginContainer);
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            //  getSupportActionBar()!!.setDis(true)
-            // supportActionBar!!.setHomeButtonEnabled(true)
-            /*binding.toolbarMain!!.setNavigationOnClickListener {
-                if (mFragment is ProfileFragment
-                    || mFragment is MyUnitFragment
-                        || mFragment is MyBulletinsFragment
-                    || mFragment is MessagingFragment
-                        || mFragment is SelectLanguageFragment
-                    || mFragment is HomeFragment
-                        || mFragment is HomeFragment
-                    || mFragment is SignInFragment
-                        || mFragment is ForgotPasswordFragment
-                    || mFragment is AddEmergencyContactFragment
-                        || mFragment is Scan_ORCode_Fragment
-                    || mFragment is VisitorDetailsFragment
-                        || mFragment is CreatePostFragment
-                    || mFragment is UpdateBulletinsFragment
-                ) {
-                    this@MainActivity.finish()
-                } else {
-                    supportFragmentManager.popBackStack()
-                }
-            }*/
-        } else {
-            // supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        }
 
+        }
 
     }
 
