@@ -359,8 +359,12 @@ public class HerbsDetailFragment extends Fragment {
             for (HealthStatusModel herb : herbsModels) {
                 if (herb.getConflict() != null && herb.getConflict().size() > 0) {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
-                        //   result.add(herb.getConflict().values().)
-                        result.add(true);
+                        if(herb.getId().equalsIgnoreCase(health.trim())){
+                            result.add(true);
+
+                        }
+
+                            //   result.add(herb.getConflict().values().)
                     }
                 }
             }

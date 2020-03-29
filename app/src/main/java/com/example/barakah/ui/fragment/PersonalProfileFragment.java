@@ -130,8 +130,8 @@ public class PersonalProfileFragment extends Fragment {
                     binding.etAddress.setText(register.getAddress());
                     binding.etName.setText(register.getName());
                     binding.etEmail.setText(register.getEmail());
-                    closeProgress();
                 }
+                closeProgress();
 
             }
 
@@ -186,9 +186,9 @@ public class PersonalProfileFragment extends Fragment {
                             } else closeProgress();
                         }
                     });
-                } else {
-                    closeProgress();
                 }
+                    closeProgress();
+
             }
         });
 
@@ -228,7 +228,7 @@ public class PersonalProfileFragment extends Fragment {
     }
 
     public void closeProgress() {
-        if (progressDialog != null) {
+        if (progressDialog != null&&progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
