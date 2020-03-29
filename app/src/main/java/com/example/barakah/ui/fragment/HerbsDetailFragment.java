@@ -116,8 +116,11 @@ public class HerbsDetailFragment extends Fragment {
         final FirebaseUser user = mAuth.getCurrentUser();
         FavouriteModel fav = new FavouriteModel(herbsModel.getId(), true);
         mDatabase.child(BarakahConstants.DbTABLE.FAVOURITE).child(user.getUid()).child(herbsModel.getId()).setValue(fav);
-        Toast.makeText(getActivity(), getResources().getText(R.string.herb_fav_success), Toast.LENGTH_SHORT).show();
+        if(getActivity()!=null){
 
+            Toast.makeText(getActivity(), getResources().getText(R.string.herb_fav_success), Toast.LENGTH_SHORT).show();
+
+    }
     }
 
     public void setHerbsData(HerbsModel herbsData) {
@@ -131,6 +134,9 @@ public class HerbsDetailFragment extends Fragment {
     }
 
     private void showAlertDialog() {
+        if(getActivity()!=null){
+
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
         String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
@@ -155,6 +161,7 @@ public class HerbsDetailFragment extends Fragment {
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
     }
 
     private void checkUserMedicalHistory(final int which) {
@@ -198,7 +205,9 @@ public class HerbsDetailFragment extends Fragment {
 
 
     private void addHerbToCart(final String uid, final int which) {
-        String herbType = "";
+        if(getActivity()!=null){
+
+            String herbType = "";
         if (which == 0) {
             herbType = getResources().getString(R.string.capsule);
         } else if (which == 1) {
@@ -245,8 +254,10 @@ public class HerbsDetailFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isComplete()){
-                                    BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
-                                }
+                                    if(getActivity()!=null){
+                                        BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+
+                                    }                                }
                             }
                         });
                     }
@@ -262,7 +273,10 @@ public class HerbsDetailFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isComplete()){
-                                BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+                                if(getActivity()!=null){
+                                    BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+
+                                }
                             }
                         }
                     });
@@ -275,10 +289,13 @@ public class HerbsDetailFragment extends Fragment {
             }
         });
     }
+    }
 
 
     private void showConflict() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        if(getActivity()!=null){
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
         String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
         final int checkedItem = 0;
@@ -302,6 +319,7 @@ public class HerbsDetailFragment extends Fragment {
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
     }
 
 
@@ -356,7 +374,9 @@ public class HerbsDetailFragment extends Fragment {
     }
 
     private void doalogConflict() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if(getActivity()!=null){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title)
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -371,5 +391,6 @@ public class HerbsDetailFragment extends Fragment {
         alert.setTitle(getResources().getString(R.string.conflict_title));
         alert.show();
 
+    }
     }
 }
