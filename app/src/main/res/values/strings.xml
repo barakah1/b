@@ -47,8 +47,8 @@
     <string name="order_placed_successfully">Order Placed Successfully!</string>
     <string name="added_to_cart">Added to Cart</string>
     <string-array name="stepLabels">
-        <item>Delivered</item>
-        <item>Under Process</item>
         <item>The order has been Confirmed</item>
+        <item>Under Process</item>
+        <item>Delivered</item>
     </string-array>
 </resources>
