@@ -45,6 +45,7 @@
     <string name="conflict_msg">You have conflict with this herb</string>
     <string name="conflict_title">Conflict !</string>
     <string name="order_placed_successfully">Order Placed Successfully!</string>
+    <string name="added_to_cart">Added to Cart</string>
     <string-array name="stepLabels">
         <item>Delivered</item>
         <item>Under Process</item>

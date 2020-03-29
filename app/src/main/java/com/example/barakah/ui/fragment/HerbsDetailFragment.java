@@ -30,6 +30,9 @@ import com.example.barakah.models.HealthStatusModel;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
+import com.example.barakah.utils.BarakahUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -222,7 +225,17 @@ public class HerbsDetailFragment extends Fragment {
                                 String key = da.getKey();
                                 isAddNewItem = false;
                                 int quantity = model.getQuantity() + 1;
-                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity);
+                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isComplete()){
+                                            BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.added_to_cart), Toast.LENGTH_SHORT);
+
+                                        }
+
+                                    }
+                                });
+
                                 break;
                             } else {
                                 isAddNewItem = true;
@@ -320,15 +333,15 @@ public class HerbsDetailFragment extends Fragment {
             for (HealthStatusModel herb : herbsModels) {
                 if (herb.getConflict() != null && herb.getConflict().size() > 0) {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
-                    //   result.add(herb.getConflict().values().)
+                        //   result.add(herb.getConflict().values().)
                         result.add(true);
                     }
                 }
             }
         }
-        if(result.size()>0){
+        if (result.size() > 0) {
             doalogConflict();
-        }else{
+        } else {
             addHerbToCart(uid, which);
 
         }
@@ -336,8 +349,7 @@ public class HerbsDetailFragment extends Fragment {
 
     private void doalogConflict() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title);
-        builder.setMessage(getResources().getString(R.string.conflict_title))
+        builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title)
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -348,7 +360,7 @@ public class HerbsDetailFragment extends Fragment {
                 });
 
         AlertDialog alert = builder.create();
-        alert.setTitle(getResources().getString(R.string.add_to_cart_message));
+        alert.setTitle(getResources().getString(R.string.conflict_title));
         alert.show();
 
     }

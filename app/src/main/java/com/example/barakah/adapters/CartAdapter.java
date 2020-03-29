@@ -96,7 +96,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.binding.tvPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (cart.getQuantity() <= 1) {
+                    if (cart.getQuantity() < 1) {
                         cart.setQuantity(1);
                     } else {
                         int count = Integer.valueOf((String) holder.binding.tvCount.getText());
