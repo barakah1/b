@@ -41,6 +41,7 @@ import java.util.ArrayList;
 public class RegisterFragment extends Fragment {
     public static String TAG = "RegisterFragment";
     Button signUpButton;
+    Button signoutB;
     EditText signUpnNameTextInput;
     EditText signUpEmailTextInput;
     EditText signUpPasswordTextInput;
@@ -113,7 +114,7 @@ public class RegisterFragment extends Fragment {
 
 
         });
-        medical.setOnClickListener(new View.OnClickListener() {
+        signoutB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -209,6 +210,7 @@ public class RegisterFragment extends Fragment {
         signUpButton = view.findViewById(R.id.signinB);
         errorView = view.findViewById(R.id.signUpErrorView);
         medical = view.findViewById(R.id.medical);
+        signoutB = view.findViewById(R.id.signoutB);
 
     }
 

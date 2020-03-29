@@ -125,11 +125,11 @@ public class FragmentHome extends Fragment {
 
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
-                    if (progressDialog != null) {
+                    if (progressDialog != null&&progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 } else {
-                    if (progressDialog != null) {
+                    if (progressDialog != null&&progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 }
@@ -137,7 +137,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                if (progressDialog != null) {
+                if (progressDialog != null&&progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
             }
