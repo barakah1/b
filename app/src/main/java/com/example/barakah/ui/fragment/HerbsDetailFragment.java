@@ -241,7 +241,14 @@ public class HerbsDetailFragment extends Fragment {
                         cartModel.setHerb_type(finalHerbType);
                         DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
                         cartModel.setId(dr.getKey());
-                        mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel);
+                        mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isComplete()){
+                                    BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+                                }
+                            }
+                        });
                     }
 
                 } else {
@@ -251,7 +258,14 @@ public class HerbsDetailFragment extends Fragment {
                     cartModel.setHerb_type(finalHerbType);
                     DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
                     cartModel.setId(dr.getKey());
-                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel);
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isComplete()){
+                                BarakahUtils.toastMessgae(getActivity(),getResources().getString(R.string.added_to_cart),Toast.LENGTH_LONG);
+                            }
+                        }
+                    });
                 }
             }
 
