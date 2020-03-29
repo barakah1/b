@@ -102,7 +102,7 @@ public class CartFragment extends Fragment {
         //Setting message manually and performing action on button click
         builder.setMessage(getResources().getString(R.string.add_to_cart_message))
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ArrayList<CartHerbModel> cartHerbModels = adapter.getHerbCartList();
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
@@ -113,7 +113,7 @@ public class CartFragment extends Fragment {
 
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //  Action for 'NO' Button
                         dialog.cancel();
