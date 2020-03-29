@@ -77,7 +77,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                     mDatabase.child(BarakahConstants.DbTABLE.CART).child(user.getUid()).child(cart.getId()).removeValue();
                     herbsList.remove(herbsList.get(position));
-                    notifyItemChanged(position);
+                    notifyItemRemoved(position);
                 }
             });
             holder.binding.tvMinus.setOnClickListener(new View.OnClickListener() {

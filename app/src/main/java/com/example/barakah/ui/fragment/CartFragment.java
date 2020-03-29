@@ -47,6 +47,7 @@ public class CartFragment extends Fragment {
     private Dialog progressDialog;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -102,11 +103,13 @@ public class CartFragment extends Fragment {
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ArrayList<CartHerbModel> cartHerbModels = adapter.getHerbCartList();
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.SELECT_HERBS_VENDOR);
-                        intent.putExtra(BarakahConstants.CART_DATA,cartHerbModels);
-                        startActivity(intent);
+                        if (cartHerbModels != null && cartHerbModels.size() > 0) {
+                            Intent intent = new Intent(getActivity(), HomeActivity.class);
+                            intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.SELECT_HERBS_VENDOR);
+                            intent.putExtra(BarakahConstants.CART_DATA, cartHerbModels);
+                            startActivity(intent);
 
+                        }
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -139,8 +142,20 @@ public class CartFragment extends Fragment {
 
                     if (herbsModels.size() > 0) {
                         getAllHerbs(herbsModels);
+                    } else {
+                        binding.btnAddToCart.setVisibility(View.GONE);
+
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                } else {
+                    binding.btnAddToCart.setVisibility(View.GONE);
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
                     }
                 }
+
             }
 
             @Override
@@ -187,11 +202,11 @@ public class CartFragment extends Fragment {
                     }
                     adapter.setData(herbsCartModels);
                     adapter.notifyDataSetChanged();
-                    if (progressDialog != null) {
+                    if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 } else {
-                    if (progressDialog != null) {
+                    if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 }
