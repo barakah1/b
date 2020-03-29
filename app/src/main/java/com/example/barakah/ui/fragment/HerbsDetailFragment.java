@@ -225,16 +225,8 @@ public class HerbsDetailFragment extends Fragment {
                                 String key = da.getKey();
                                 isAddNewItem = false;
                                 int quantity = model.getQuantity() + 1;
-                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isComplete()) {
-                                            BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.added_to_cart), Toast.LENGTH_SHORT);
+                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity);
 
-                                        }
-
-                                    }
-                                });
 
                                 break;
                             } else {
@@ -257,7 +249,9 @@ public class HerbsDetailFragment extends Fragment {
                     CartModel cartModel = new CartModel();
                     cartModel.setHerb_id(herbsModel.getId());
                     cartModel.setHerb_type(finalHerbType);
-                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push().setValue(cartModel);
+                    DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
+                    cartModel.setId(dr.getKey());
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel);
                 }
             }
 
