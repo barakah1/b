@@ -100,7 +100,7 @@ public class CartFragment extends Fragment {
         builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
         //Setting message manually and performing action on button click
-        builder.setMessage("Do you want to close this application ?")
+        builder.setMessage(getResources().getString(R.string.add_to_cart_message))
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -122,7 +122,7 @@ public class CartFragment extends Fragment {
         //Creating dialog box
         AlertDialog alert = builder.create();
         //Setting the title manually
-        alert.setTitle("AlertDialogExample");
+        alert.setTitle(getResources().getString(R.string.add_to_cart_title));
         alert.show();
     }
 
