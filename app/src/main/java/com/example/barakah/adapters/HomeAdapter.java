@@ -86,7 +86,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    contactListFiltered = herbsList;
+                    herbsList= contactListFiltered ;
                 } else {
                     ArrayList<HerbsModel> filteredList = new ArrayList<>();
                     for (HerbsModel row : herbsList) {
@@ -97,17 +97,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                         }
                     }
 
-                    contactListFiltered = filteredList;
+                    herbsList = filteredList;
                 }
 
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = contactListFiltered;
+                filterResults.values = herbsList;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                contactListFiltered = (ArrayList<HerbsModel>) filterResults.values;
+                herbsList = (ArrayList<HerbsModel>) filterResults.values;
 
                 notifyDataSetChanged();
             }

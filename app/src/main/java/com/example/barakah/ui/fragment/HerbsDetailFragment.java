@@ -228,7 +228,7 @@ public class HerbsDetailFragment extends Fragment {
                                 mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isComplete()){
+                                        if (task.isComplete()) {
                                             BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.added_to_cart), Toast.LENGTH_SHORT);
 
                                         }
