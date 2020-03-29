@@ -6,8 +6,10 @@ import java.util.ArrayList;
 public class CartHerbModel implements Serializable {
     CartModel cartModel;
     HerbsModel herbModel;
-    ArrayList<VendorStoreItemModel> vendor;
-
+    ArrayList<VendorStoreItemModel> vendors;
+    VendorStoreItemModel vendor;
+    //0=home, 1= self service
+String deliveryType="0";
 
     public CartModel getCartModel() {
         return cartModel;
@@ -25,11 +27,27 @@ public class CartHerbModel implements Serializable {
         this.herbModel = herbModel;
     }
 
-    public ArrayList<VendorStoreItemModel> getVendor() {
+    public ArrayList<VendorStoreItemModel> getVendors() {
+        return vendors;
+    }
+
+    public void setVendors(ArrayList<VendorStoreItemModel> vendor) {
+        this.vendors = vendor;
+    }
+
+    public void setVendor(VendorStoreItemModel vendor) {
+        this.vendor = vendor;
+    }
+
+    public VendorStoreItemModel getVendor() {
         return vendor;
     }
 
-    public void setVendor(ArrayList<VendorStoreItemModel> vendor) {
-        this.vendor = vendor;
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
     }
 }

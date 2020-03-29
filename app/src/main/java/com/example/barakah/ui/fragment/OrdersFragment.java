@@ -49,8 +49,7 @@ public class OrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_orders, container, false);
+
         binding = FragmentOrdersBinding.inflate(inflater);
         return binding.getRoot();
     }
@@ -70,25 +69,8 @@ public class OrdersFragment extends Fragment {
                     tab.setText(getResources().getString(R.string.previous_orders));
 
                 }
-
-
             }
         });
         tabLayoutMediator.attach();
-
-                /*  TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
-            tab.text = "OBJECT ${(position + 1)}"
-            when (position) {
-                0 -> {
-                    tab.text = resources.getString(R.string.generated_qr)
-                }
-                1 -> {
-                    tab.text = resources.getString(R.string.checked_in)
-                }
-                2 -> {
-                    tab.text = resources.getString(R.string.checked_out)
-                }
-            }
-        }.attach()*/
     }
 }

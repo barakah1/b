@@ -19,7 +19,9 @@ import com.example.barakah.databinding.FragmentSelectHerbVendorBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.CartModel;
 import com.example.barakah.models.VendorStoreItemModel;
+import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
+import com.example.barakah.utils.BarakahUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -80,6 +82,28 @@ public class SelectHerbVendorFragment extends Fragment {
             getCardData();
 
         }
+        binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<CartHerbModel> cartherb = adapter.getHerbCartList();
+               /* for (CartHerbModel cart:
+                     cartherb) {*/
+                for (int i = 0; i < cartherb.size(); i++) {
+                    for (VendorStoreItemModel vendor :
+                            cartherb.get(i).getVendors()) {
+                        if (vendor.getIsChecked()) {
+                            cartherb.get(i).setVendor(vendor);
+                        }
+                    }
+                }
+
+
+                BarakahUtils.setCurrentFragment(
+                        getActivity(), R.id.homeContainer,
+                        FragmentDeliveryType.newInstance(cartherb), FragmentDeliveryType.TAG
+                );
+            }
+        });
     }
 
     private void getCardData() {
@@ -93,7 +117,7 @@ public class SelectHerbVendorFragment extends Fragment {
                         String key = da.getKey();
                        /* for (CartHerbModel model : cartHerbList
                         ) {*/
-                            for(int i=0;i<cartHerbList.size();i++){
+                        for (int i = 0; i < cartHerbList.size(); i++) {
                             if (cartHerbList.get(i).getCartModel().getHerb_id().equalsIgnoreCase(key)) {
                                 if (da.hasChildren()) {
                                     ArrayList<VendorStoreItemModel> herbsModels = new ArrayList<VendorStoreItemModel>();
@@ -105,28 +129,19 @@ public class SelectHerbVendorFragment extends Fragment {
                                         herbsModels.add(modell);
 
                                     }
-                                    cartHerbList.get(i).setVendor(herbsModels);
+                                    cartHerbList.get(i).setVendors(herbsModels);
 
                                 }
                             }
 
-                        //}
                         }
                         System.out.println(da.getValue());
-
-
-
 
 
                     }
                     adapter.setData(cartHerbList);
                     adapter.notifyDataSetChanged();
 
-                    //   adapter.setData(herbsModels);
-
-                  /*  if (herbsModels.size() > 0) {
-                        //  getAllHerbs(herbsModels);
-                    }*/
                 }
             }
 

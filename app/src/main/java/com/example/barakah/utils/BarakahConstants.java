@@ -11,9 +11,13 @@ public class BarakahConstants {
     public static  String quantity = "quantity";
     public static  String SELECT_HERBS_VENDOR = "SELECT_HERBS_VENDOR";
     public static  String CART_DATA = "CART_DATA";
+    public static String DELIVERED="2";
+    public static String ORDER_DETAILS="ORDER_DETAILS";
+    public static String ORDER_MODEL="ORDER_MODEL";
 
     public interface DbTABLE {
         String CART = "CART";
+        String ORDERS = "ORDERS";
         String STOREITEM = "STOREITEM";
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";

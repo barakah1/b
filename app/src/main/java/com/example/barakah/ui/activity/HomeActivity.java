@@ -16,9 +16,11 @@ import com.example.barakah.R;
 import com.example.barakah.databinding.ActivityHomeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.HerbsModel;
+import com.example.barakah.models.OrderModel;
 import com.example.barakah.ui.fragment.HealthStatusFragment;
 import com.example.barakah.ui.fragment.HerbsDetailFragment;
 import com.example.barakah.ui.fragment.LoginFragment;
+import com.example.barakah.ui.fragment.OrderDetailFragment;
 import com.example.barakah.ui.fragment.RegisterFragment;
 import com.example.barakah.ui.fragment.SelectHerbVendorFragment;
 import com.example.barakah.utils.BarakahConstants;
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
     private ActivityHomeBinding binding;
     private Toolbar toolbar;
     private ArrayList<CartHerbModel> cartHerbList;
+    private OrderModel orderModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
             fragmentType = bundle.getString(BarakahConstants.HOME_ACTIVITY);
             herbModel = (HerbsModel) bundle.getSerializable(BarakahConstants.HERBS_MODEL);
             cartHerbList = (ArrayList<CartHerbModel>) bundle.getSerializable(BarakahConstants.CART_DATA);
+            orderModel = (OrderModel) bundle.getSerializable(BarakahConstants.ORDER_MODEL);
         }
 
         setFragment();
@@ -72,6 +76,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         SelectHerbVendorFragment.newInstance(cartHerbList), SelectHerbVendorFragment.TAG
+                );
+            }
+            if (fragmentType.equals(BarakahConstants.ORDER_DETAILS)) {
+                BarakahUtils.setCurrentFragment(
+                        HomeActivity.this, R.id.homeContainer,
+                        OrderDetailFragment.newInstance(orderModel), OrderDetailFragment.TAG
                 );
             }
 

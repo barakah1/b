@@ -8,6 +8,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/white"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.CurrentOrdersFragment">
 

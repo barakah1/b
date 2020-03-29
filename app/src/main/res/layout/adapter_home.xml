@@ -10,10 +10,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/container"
         android:layout_width="match_parent"
-app:cardUseCompatPadding="false"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/fifteen"
         app:cardCornerRadius="@dimen/dp_ten"
-        android:layout_height="wrap_content">
+        app:cardUseCompatPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,8 +32,8 @@ app:cardUseCompatPadding="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="if"
-                android:layout_marginBottom="@dimen/dp_ten"/>
+                android:layout_marginBottom="@dimen/dp_ten"
+                android:text="if" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

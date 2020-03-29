@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHolder> {
     private final Context context;
     private final ArrayList<VendorStoreItemModel> data;
-   // private ArrayList<HealthStatusModel> data;
+    // private ArrayList<HealthStatusModel> data;
 
     /*public AdapterVendors(FragmentActivity activity, Context context, ArrayList<VendorStoreItemModel> data) {
         this.context = context;
@@ -32,8 +32,8 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
     }*/
 
     public AdapterVendors(FragmentActivity mContext, ArrayList<VendorStoreItemModel> cartHerbModel) {
-        this.context=mContext;
-        this.data=cartHerbModel;
+        this.context = mContext;
+        this.data = cartHerbModel;
     }
 
   /*  public void setData(ArrayList<HealthStatusModel> data) {
@@ -45,6 +45,7 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
         // each data item is just a string in this case
         public TextView tvPrice;
         public RadioButton radioButton;
+
         public MyViewHolder(View v) {
             super(v);
             radioButton = v.findViewById(R.id.radioVendor);
@@ -62,6 +63,7 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
+
     private RadioButton lastCheckedRB = null;
 
     @Override
@@ -77,7 +79,17 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
                     if (lastCheckedRB != null) {
                         lastCheckedRB.setChecked(false);
                     }
+
                     lastCheckedRB = checked_rb;
+                    for (int i = 0; i < data.size(); i++) {
+                        if (i == position) {
+                            data.get(i).setIsChecked(true);
+
+                        } else {
+                            data.get(i).setIsChecked(false);
+
+                        }
+                    }
                 }
 
             });

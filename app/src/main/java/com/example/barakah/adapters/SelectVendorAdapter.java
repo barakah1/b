@@ -73,7 +73,7 @@ public class SelectVendorAdapter extends RecyclerView.Adapter<SelectVendorAdapte
             holder.binding.tvHerbWeight.setText(String.valueOf(cart.getQuantity()));
             LinearLayoutManager lln = new LinearLayoutManager(mContext);
             holder.binding.rcvVendors.setLayoutManager(lln);
-            AdapterVendors adapter = new AdapterVendors((FragmentActivity) mContext, cartHerbModel.getVendor());
+            AdapterVendors adapter = new AdapterVendors((FragmentActivity) mContext, cartHerbModel.getVendors());
             holder.binding.rcvVendors.setAdapter(adapter);
         }
     }

@@ -1,6 +1,7 @@
 package com.example.barakah.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.example.barakah.databinding.AdapterCurrentOrderBinding;
 import com.example.barakah.databinding.AdapterFavouriteBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.HerbsModel;
+import com.example.barakah.models.OrderModel;
+import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,12 +27,12 @@ import java.util.ArrayList;
 
 public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapter.MyViewHolder> {
     private final Context mContext;
-    private ArrayList<CartHerbModel> herbsList;
+    private ArrayList<OrderModel> herbsList;
     private ArrayList<HerbsModel> contactListFiltered;
 
-    public void setData(ArrayList<CartHerbModel> herbsModels) {
+    public void setData(ArrayList<OrderModel> herbsModels) {
         this.herbsList = herbsModels;
-       // this.contactListFiltered = herbsModels;
+        // this.contactListFiltered = herbsModels;
     }
 
 
@@ -57,11 +60,18 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
-           // holder.binding.orderNumber.setText(herbsList.get(position).getName());
-           // holder.binding.orderPrice.setText(herbsList.get(position).getName());
+            final OrderModel model = herbsList.get(position);
+            holder.binding.orderPrice.setText(model.getOrder_price());
+            holder.binding.orderNumber.setText(model.getId());
+            // holder.binding.orderNumber.setText(herbsList.get(position).getName());
+            // holder.binding.orderPrice.setText(herbsList.get(position).getName());
             holder.binding.cardOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(mContext, HomeActivity.class);
+                    intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.ORDER_DETAILS);
+                    intent.putExtra(BarakahConstants.ORDER_MODEL, model);
+                    mContext.startActivity(intent);
 
                 }
             });

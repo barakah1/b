@@ -61,15 +61,27 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
             CartHerbModel cartHerbModel = herbsList.get(position);
+            VendorStoreItemModel vendor = herbsList.get(position).getVendor();
             final HerbsModel herb = herbsList.get(position).getHerbModel();
-         //   final VendorStoreItemModel herb = herbsList.get(position).getVendor();
+            //   final VendorStoreItemModel herb = herbsList.get(position).getVendor();
             final CartModel cart = herbsList.get(position).getCartModel();
-            holder.binding.tvHerbName.setText(herb.getName());
-           // holder.binding.tvPrice.setText(cart.get());
+            holder.binding.tvHerb.setText(herb.getName());
+            holder.binding.tvPrice.setText(vendor.getPrice());
             Glide.with(mContext).load(herb.getImage()).into(holder.binding.imageIv);
             holder.binding.tvQuantity.setText(String.valueOf(cart.getQuantity()));
+            if (cartHerbModel.getDeliveryType().equals("0")) {
+                holder.binding.radioHomeDelivery.setChecked(true);
+            } else {
+                holder.binding.receiveFromHome.setChecked(true);
 
             }
+          /*  if (holder.binding.radioHomeDelivery.isChecked()) {
+                cartHerbModel.setDeliveryType("0");
+            } else {
+                cartHerbModel.setDeliveryType("1");
+            }*/
+
+        }
     }
 
     @Override

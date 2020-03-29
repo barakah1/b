@@ -41,12 +41,12 @@ import java.util.Iterator;
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-    private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
+
     private FragmentCartBinding binding;
     private CartAdapter adapter;
     private Dialog progressDialog;
-
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
     public CartFragment() {
         // Required empty public constructor
     }

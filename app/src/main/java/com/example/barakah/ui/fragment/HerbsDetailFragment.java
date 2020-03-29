@@ -213,8 +213,9 @@ public class HerbsDetailFragment extends Fragment {
                         CartModel cartModel = new CartModel();
                         cartModel.setHerb_id(herbsModel.getId());
                         cartModel.setHerb_type(finalHerbType);
-                        mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push().setValue(cartModel);
-
+                        DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).push();
+                        cartModel.setId(dr.getKey());
+                        mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(dr.getKey()).setValue(cartModel);
                     }
 
                 } else {

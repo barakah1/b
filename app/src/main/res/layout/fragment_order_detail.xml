@@ -36,7 +36,8 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:id="@+id/herb_name"
+
+                    android:id="@+id/orderNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
@@ -51,13 +52,14 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvVendroName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
-                    android:text="اسم العشبه"
+                    android:text="vendor n"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -72,15 +74,88 @@
                 android:background="@color/lightGray"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:text="اسم العشبه"
+                android:text="Delivery method"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_fifty"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lightGray"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/herb" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/quantity" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/tvHerb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTotalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_fifty"
+                android:layout_toLeftOf="@id/imageIv"
+                android:background="@color/lightGray"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="total price"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvOrderItems"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" />-->
         </LinearLayout>
     </ScrollView>
 </layout>
