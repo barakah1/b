@@ -41,6 +41,8 @@ public class CurrentOrdersFragment extends Fragment {
     private Dialog progressDialog;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+    ArrayList<OrderModel> herbsModels;
+
     public CurrentOrdersFragment() {
         // Required empty public constructor
     }
@@ -68,6 +70,8 @@ public class CurrentOrdersFragment extends Fragment {
         binding.rcvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new CurrentOrderAdapter(getActivity());
         binding.rcvCurrentOrders.setAdapter(adapter);
+        herbsModels = new ArrayList<OrderModel>();
+
         getCurrentOrdersList();
     }
 
@@ -78,7 +82,6 @@ public class CurrentOrdersFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
@@ -86,18 +89,46 @@ public class CurrentOrdersFragment extends Fragment {
                         OrderModel model = da.getValue(OrderModel.class);
                         herbsModels.add(model);
                     }
-                       adapter.setData(herbsModels);
+                    adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
+                    getProgressOrders();
 
                     /*if (herbsModels.size() > 0) {
                         getAllHerbs(herbsModels);
                     }*/
+                } else {
+                    getProgressOrders();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                getProgressOrders();
+            }
+        });
+    }
 
+    private void getProgressOrders() {
+        final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").startAt("1").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                    while (data.hasNext()) {
+                        DataSnapshot da = data.next();
+                        System.out.println(da.getValue());
+                        OrderModel model = da.getValue(OrderModel.class);
+                        herbsModels.add(model);
+                    }
+                    adapter.setData(herbsModels);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
     }

@@ -2,6 +2,7 @@ package com.example.barakah.ui.fragment;
 
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,9 +23,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.barakah.R;
 import com.example.barakah.databinding.FragmentHerbsDetailBinding;
+import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.CartModel;
 import com.example.barakah.models.FavouriteModel;
+import com.example.barakah.models.HealthStatusModel;
 import com.example.barakah.models.HerbsModel;
+import com.example.barakah.ui.activity.HomeActivity;
 import com.example.barakah.utils.BarakahConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -159,6 +163,22 @@ public class HerbsDetailFragment extends Fragment {
                     Iterator<DataSnapshot> dataSnapshotIterator = dataSnapshot.getChildren().iterator();
                     //  System.out.println(dataSnapshot.getChildren().iterator());
                     //addHerbToCart(firebaseUser.getUid(), which);
+                    ArrayList<String> al = new ArrayList<>();
+
+                    while (dataSnapshotIterator.hasNext()) {
+                        DataSnapshot dataSnapshot1 = dataSnapshotIterator.next();
+                        al.add(dataSnapshot1.getValue(String.class));
+                        System.out.println();
+
+                        //CartModel model = dataSnapshot1.getValue(CartModel.class);
+
+                    }
+                    if (al.size() > 0) {
+                        checkUserHealthStatusWithThisHerb(firebaseUser.getUid(), which, al);
+
+                    } else {
+                        addHerbToCart(firebaseUser.getUid(), which);
+                    }
 
                 } else {
                     //add herb to cart
@@ -172,6 +192,7 @@ public class HerbsDetailFragment extends Fragment {
             }
         });
     }
+
 
     private void addHerbToCart(final String uid, final int which) {
         String herbType = "";
@@ -262,4 +283,73 @@ public class HerbsDetailFragment extends Fragment {
         alert.show();
     }
 
+
+    private void checkUserHealthStatusWithThisHerb(final String uid, final int which, final ArrayList<String> healthStatusList) {
+        final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        mDatabase.child(BarakahConstants.DbTABLE.MEDICAL_HISTORY).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    System.out.print(dataSnapshot.getValue());
+                    ArrayList<HealthStatusModel> herbsModels = new ArrayList<>();
+                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                    while (data.hasNext()) {
+                        HealthStatusModel model = data.next().getValue(HealthStatusModel.class);
+                        // Object model=data.next().getValue();
+                        System.out.println(model);
+                        herbsModels.add(model);
+                    }
+                    if (herbsModels.size() > 0) {
+                        checkHerbConflict(uid, which, healthStatusList, herbsModels);
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void checkHerbConflict(String uid, int which, ArrayList<String> healthStatusList, ArrayList<HealthStatusModel> herbsModels) {
+        ArrayList<Boolean> result = new ArrayList<>();
+
+        for (String health : healthStatusList) {
+            for (HealthStatusModel herb : herbsModels) {
+                if (herb.getConflict() != null && herb.getConflict().size() > 0) {
+                    if (herb.getConflict().containsValue(herbsModel.getId())) {
+                    //   result.add(herb.getConflict().values().)
+                        result.add(true);
+                    }
+                }
+            }
+        }
+        if(result.size()>0){
+            doalogConflict();
+        }else{
+            addHerbToCart(uid, which);
+
+        }
+    }
+
+    private void doalogConflict() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title);
+        builder.setMessage(getResources().getString(R.string.conflict_title))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.setTitle(getResources().getString(R.string.add_to_cart_message));
+        alert.show();
+
+    }
 }

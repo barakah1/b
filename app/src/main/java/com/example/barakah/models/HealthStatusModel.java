@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class HealthStatusModel implements Serializable {
 
@@ -14,7 +15,12 @@ public class HealthStatusModel implements Serializable {
     @Expose
     private String id;
 
-    private Boolean isChecked=false;
+    @SerializedName("conflict")
+    @Expose
+    private HashMap<String,String> conflict;
+
+
+    private Boolean isChecked = false;
 
 
     public HealthStatusModel() {
@@ -50,5 +56,13 @@ public class HealthStatusModel implements Serializable {
 
     public void setChecked(Boolean checked) {
         isChecked = checked;
+    }
+
+    public HashMap<String, String> getConflict() {
+        return conflict;
+    }
+
+    public void setConflict(HashMap<String, String> conflict) {
+        this.conflict = conflict;
     }
 }

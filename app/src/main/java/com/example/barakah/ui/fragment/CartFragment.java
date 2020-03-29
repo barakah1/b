@@ -96,10 +96,7 @@ public class CartFragment extends Fragment {
 
     public void popupAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //Uncomment the below code to Set the message and title from the strings.xml file
         builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-
-        //Setting message manually and performing action on button click
         builder.setMessage(getResources().getString(R.string.add_to_cart_message))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
@@ -119,9 +116,7 @@ public class CartFragment extends Fragment {
                         dialog.cancel();
                     }
                 });
-        //Creating dialog box
         AlertDialog alert = builder.create();
-        //Setting the title manually
         alert.setTitle(getResources().getString(R.string.add_to_cart_title));
         alert.show();
     }

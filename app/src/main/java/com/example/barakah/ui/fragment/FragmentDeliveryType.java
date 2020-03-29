@@ -2,6 +2,7 @@ package com.example.barakah.ui.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.OrderModel;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -81,7 +84,7 @@ public class FragmentDeliveryType extends Fragment {
             public void onClick(View v) {
                 ArrayList<CartHerbModel> al = adapter.getHerbCartList();
 
-                for (CartHerbModel model :
+                for (final CartHerbModel model :
                         al) {
                     OrderModel orderModel = new OrderModel();
                     orderModel.setVendor_name(model.getVendor().getVendor_name());
@@ -101,8 +104,15 @@ public class FragmentDeliveryType extends Fragment {
                     DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).push();
                     String key = db.getKey();
                     orderModel.setId(key);
-                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel);
-                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
+                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isComplete()) {
+                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
+
+                            }
+                        }
+                    });
                 }
                 /* @SerializedName("id")
     @Expose
