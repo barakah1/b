@@ -59,7 +59,7 @@
                     android:layout_weight="1"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
-                    android:text="vendor n"
+                    android:text="المتجر"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -74,7 +74,7 @@
                 android:background="@color/lightGray"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:text="Delivery method"
+                android:text="طريقة التوصيل"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -148,7 +148,7 @@
                 android:background="@color/lightGray"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:text="total price"
+                android:text="السعر الاجمالي"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />

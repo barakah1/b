@@ -25,7 +25,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="@dimen/twenty"
             android:background="#FF7BBD7F"
-            android:hint="تسجيل الدخول"
+            android:hint="تاكيد الطلبات"
 
             />
     </FrameLayout>

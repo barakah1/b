@@ -22,34 +22,34 @@
     <string name="herb_fav_success">تم الاضافة الى المفضلة بنجاح </string>
     <string name="health_status_title">الحالة الصحية</string>
     <string name="herb_details">عن العشبة</string>
-    <string name="current_orders">Current Orders</string>
-    <string name="previous_orders">Previous Orders</string>
-    <string name="ok">OK</string>
-    <string name="capsule">Capsule</string>
-    <string name="raw">Raw</string>
+    <string name="current_orders">الطلبات الحالية</string>
+    <string name="previous_orders">الطلبات السابقة</string>
+    <string name="ok">موافق</string>
+    <string name="capsule">كابسولات</string>
+    <string name="raw">خام</string>
     <string name="dialog_title">Dialog Title</string>
     <string name="dialog_message">Dialog Body</string>
-    <string name="select_vendor">Select vendor for product</string>
-    <string name="select_deilvery_method">Select Delivery Method</string>
-    <string name="receive_from_home">Receive From Home</string>
-    <string name="home_delivery">Home Delivery</string>
-    <string name="quantity">Quantity</string>
-    <string name="price">Price</string>
-    <string name="herb">Herb</string>
-    <string name="select_herb_title">SELECT HERB TYPE</string>
-    <string name="total_price">Total Price: %s</string>
-    <string name="add_to_cart_title">Add To Cart</string>
-    <string name="add_to_cart_message">add to cart message</string>
-    <string name="no">NO</string>
-    <string name="yes">YES</string>
-    <string name="conflict_msg">You have conflict with this herb</string>
-    <string name="conflict_title">Conflict !</string>
-    <string name="order_placed_successfully">Order Placed Successfully!</string>
-    <string name="added_to_cart">Added to Cart</string>
-    <string name="cancel">Cancel</string>
+    <string name="select_vendor">اختر البائع</string>
+    <string name="select_deilvery_method">اختر طريقة التوصيل</string>
+    <string name="receive_from_home">استلام من المتجر</string>
+    <string name="home_delivery">توصيل الى المنزل</string>
+    <string name="quantity">الكمية</string>
+    <string name="price">السعر</string>
+    <string name="herb">اسم العشبة</string>
+    <string name="select_herb_title">اختيار النوع</string>
+    <string name="total_price">السعر الاجمالي: %s</string>
+    <string name="add_to_cart_title">نموذج الموافقة</string>
+    <string name="add_to_cart_message">اقر باني اطلعت </string>
+    <string name="no">موافق</string>
+    <string name="yes">غير موافق</string>
+    <string name="conflict_msg">لديك تعارض مع هذه العشبة</string>
+    <string name="conflict_title">تنبيه !</string>
+    <string name="order_placed_successfully">تم تاكيد الطلب بنجاح!</string>
+    <string name="added_to_cart">تمت الاضافة الى السلة</string>
+    <string name="cancel">الغاء</string>
     <string-array name="stepLabels">
-        <item>The order has been Confirmed</item>
-        <item>Under Process</item>
-        <item>Delivered</item>
+        <item>تم التوصيل</item>
+        <item>تحت االعمل</item>
+        <item>تم تاكيد الطلب</item>
     </string-array>
 </resources>
