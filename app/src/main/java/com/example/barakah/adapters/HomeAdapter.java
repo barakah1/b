@@ -58,7 +58,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
             holder.binding.rvTitle.setText(herbsList.get(position).getName());
-            Glide.with(mContext).load(herbsList.get(position).getImage()).into(holder.binding.imgHome);
+                Glide.with(mContext).load(herbsList.get(position).getImage()).into(holder.binding.imgHome);
             holder.binding.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,8 +90,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 } else {
                     ArrayList<HerbsModel> filteredList = new ArrayList<>();
                     for (HerbsModel row : herbsList) {
-
-
                         if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }

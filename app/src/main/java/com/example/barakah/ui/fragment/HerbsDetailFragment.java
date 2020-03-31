@@ -40,10 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -54,7 +51,6 @@ public class HerbsDetailFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FragmentHerbsDetailBinding binding;
     private HerbsModel herbsModel;
-
     public HerbsDetailFragment() {
         // Required empty public constructor
     }
@@ -85,6 +81,7 @@ public class HerbsDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_herbs_detail, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.herb_details));
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         return binding.getRoot();
@@ -117,9 +114,7 @@ public class HerbsDetailFragment extends Fragment {
         FavouriteModel fav = new FavouriteModel(herbsModel.getId(), true);
         mDatabase.child(BarakahConstants.DbTABLE.FAVOURITE).child(user.getUid()).child(herbsModel.getId()).setValue(fav);
         if (getActivity() != null) {
-
             Toast.makeText(getActivity(), getResources().getText(R.string.herb_fav_success), Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -135,8 +130,6 @@ public class HerbsDetailFragment extends Fragment {
 
     private void showAlertDialog() {
         if (getActivity() != null) {
-
-
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
             alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
             String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
@@ -171,17 +164,12 @@ public class HerbsDetailFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     Iterator<DataSnapshot> dataSnapshotIterator = dataSnapshot.getChildren().iterator();
-                    //  System.out.println(dataSnapshot.getChildren().iterator());
-                    //addHerbToCart(firebaseUser.getUid(), which);
+
                     ArrayList<String> al = new ArrayList<>();
 
                     while (dataSnapshotIterator.hasNext()) {
                         DataSnapshot dataSnapshot1 = dataSnapshotIterator.next();
                         al.add(dataSnapshot1.getValue(String.class));
-                        System.out.println();
-
-                        //CartModel model = dataSnapshot1.getValue(CartModel.class);
-
                     }
                     if (al.size() > 0) {
                         checkUserHealthStatusWithThisHerb(firebaseUser.getUid(), which, al);
@@ -224,7 +212,6 @@ public class HerbsDetailFragment extends Fragment {
                         Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                         System.out.println(data);
                         boolean isAddNewItem = true;
-
                         while (data.hasNext()) {
                             DataSnapshot da = data.next();
                             System.out.println(da.getValue());
@@ -235,8 +222,6 @@ public class HerbsDetailFragment extends Fragment {
                                     isAddNewItem = false;
                                     int quantity = model.getQuantity() + 1;
                                     mDatabase.child(BarakahConstants.DbTABLE.CART).child(uid).child(key).child(BarakahConstants.quantity).setValue(quantity);
-
-
                                     break;
                                 } else {
                                     isAddNewItem = true;
@@ -264,7 +249,6 @@ public class HerbsDetailFragment extends Fragment {
                         }
 
                     } else {
-                        //add herb to cart
                         CartModel cartModel = new CartModel();
                         cartModel.setHerb_id(herbsModel.getId());
                         cartModel.setHerb_type(finalHerbType);
@@ -293,36 +277,6 @@ public class HerbsDetailFragment extends Fragment {
     }
 
 
-    private void showConflict() {
-        if (getActivity() != null) {
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
-            String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
-            final int checkedItem = 0;
-    /*    alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        checkUserMedicalHistory(which);
-                        dialog.dismiss();
-
-                        break;
-                    case 1:
-                        checkUserMedicalHistory(which);
-                        dialog.dismiss();
-                        break;
-                }
-            }
-        });*/
-
-            AlertDialog alert = alertDialog.create();
-            alert.setCanceledOnTouchOutside(false);
-            alert.show();
-        }
-    }
-
 
     private void checkUserHealthStatusWithThisHerb(final String uid, final int which, final ArrayList<String> healthStatusList) {
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
@@ -331,16 +285,16 @@ public class HerbsDetailFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     System.out.print(dataSnapshot.getValue());
-                    ArrayList<HealthStatusModel> herbsModels = new ArrayList<>();
+                    ArrayList<HealthStatusModel> medicalHistory = new ArrayList<>();
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         HealthStatusModel model = data.next().getValue(HealthStatusModel.class);
                         // Object model=data.next().getValue();
                         System.out.println(model);
-                        herbsModels.add(model);
+                        medicalHistory.add(model);
                     }
-                    if (herbsModels.size() > 0) {
-                        checkHerbConflict(uid, which, healthStatusList, herbsModels);
+                    if (medicalHistory.size() > 0) {
+                        checkHerbConflict(uid, which, healthStatusList, medicalHistory);
                     }
                 }
             }
@@ -353,25 +307,22 @@ public class HerbsDetailFragment extends Fragment {
         });
     }
 
-    private void checkHerbConflict(String uid, int which, ArrayList<String> healthStatusList, ArrayList<HealthStatusModel> herbsModels) {
+    private void checkHerbConflict(String uid, int which, ArrayList<String> healthStatusList, ArrayList<HealthStatusModel> medicalHistory) {
         ArrayList<Boolean> result = new ArrayList<>();
 
         for (String health : healthStatusList) {
-            for (HealthStatusModel herb : herbsModels) {
+            for (HealthStatusModel herb : medicalHistory) {
                 if (herb.getConflict() != null && herb.getConflict().size() > 0) {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
                         if (herb.getId().equalsIgnoreCase(health.trim())) {
                             result.add(true);
-
                         }
-
-                        //   result.add(herb.getConflict().values().)
                     }
                 }
             }
         }
         if (result.size() > 0) {
-            doalogConflict(uid,which);
+            doalogConflict(uid, which);
         } else {
             addHerbToCart(uid, which);
 

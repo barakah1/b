@@ -121,7 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="70dp"
                     android:background="@color/colorPrimary"
-                    android:text="اضافه الي السله"></Button>
+                    android:text="اضافه الي السله"/>
 
                 <ImageButton
                     android:id="@+id/btnAddToFav"
@@ -130,7 +130,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:background="@color/colorPrimary"
-                    android:src="@drawable/ic_favorite"></ImageButton>
+                    android:src="@drawable/ic_favorite"/>
             </LinearLayout>
 
 

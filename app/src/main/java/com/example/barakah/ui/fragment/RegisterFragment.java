@@ -117,11 +117,9 @@ public class RegisterFragment extends Fragment {
         signoutB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.HEALTH_STATUS_FM);
                 startActivityForResult(intent, BarakahConstants.GET_HEALTH_STATUS);
-
             }
 
 
