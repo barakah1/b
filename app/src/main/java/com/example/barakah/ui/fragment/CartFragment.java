@@ -108,7 +108,6 @@ public class CartFragment extends Fragment {
                             intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.SELECT_HERBS_VENDOR);
                             intent.putExtra(BarakahConstants.CART_DATA, cartHerbModels);
                             startActivity(intent);
-
                         }
                     }
                 })
@@ -173,12 +172,13 @@ public class CartFragment extends Fragment {
                     ArrayList<HerbsModel> herbsModels = new ArrayList<HerbsModel>();
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
+
                         HerbsModel model = data.next().getValue(HerbsModel.class);
+                      //  model.setId(dataSnapshot.getKey());
                         System.out.println(model);
                         herbsModels.add(model);
                     }
                     ArrayList<CartHerbModel> herbsCartModels = new ArrayList<CartHerbModel>();
-
                     for (CartModel cartModel :
                             cart) {
 
