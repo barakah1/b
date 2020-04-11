@@ -206,7 +206,7 @@ public class RegisterFragment extends Fragment {
         signUpPhoneTextInput = view.findViewById(R.id.PhoneF);
         signUpaddresTextInput = view.findViewById(R.id.addreddF);
         signUpButton = view.findViewById(R.id.signinB);
-        errorView = view.findViewById(R.id.signUpErrorView);
+       // errorView = view.findViewById(R.id.signUpErrorView);
         medical = view.findViewById(R.id.medical);
         signoutB = view.findViewById(R.id.signoutB);
 
