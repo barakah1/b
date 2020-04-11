@@ -20,11 +20,12 @@
             android:id="@+id/btnAddToCart"
             android:layout_width="257dp"
             android:layout_height="55dp"
+            android:textColor="@color/white"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="@dimen/twenty"
             android:background="#FF7BBD7F"
-            android:hint="اطلب"
+            android:text="اطلب"
 
             />
     </FrameLayout>

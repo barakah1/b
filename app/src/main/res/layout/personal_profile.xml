@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".personalprof">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/Personalprofile"
@@ -15,6 +14,7 @@
         android:layout_marginBottom="40dp"
         android:text="الملف الشخصي"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/nameF"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -22,8 +22,11 @@
         android:id="@+id/nameF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/et_bg"
         android:ems="10"
         android:inputType="textPersonName"
+
+        android:padding="@dimen/dp_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.79"
@@ -36,8 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="256dp"
+        android:background="@drawable/et_bg"
         android:ems="10"
+
         android:inputType="textPersonName"
+        android:padding="@dimen/dp_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.775"
@@ -50,8 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="360dp"
+        android:background="@drawable/et_bg"
         android:ems="10"
         android:inputType="textPersonName"
+
+        android:padding="@dimen/dp_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.782"
@@ -63,8 +72,11 @@
         android:id="@+id/passF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/et_bg"
         android:ems="10"
         android:inputType="textPersonName"
+
+        android:padding="@dimen/dp_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.782"
@@ -79,7 +91,9 @@
         android:layout_marginStart="178dp"
         android:layout_marginLeft="178dp"
         android:layout_marginBottom="90dp"
+        android:background="@drawable/bg"
         android:text="عرض "
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/signoutB"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,6 +102,7 @@
         android:layout_width="102dp"
         android:layout_height="45dp"
         android:layout_marginBottom="92dp"
+        android:background="@drawable/bg"
         android:text="حفظ التعديلات"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,8 +113,10 @@
         android:id="@+id/signoutB"
         android:layout_width="100dp"
         android:layout_height="45dp"
+        android:background="@drawable/bg"
 
         android:text="تسجيل خروج"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

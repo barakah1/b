@@ -43,7 +43,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:background="#FF7BBD7F"
-        android:hint="تسجيل الدخول"
+        android:textColor="@color/white"
+        android:text="تسجيل الدخول"
 
         />
 
@@ -54,6 +55,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:gravity="center"
+
         android:text="انشاء حساب"
         android:textColor="#FF7BBD7F"
         android:textSize="18sp"
