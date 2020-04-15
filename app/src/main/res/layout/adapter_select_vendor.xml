@@ -10,6 +10,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sixteen"
+        android:layout_marginEnd="@dimen/sixteen"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
@@ -28,6 +30,7 @@
                 android:background="@drawable/btn_plus"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal"
+                android:padding="@dimen/dp_ten"
                 android:weightSum="3">
 
                 <TextView
@@ -54,6 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
                 android:text="@string/select_vendor" />
 
             <LinearLayout
@@ -63,7 +67,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_ten"
                     android:background="@color/lightGray"
+                    android:padding="@dimen/dp_ten"
                     android:weightSum="2">
 
                     <TextView

@@ -6,6 +6,7 @@
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="match_parent"
+       android:buttonTint="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:padding="10dp" />

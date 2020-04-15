@@ -22,13 +22,14 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_ten"
                 android:text="الأمراض التي تعاني منها:"
-
+android:layout_centerHorizontal="true"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvHealth"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_ten"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btnSignin"
                 android:layout_below="@id/tvTitle" />
@@ -43,7 +44,8 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="#FF7BBD7F"
-                android:hint="تسجيل" />
+                android:textColor="@color/white"
+                android:text="تسجيل" />
 
 
         </RelativeLayout>

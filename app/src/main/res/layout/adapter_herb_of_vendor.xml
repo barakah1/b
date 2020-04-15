@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_plus"
                 android:layoutDirection="rtl"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_ten">
 
                 <TextView
                     android:id="@+id/tvHerbName"
@@ -39,7 +40,6 @@
                     android:textAlignment="center" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -66,6 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/lightGray"
+                        android:padding="@dimen/three"
                         android:weightSum="3">
 
                         <TextView
@@ -91,30 +92,29 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+
                         android:layout_height="wrap_content"
                         android:background="@color/lightGray"
+                        android:padding="@dimen/three"
                         android:weightSum="3">
 
                         <TextView
                             android:id="@+id/tvHerb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            />
+                            android:layout_weight="1" />
 
                         <TextView
                             android:id="@+id/tvPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                           />
+                            android:layout_weight="1" />
 
                         <TextView
                             android:id="@+id/tvQuantity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                           />
+                            android:layout_weight="1" />
 
 
                     </LinearLayout>
@@ -125,13 +125,14 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
                 android:layoutDirection="rtl">
 
                 <RadioButton
-                    android:checked="true"
                     android:id="@+id/receiveFromHome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="@string/receive_from_home" />
 
                 <RadioButton

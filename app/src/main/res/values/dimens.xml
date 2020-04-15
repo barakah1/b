@@ -30,4 +30,5 @@
 
     <dimen name="stpi_two_dp">2dp</dimen>
     <dimen name="stpi_done_icon_size">18dp</dimen>
+    <dimen name="three">3dp</dimen>
 </resources>
