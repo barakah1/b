@@ -7,6 +7,7 @@ public class BarakahApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-       // TypefaceUtil.overrideFont(getApplicationContext(), "fonts/tajawal.ttf", "fonts/tajawal.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
+       //
+        // TypefaceUtil.overrideFont(getApplicationContext(), "fonts/tajawal.ttf", "fonts/tajawal.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
     }
 }
