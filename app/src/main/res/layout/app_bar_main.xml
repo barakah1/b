@@ -55,8 +55,10 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:clickable="true"
+        android:focusable="true"
         android:background="@color/white"
+        android:layout_below="@+id/toolbar"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
