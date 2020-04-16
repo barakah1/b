@@ -68,10 +68,10 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
             holder.binding.tvHerb.setText(herb.getName());
             if (cart.getHerb_type() != null || !cart.getHerb_type().isEmpty()) {
                 if (cart.getHerb_type().equals(mContext.getResources().getString(R.string.raw))) {
-                    holder.binding.tvPrice.setText(vendor.getRaw_price());
+                    holder.binding.tvPrice.setText(String.valueOf(vendor.getRaw_price()));
 
                 } else if (cart.getHerb_type().equals(mContext.getResources().getString(R.string.capsule))) {
-                    holder.binding.tvPrice.setText(vendor.getCapsule_price());
+                    holder.binding.tvPrice.setText(String.valueOf(vendor.getCapsule_price()));
 
                 }
 
