@@ -21,6 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dp_fifty"
         android:ems="10"
+
         android:hint="البريد الالكتروني"
         android:inputType="textPersonName"
 
