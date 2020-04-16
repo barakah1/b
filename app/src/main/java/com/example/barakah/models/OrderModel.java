@@ -38,9 +38,6 @@ public class OrderModel implements Serializable {
     @Expose
     private String order_id;
 
-
-
-
     public String getId() {
         return id;
     }

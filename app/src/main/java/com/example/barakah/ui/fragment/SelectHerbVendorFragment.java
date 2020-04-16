@@ -101,7 +101,12 @@ public class SelectHerbVendorFragment extends Fragment {
                     }
                 }
 
-
+                for (int i = 0; i < cartherb.size(); i++) {
+                    if (cartherb.get(i).getVendor() == null) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.plz_select_vendor), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 BarakahUtils.setCurrentFragment(
                         getActivity(), R.id.homeContainer,
                         FragmentDeliveryType.newInstance(cartherb), FragmentDeliveryType.TAG

@@ -76,7 +76,7 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
                 }
 
             }
-           // holder.binding.tvPrice.setText(vendor.getPrice());
+            // holder.binding.tvPrice.setText(vendor.getPrice());
             Glide.with(mContext).load(herb.getImage()).into(holder.binding.imageIv);
             holder.binding.tvQuantity.setText(String.valueOf(cart.getQuantity()));
             if (cartHerbModel.getDeliveryType().equals("0")) {

@@ -19,16 +19,22 @@ import com.example.barakah.adapters.SelectVendorAdapter;
 import com.example.barakah.databinding.FragmentDeliveryTypeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.OrderModel;
+import com.example.barakah.models.StoreItemModel;
+import com.example.barakah.models.VendorStoreItemModel;
 import com.example.barakah.ui.activity.MainActivity;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 import static com.example.barakah.utils.BarakahConstants.CART_DATA;
@@ -90,7 +96,7 @@ public class FragmentDeliveryType extends Fragment {
                 for (final CartHerbModel model :
                         al) {
                     long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-                    OrderModel orderModel = new OrderModel();
+                    final OrderModel orderModel = new OrderModel();
                     orderModel.setId(String.valueOf(number));
                     orderModel.setVendor_name(model.getVendor().getVendor_name());
                     orderModel.setVendor_id(model.getVendor().getVendor_id());
@@ -98,6 +104,7 @@ public class FragmentDeliveryType extends Fragment {
                     orderModel.setVendor_name(model.getVendor().getVendor_name());
                     orderModel.setHerb_type(model.getCartModel().getHerb_type());
                     orderModel.setHerb_name(model.getHerbModel().getName());
+                    orderModel.setHerb_id(model.getHerbModel().getId());
                     orderModel.setOrder_status("0");
                     try {
                         int quantity = orderModel.getQuantity();
@@ -127,12 +134,8 @@ public class FragmentDeliveryType extends Fragment {
                             if (task.isComplete()) {
                                 mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
                                 BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                                Intent intentt = new Intent(getActivity(), MainActivity.class);
-                                intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intentt);
-                                getActivity().finish();
+                                updateStoreData(orderModel);
+
                             }
                         }
                     });
@@ -141,5 +144,71 @@ public class FragmentDeliveryType extends Fragment {
         });
         adapter.setData(cartHerbList);
         adapter.notifyDataSetChanged();
+    }
+
+    private void updateStoreData(final OrderModel orderModel) {
+        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    VendorStoreItemModel modell = dataSnapshot.getValue(VendorStoreItemModel.class);
+                    StoreItemModel model=new StoreItemModel();
+model.setCapsule_price(modell.getCapsule_price());
+model.setCapsule_quantity(modell.getCapsule_quantity());
+model.setRaw_price(modell.getRaw_price());
+model.setRaw_quantity(modell.getRaw_quantity());
+model.setHerb_id(modell.getHerb_id());
+model.setVendor_id(modell.getVendor_id());
+model.setVendor_name(modell.getVendor_name());
+                    if (orderModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.raw))) {
+                        model.setRaw_quantity(model.getRaw_quantity() - orderModel.getQuantity());
+                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isComplete()){
+                                    Intent intentt = new Intent(getActivity(), MainActivity.class);
+                                    intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intentt);
+                                    getActivity().finish();
+                                }
+                            }
+                        });
+
+
+                    } else if (orderModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.capsule))) {
+                        model.setCapsule_quantity(model.getCapsule_quantity() - orderModel.getQuantity());
+                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isComplete()){
+                                    Intent intentt = new Intent(getActivity(), MainActivity.class);
+                                    intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intentt);
+                                    getActivity().finish();
+                                }
+                            }
+                        });
+
+                    }
+
+
+                }
+            }
+            //  System.out.println(da.getValue());
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
     }
 }
