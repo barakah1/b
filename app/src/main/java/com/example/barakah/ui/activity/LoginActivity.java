@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements FragmentManager.
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             LoginActivity.this.finish();
         } else {
+            toolbar.setVisibility(View.GONE);
             BarakahUtils.setCurrentFragment(
                     LoginActivity.this, R.id.loginContainer,
                     LoginFragment.newInstance(), LoginFragment.TAG
