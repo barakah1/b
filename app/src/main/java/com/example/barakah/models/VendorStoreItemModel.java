@@ -15,21 +15,40 @@ public class VendorStoreItemModel implements Serializable {
     @SerializedName("id")
     @Expose
     String id;
-    @SerializedName("price")
+    @SerializedName("capsule_price")
+    @Expose
+    int capsule_price;
+    @SerializedName("capsule_quantity")
+    @Expose
+    int capsule_quantity;
+
+   /* @SerializedName("stock_quantity")
+    @Expose
+    String stock_quantity;*/
+
+    @SerializedName("raw_price")
+    @Expose
+    int raw_price;
+
+    @SerializedName("raw_quantity")
+    @Expose
+    int raw_quantity;
+
+    /*    @SerializedName("price")
     @Expose
     String price;
     @SerializedName("stock_quantity")
     @Expose
-    String stock_quantity;
+    String stock_quantity;*/
     @SerializedName("vendor_id")
     @Expose
     String vendor_id;
- @SerializedName("vendor_name")
+    @SerializedName("vendor_name")
     @Expose
     String vendor_name;
 
 
-  transient   boolean isChecked;
+    transient boolean isChecked;
 
 
     public String getHerb_id() {
@@ -48,21 +67,21 @@ public class VendorStoreItemModel implements Serializable {
         this.id = id;
     }
 
-    public String getPrice() {
+ /*   public String getPrice() {
         return price;
     }
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
+    }*/
+/*
     public String getStock_quantity() {
         return stock_quantity;
     }
 
     public void setStock_quantity(String stock_quantity) {
         this.stock_quantity = stock_quantity;
-    }
+    }*/
 
     public String getVendor_id() {
         return vendor_id;
@@ -80,11 +99,51 @@ public class VendorStoreItemModel implements Serializable {
         this.vendor_name = vendor_name;
     }
 
-     public boolean getIsChecked() {
+    public boolean getIsChecked() {
         return isChecked;
     }
 
     public void setIsChecked(boolean isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public int getCapsule_price() {
+        return capsule_price;
+    }
+
+    public void setCapsule_price(int capsule_price) {
+        this.capsule_price = capsule_price;
+    }
+
+    public int getCapsule_quantity() {
+        return capsule_quantity;
+    }
+
+    public void setCapsule_quantity(int capsule_quantity) {
+        this.capsule_quantity = capsule_quantity;
+    }
+
+    public int getRaw_price() {
+        return raw_price;
+    }
+
+    public void setRaw_price(int raw_price) {
+        this.raw_price = raw_price;
+    }
+
+    public int getRaw_quantity() {
+        return raw_quantity;
+    }
+
+    public void setRaw_quantity(int raw_quantity) {
+        this.raw_quantity = raw_quantity;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

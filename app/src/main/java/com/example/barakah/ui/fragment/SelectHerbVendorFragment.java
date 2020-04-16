@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.barakah.R;
 import com.example.barakah.adapters.FavouriteAdapter;
@@ -87,11 +88,16 @@ public class SelectHerbVendorFragment extends Fragment {
             public void onClick(View v) {
                 ArrayList<CartHerbModel> cartherb = adapter.getHerbCartList();
                 for (int i = 0; i < cartherb.size(); i++) {
-                    for (VendorStoreItemModel vendor :
-                            cartherb.get(i).getVendors()) {
-                        if (vendor.getIsChecked()) {
-                            cartherb.get(i).setVendor(vendor);
+                    if (cartherb.get(i).getVendors() != null && cartherb.get(i).getVendors().size() > 0) {
+                        for (VendorStoreItemModel vendor :
+                                cartherb.get(i).getVendors()) {
+                            if (vendor.getIsChecked()) {
+                                cartherb.get(i).setVendor(vendor);
+                            }
                         }
+                    } else {
+                        Toast.makeText(getActivity(), "" + cartherb.get(i).getCartModel().getHerb_type() + " as " + cartherb.get(i).getHerbModel().getName() + getResources().getString(R.string.medecine_out_of_stock), Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
 
@@ -122,7 +128,17 @@ public class SelectHerbVendorFragment extends Fragment {
                                     while (dataa.hasNext()) {
                                         DataSnapshot daa = dataa.next();
                                         VendorStoreItemModel modell = daa.getValue(VendorStoreItemModel.class);
-                                        herbsModels.add(modell);
+                                        if (cartHerbList.get(i).getCartModel().getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                                            if (modell.getRaw_quantity() > cartHerbList.get(i).getCartModel().getQuantity()) {
+                                                herbsModels.add(modell);
+
+                                            }
+                                        } else if (cartHerbList.get(i).getCartModel().getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                                            if (modell.getCapsule_quantity() > cartHerbList.get(i).getCartModel().getQuantity()) {
+                                                herbsModels.add(modell);
+
+                                            }
+                                        }
 
                                     }
                                     cartHerbList.get(i).setVendors(herbsModels);
@@ -135,6 +151,7 @@ public class SelectHerbVendorFragment extends Fragment {
 
 
                     }
+
                     adapter.setData(cartHerbList);
                     adapter.notifyDataSetChanged();
 

@@ -9,7 +9,7 @@ public class CartHerbModel implements Serializable {
     ArrayList<VendorStoreItemModel> vendors;
     VendorStoreItemModel vendor;
     //0=home, 1= self service
-String deliveryType="0";
+    String deliveryType = "0";
 
     public CartModel getCartModel() {
         return cartModel;

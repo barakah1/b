@@ -89,7 +89,9 @@ public class FragmentDeliveryType extends Fragment {
 
                 for (final CartHerbModel model :
                         al) {
+                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
                     OrderModel orderModel = new OrderModel();
+                    orderModel.setId(String.valueOf(number));
                     orderModel.setVendor_name(model.getVendor().getVendor_name());
                     orderModel.setVendor_id(model.getVendor().getVendor_id());
                     orderModel.setQuantity(model.getCartModel().getQuantity());
@@ -99,14 +101,26 @@ public class FragmentDeliveryType extends Fragment {
                     orderModel.setOrder_status("0");
                     try {
                         int quantity = orderModel.getQuantity();
-                        double price = quantity * Double.parseDouble(model.getVendor().getPrice());
-                        orderModel.setOrder_price(String.valueOf(price));
+                        if (orderModel.getHerb_type() != null || !orderModel.getHerb_type().isEmpty()) {
+                            if (orderModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                                double price = quantity * Double.valueOf(model.getVendor().getRaw_price());
+
+                                orderModel.setOrder_price(String.valueOf(price));
+                            } else if (orderModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                                double price = quantity * Double.valueOf(model.getVendor().getCapsule_price());
+
+                                orderModel.setOrder_price(String.valueOf(price));
+
+
+                            }
+
+                        }
                     } catch (Exception e
                     ) {
                     }
                     DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).push();
                     String key = db.getKey();
-                    orderModel.setId(key);
+                    //orderModel.setId(key);
                     mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

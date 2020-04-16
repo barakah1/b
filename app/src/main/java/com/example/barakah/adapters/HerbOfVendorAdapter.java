@@ -66,7 +66,17 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
             //   final VendorStoreItemModel herb = herbsList.get(position).getVendor();
             final CartModel cart = herbsList.get(position).getCartModel();
             holder.binding.tvHerb.setText(herb.getName());
-            holder.binding.tvPrice.setText(vendor.getPrice());
+            if (cart.getHerb_type() != null || !cart.getHerb_type().isEmpty()) {
+                if (cart.getHerb_type().equals(mContext.getResources().getString(R.string.raw))) {
+                    holder.binding.tvPrice.setText(vendor.getRaw_price());
+
+                } else if (cart.getHerb_type().equals(mContext.getResources().getString(R.string.capsule))) {
+                    holder.binding.tvPrice.setText(vendor.getCapsule_price());
+
+                }
+
+            }
+           // holder.binding.tvPrice.setText(vendor.getPrice());
             Glide.with(mContext).load(herb.getImage()).into(holder.binding.imageIv);
             holder.binding.tvQuantity.setText(String.valueOf(cart.getQuantity()));
             if (cartHerbModel.getDeliveryType().equals("0")) {
