@@ -73,8 +73,8 @@ public class OrderDetailFragment extends Fragment {
 
                 }
             }
-            binding.orderNumber.setText(orderModel.getId());
-            binding.tvVendroName.setText(orderModel.getVendor_name());
+            binding.orderNumber.setText(getResources().getString(R.string.order_id, orderModel.getId()));
+            binding.tvVendroName.setText(getResources().getString(R.string.vendor_name,orderModel.getVendor_name()));
             binding.tvPrice.setText(orderModel.getOrder_price());
             binding.tvQuantity.setText(String.valueOf(orderModel.getQuantity()));
             binding.tvHerb.setText(orderModel.getHerb_name());

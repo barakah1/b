@@ -65,8 +65,10 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
                 holder.binding.orderPrice.setText(mContext.getResources().getString(R.string.total_price,model.getOrder_price()));
 
             }
-            holder.binding.orderNumber.setText(model.getId());
-            // holder.binding.orderNumber.setText(herbsList.get(position).getName());
+            if(model.getId()!=null) {
+
+                holder.binding.orderNumber.setText(mContext.getResources().getString(R.string.order_id, model.getId()));
+            }  // holder.binding.orderNumber.setText(herbsList.get(position).getName());
             // holder.binding.orderPrice.setText(herbsList.get(position).getName());
             holder.binding.cardOrder.setOnClickListener(new View.OnClickListener() {
                 @Override

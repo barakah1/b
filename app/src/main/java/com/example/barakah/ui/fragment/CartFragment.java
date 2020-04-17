@@ -142,6 +142,12 @@ public class CartFragment extends Fragment {
                     if (herbsModels.size() > 0) {
                         getAllHerbs(herbsModels);
                     } else {
+
+                            binding.rcvCurrentOrders.setVisibility(View.GONE);
+                            binding.llNoData.setVisibility(View.VISIBLE);
+
+
+
                         binding.btnAddToCart.setVisibility(View.GONE);
 
                         if (progressDialog != null && progressDialog.isShowing()) {
@@ -150,6 +156,8 @@ public class CartFragment extends Fragment {
                     }
                 } else {
                     binding.btnAddToCart.setVisibility(View.GONE);
+                    binding.rcvCurrentOrders.setVisibility(View.GONE);
+                    binding.llNoData.setVisibility(View.VISIBLE);
                     if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
