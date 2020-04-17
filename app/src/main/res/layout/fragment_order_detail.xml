@@ -27,13 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:stpi_labels="@array/stepLabels"
+app:stpi_labelMarginTop="@dimen/fifteen"
                 app:stpi_stepCount="3" />
 
             <LinearLayout
-                android:layout_marginTop="@dimen/dp_ten"
+                android:layout_marginTop="@dimen/twenty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+
                 android:weightSum="2">
 
                 <TextView

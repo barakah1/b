@@ -59,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fifteen"
             android:ems="10"
-
+            android:textAlignment="viewStart"
+            tools:ignore="RtlCompat"
             android:hint="كلمة السر"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"

@@ -137,7 +137,7 @@
                     android:layout_marginStart="@dimen/dp_twenty"
                     android:layout_marginLeft="30dp"
                     android:background="@color/colorPrimary"
-                    android:src="@drawable/ic_favorite" />
+                    android:src="@drawable/ic_plus" />
             </LinearLayout>
 
 

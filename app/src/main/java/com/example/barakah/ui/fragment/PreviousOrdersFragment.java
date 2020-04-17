@@ -51,6 +51,7 @@ public class PreviousOrdersFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +64,9 @@ public class PreviousOrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      //  return inflater.inflate(R.layout.fragment_previous_orders, container, false);
-        binding= FragmentPreviousOrdersBinding.inflate(inflater);
-      return   binding.getRoot();
+        //  return inflater.inflate(R.layout.fragment_previous_orders, container, false);
+        binding = FragmentPreviousOrdersBinding.inflate(inflater);
+        return binding.getRoot();
     }
 
     @Override
@@ -91,8 +92,19 @@ public class PreviousOrdersFragment extends Fragment {
                         OrderModel model = da.getValue(OrderModel.class);
                         herbsModels.add(model);
                     }
-                    adapter.setData(herbsModels);
-                    adapter.notifyDataSetChanged();
+                    if (herbsModels.size() > 0) {
+                        adapter.setData(herbsModels);
+                        adapter.notifyDataSetChanged();
+                        binding.rcvCurrentOrders.setVisibility(View.VISIBLE);
+                        binding.llNoData.setVisibility(View.GONE);
+                    } else {
+                        binding.rcvCurrentOrders.setVisibility(View.GONE);
+                        binding.llNoData.setVisibility(View.VISIBLE);
+                    }
+
+                }else{
+                    binding.rcvCurrentOrders.setVisibility(View.GONE);
+                    binding.llNoData.setVisibility(View.VISIBLE);
                 }
             }
 
