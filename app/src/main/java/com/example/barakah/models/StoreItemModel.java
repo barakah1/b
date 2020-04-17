@@ -1,12 +1,11 @@
 package com.example.barakah.models;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class VendorStoreItemModel implements Serializable {
+public class StoreItemModel implements Serializable {
 
 
     @SerializedName("herb_id")
@@ -48,7 +47,7 @@ public class VendorStoreItemModel implements Serializable {
     String vendor_name;
 
 
-    transient boolean isChecked;
+
 
 
     public String getHerb_id() {
@@ -99,15 +98,7 @@ public class VendorStoreItemModel implements Serializable {
         this.vendor_name = vendor_name;
     }
 
-    public boolean getIsChecked() {
-        return isChecked;
-    }
-
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
-    }
-
-    public int getCapsule_price() {
+      public int getCapsule_price() {
         return capsule_price;
     }
 
@@ -139,11 +130,4 @@ public class VendorStoreItemModel implements Serializable {
         this.raw_quantity = raw_quantity;
     }
 
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
-}
+   }

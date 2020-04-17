@@ -19,13 +19,15 @@ import com.example.barakah.models.VendorStoreItemModel;
 import java.util.ArrayList;
 
 public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHolder> {
+    private final String herb_type;
     private final Context context;
     private final ArrayList<VendorStoreItemModel> data;
 
 
-    public AdapterVendors(FragmentActivity mContext, ArrayList<VendorStoreItemModel> cartHerbModel) {
+    public AdapterVendors(FragmentActivity mContext, ArrayList<VendorStoreItemModel> cartHerbModel, String herb_type) {
         this.context = mContext;
         this.data = cartHerbModel;
+        this.herb_type = herb_type;
     }
 
 
@@ -57,7 +59,16 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (data != null && data.size() > 0) {
             VendorStoreItemModel model = data.get(position);
-            holder.tvPrice.setText(model.getPrice());
+            if (herb_type != null || !herb_type.isEmpty()) {
+                if (herb_type.equals(context.getResources().getString(R.string.raw))) {
+                    holder.tvPrice.setText(String.valueOf(model.getRaw_price()));
+
+                } else if (herb_type.equals(context.getResources().getString(R.string.capsule))) {
+                    holder.tvPrice.setText(String.valueOf(model.getCapsule_price()));
+
+                }
+
+            }
             holder.radioButton.setText(model.getVendor_name());
             holder.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

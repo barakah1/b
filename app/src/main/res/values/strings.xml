@@ -47,6 +47,8 @@
     <string name="order_placed_successfully">تم تاكيد الطلب بنجاح!</string>
     <string name="added_to_cart">تمت الاضافة الى السلة</string>
     <string name="cancel">الغاء</string>
+    <string name="medecine_out_of_stock">إنتهى من المخزن</string>
+    <string name="plz_select_vendor">يرجى تحديد البائع</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

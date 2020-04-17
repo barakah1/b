@@ -10,7 +10,10 @@
         android:id="@+id/htab_maincontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/white"
+        >
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -62,6 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
+            android:clickable="true"
+            android:focusable="true"
             android:background="@color/white"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
