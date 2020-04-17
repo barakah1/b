@@ -165,18 +165,25 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            final FirebaseUser user = mAuth.getCurrentUser();
                             if (registerModel != null) {
-                                mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).setValue(registerModel);
+                                mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).setValue(registerModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            if (arrayList != null && arrayList.size() > 0) {
+                                                DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid());
+                                                for (HealthStatusModel hl : arrayList
+                                                ) {
+                                                    dr.push().setValue(hl.getId());
 
-                                if (arrayList != null && arrayList.size() > 0) {
-                                    DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid());
-                                    for (HealthStatusModel hl : arrayList
-                                    ) {
-                                        dr.push().setValue(hl.getId());
-
+                                                }
+                                            }
+                                        }
                                     }
-                                }
+                                });
+
+
                                 closeProgress();
 
                                 Toast.makeText(getActivity(), getResources().getString(R.string.reg_success), Toast.LENGTH_SHORT).show();
