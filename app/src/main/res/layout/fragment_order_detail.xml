@@ -26,12 +26,49 @@
                 android:id="@+id/stepper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:stpi_labelMarginTop="@dimen/fifteen"
                 app:stpi_labels="@array/stepLabels"
-app:stpi_labelMarginTop="@dimen/fifteen"
                 app:stpi_stepCount="3" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/twenty"
+                android:orientation="horizontal"
+
+                android:weightSum="2">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/imageIv"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/dp_ten"
+                    android:paddingBottom="@dimen/dp_ten"
+                    android:paddingRight="10dp"
+                    android:text="اسم العشبه"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/imageIv"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/dp_ten"
+                    android:paddingBottom="@dimen/dp_ten"
+                    android:paddingRight="10dp"
+                    android:text="المتجر"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout><LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -45,10 +82,10 @@ app:stpi_labelMarginTop="@dimen/fifteen"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
-                    android:paddingTop="@dimen/dp_five"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
                     android:text="اسم العشبه"
-                    android:textColor="#000"
+                    android:textColor="@color/gray"
                     android:textSize="15sp"
                     android:textStyle="bold"
 
@@ -60,10 +97,10 @@ app:stpi_labelMarginTop="@dimen/fifteen"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
-                    android:paddingTop="@dimen/dp_five"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
                     android:text="المتجر"
-                    android:textColor="#000"
+                    android:textColor="@color/gray"
                     android:textSize="15sp"
                     android:textStyle="bold"
 
@@ -72,15 +109,14 @@ app:stpi_labelMarginTop="@dimen/fifteen"
 
             <TextView
                 android:id="@+id/deliveryMethod"
-                android:padding="@dimen/dp_five"
-android:layout_marginTop="@dimen/dp_ten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_ten"
                 android:layout_toLeftOf="@id/imageIv"
                 android:background="@color/lightGray"
+                android:padding="@dimen/dp_five"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:text="@string/delivery_method"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -92,10 +128,10 @@ android:layout_marginTop="@dimen/dp_ten"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:padding="@dimen/dp_five"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/lightGray"
+                    android:padding="@dimen/dp_five"
                     android:weightSum="3">
 
                     <TextView
@@ -147,13 +183,13 @@ android:layout_marginTop="@dimen/dp_ten"
             </LinearLayout>
 
             <TextView
-                android:padding="@dimen/dp_five"
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_fifty"
                 android:layout_toLeftOf="@id/imageIv"
                 android:background="@color/lightGray"
+                android:padding="@dimen/dp_five"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:text="السعر الاجمالي"
