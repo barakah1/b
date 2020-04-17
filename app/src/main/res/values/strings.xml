@@ -54,6 +54,7 @@
     <string name="vendor_name">اسم البائع:%s</string>
     <string name="empty_cart">عربة التسوق فارغة</string>
     <string name="no_fav_herb">ليس لديك عشب مفضل</string>
+    <string name="delivery_method">طريقة التوصيل: %s</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

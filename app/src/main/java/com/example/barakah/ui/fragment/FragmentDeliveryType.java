@@ -105,6 +105,7 @@ public class FragmentDeliveryType extends Fragment {
                     orderModel.setHerb_type(model.getCartModel().getHerb_type());
                     orderModel.setHerb_name(model.getHerbModel().getName());
                     orderModel.setHerb_id(model.getHerbModel().getId());
+                    orderModel.setDelivery_type(model.getDeliveryType());
                     orderModel.setOrder_status("0");
                     try {
                         int quantity = orderModel.getQuantity();
@@ -152,20 +153,20 @@ public class FragmentDeliveryType extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     VendorStoreItemModel modell = dataSnapshot.getValue(VendorStoreItemModel.class);
-                    StoreItemModel model=new StoreItemModel();
-model.setCapsule_price(modell.getCapsule_price());
-model.setCapsule_quantity(modell.getCapsule_quantity());
-model.setRaw_price(modell.getRaw_price());
-model.setRaw_quantity(modell.getRaw_quantity());
-model.setHerb_id(modell.getHerb_id());
-model.setVendor_id(modell.getVendor_id());
-model.setVendor_name(modell.getVendor_name());
+                    StoreItemModel model = new StoreItemModel();
+                    model.setCapsule_price(modell.getCapsule_price());
+                    model.setCapsule_quantity(modell.getCapsule_quantity());
+                    model.setRaw_price(modell.getRaw_price());
+                    model.setRaw_quantity(modell.getRaw_quantity());
+                    model.setHerb_id(modell.getHerb_id());
+                    model.setVendor_id(modell.getVendor_id());
+                    model.setVendor_name(modell.getVendor_name());
                     if (orderModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.raw))) {
                         model.setRaw_quantity(model.getRaw_quantity() - orderModel.getQuantity());
                         mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isComplete()){
+                                if (task.isComplete()) {
                                     Intent intentt = new Intent(getActivity(), MainActivity.class);
                                     intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -182,7 +183,7 @@ model.setVendor_name(modell.getVendor_name());
                         mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isComplete()){
+                                if (task.isComplete()) {
                                     Intent intentt = new Intent(getActivity(), MainActivity.class);
                                     intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -206,8 +207,6 @@ model.setVendor_name(modell.getVendor_name());
 
             }
         });
-
-
 
 
     }

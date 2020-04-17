@@ -73,14 +73,24 @@ public class OrderDetailFragment extends Fragment {
 
                 }
             }
+            if (orderModel.getDelivery_type() != null) {
+                if (orderModel.getDelivery_type().equals("0")) {
+                    binding.deliveryMethod.setText(getResources().getString(R.string.home_delivery));
+
+                } else if (orderModel.getDelivery_type().equals("1")) {
+                    binding.deliveryMethod.setText(getResources().getString(R.string.receive_from_home));
+
+                }
+            }
             binding.orderNumber.setText(getResources().getString(R.string.order_id, orderModel.getId()));
-            binding.tvVendroName.setText(getResources().getString(R.string.vendor_name,orderModel.getVendor_name()));
+            binding.deliveryMethod.setText(getResources().getString(R.string.order_id, orderModel.getOrder_status()));
+            binding.tvVendroName.setText(getResources().getString(R.string.vendor_name, orderModel.getVendor_name()));
             binding.tvPrice.setText(orderModel.getOrder_price());
             binding.tvQuantity.setText(String.valueOf(orderModel.getQuantity()));
             binding.tvHerb.setText(orderModel.getHerb_name());
-            if(orderModel.getOrder_price()!=null){
+            if (orderModel.getOrder_price() != null) {
                 binding.tvTotalPrice.setText(getResources().getString(R.string.total_price, orderModel.getOrder_price()));
-        }
+            }
         }
 
     }

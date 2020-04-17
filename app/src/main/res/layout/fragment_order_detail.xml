@@ -69,6 +69,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/deliveryMethod"
                 android:padding="@dimen/dp_five"
 android:layout_marginTop="@dimen/dp_ten"
                 android:layout_width="match_parent"
@@ -77,7 +78,7 @@ android:layout_marginTop="@dimen/dp_ten"
                 android:background="@color/lightGray"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:text="طريقة التوصيل"
+                android:text="@string/delivery_method"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
