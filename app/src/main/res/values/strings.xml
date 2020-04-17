@@ -57,6 +57,8 @@
     <string name="delivery_method">طريقة التوصيل: %s</string>
     <string name="no_active_order">يا سناب! لا توجد أوامر نشطة</string>
     <string name="no_previous_order">يا سناب! لا توجد أوامر سابقة</string>
+    <string name="personal_profile">الملف الشخصي</string>
+    <string name="favourites">المفضلة</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -51,6 +52,8 @@ public class OrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentOrdersBinding.inflate(inflater);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.orders));
+
         return binding.getRoot();
     }
 

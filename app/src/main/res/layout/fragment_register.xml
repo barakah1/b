@@ -137,6 +137,7 @@
             android:textColor="#FF7BBD7F"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginEnd="@dimen/dp_ten"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.849"
             app:layout_constraintStart_toStartOf="parent"

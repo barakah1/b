@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
@@ -70,6 +71,8 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         //   return inflater.inflate(R.layout.fragment_home, container, false);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home));
+
         return binding.getRoot();
     }
 
