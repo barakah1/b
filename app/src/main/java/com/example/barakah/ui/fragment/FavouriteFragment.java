@@ -102,6 +102,9 @@ public class FavouriteFragment extends Fragment {
                     setAdapterdata();
 
 
+                }else{
+                    binding.rcvHome.setVisibility(View.GONE);
+                    binding.llNoData.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -129,8 +132,17 @@ public class FavouriteFragment extends Fragment {
                     }
 
                 }
-                adapter.setData(herbsModelss);
-                adapter.notifyDataSetChanged();
+                if(herbsModelss.size()>0){
+                    binding.llNoData.setVisibility(View.GONE);
+                    binding.rcvHome.setVisibility(View.VISIBLE);
+                    adapter.setData(herbsModelss);
+                    adapter.notifyDataSetChanged();
+                }else{
+
+                    binding.rcvHome.setVisibility(View.GONE);
+                    binding.llNoData.setVisibility(View.VISIBLE);
+                }
+
             }
         }
     }

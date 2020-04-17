@@ -49,6 +49,12 @@
     <string name="cancel">الغاء</string>
     <string name="medecine_out_of_stock">إنتهى من المخزن</string>
     <string name="plz_select_vendor">يرجى تحديد البائع</string>
+    <string name="name_of_vendor">اسم البائع</string>
+    <string name="order_id">رقم التعريف الخاص بالطلب : %s</string>
+    <string name="vendor_name">اسم البائع:%s</string>
+    <string name="empty_cart">عربة التسوق فارغة</string>
+    <string name="no_fav_herb">ليس لديك عشب مفضل</string>
+    <string name="delivery_method">طريقة التوصيل: %s</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>
