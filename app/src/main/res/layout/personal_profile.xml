@@ -78,7 +78,8 @@
         android:background="@drawable/et_bg"
         android:ems="10"
         android:inputType="textPersonName"
-
+        android:textAlignment="viewStart"
+        tools:ignore="RtlCompat"
         android:padding="@dimen/dp_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

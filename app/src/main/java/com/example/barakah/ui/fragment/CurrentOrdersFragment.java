@@ -125,11 +125,25 @@ public class CurrentOrdersFragment extends Fragment {
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
                 }
+                checkPreviousOrders();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private void checkPreviousOrders() {
+        //   ArrayList<OrderModel> herb=   adapter.getHerb();
+        if (herbsModels.size() > 0) {
+            adapter.setData(herbsModels);
+            adapter.notifyDataSetChanged();
+            binding.rcvCurrentOrders.setVisibility(View.VISIBLE);
+            binding.llNoData.setVisibility(View.GONE);
+        } else {
+            binding.rcvCurrentOrders.setVisibility(View.GONE);
+            binding.llNoData.setVisibility(View.VISIBLE);
+        }
     }
 }

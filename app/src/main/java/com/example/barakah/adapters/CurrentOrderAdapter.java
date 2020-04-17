@@ -90,6 +90,9 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             return herbsList.size();
         } else return 0;
     }
+    public ArrayList<OrderModel> getHerb(){
+        return herbsList;
+    }
 
 
 }
