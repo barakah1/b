@@ -75,10 +75,10 @@ public class OrderDetailFragment extends Fragment {
             }
             if (orderModel.getDelivery_type() != null) {
                 if (orderModel.getDelivery_type().equals("0")) {
-                    binding.deliveryMethod.setText(getResources().getString(R.string.home_delivery));
+                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method,getResources().getString(R.string.home_delivery)));
 
                 } else if (orderModel.getDelivery_type().equals("1")) {
-                    binding.deliveryMethod.setText(getResources().getString(R.string.receive_from_home));
+                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method,getResources().getString(R.string.receive_from_home)));
 
                 }
             }
