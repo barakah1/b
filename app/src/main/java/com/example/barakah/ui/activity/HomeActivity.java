@@ -80,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                 );
             }
             if (fragmentType.equals(BarakahConstants.ORDER_DETAILS)) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         OrderDetailFragment.newInstance(orderModel), OrderDetailFragment.TAG
