@@ -59,7 +59,6 @@
                 android:layout_marginStart="@dimen/sixteen"
 
                 android:layout_marginEnd="@dimen/sixteen"
-                android:background="@drawable/textview_border"
                 android:paddingTop="@dimen/dp_ten"
                 android:paddingEnd="@dimen/dp_five"
                 android:paddingBottom="@dimen/dp_five"

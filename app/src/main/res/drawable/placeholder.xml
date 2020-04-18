@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#E4F0E6"
+                />
+        </shape>
+
+    </item>
+
+    <item android:drawable="@drawable/ic_picture"
+        android:bottom="15dp"
+        android:left="15dp"
+        android:right="15dp"
+        android:top="15dp"
+        >
+    </item>
+</layer-list>

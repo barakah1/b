@@ -25,15 +25,21 @@
                 android:id="@+id/imgHome"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+                app:srcCompat="@drawable/placeholder" />
 
             <TextView
                 android:id="@+id/rvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_ten"
                 android:layout_marginBottom="@dimen/dp_ten"
-                android:text="if" />
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:text="if"
+                android:textSize="@dimen/eighteen"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

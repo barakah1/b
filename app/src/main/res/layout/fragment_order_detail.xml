@@ -168,13 +168,14 @@
             </LinearLayout>
 
             <TextView
+                android:padding="@dimen/dp_ten"
+
                 android:id="@+id/deliveryMethod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_ten"
                 android:layout_toLeftOf="@id/imageIv"
                 android:background="@color/lightGray"
-                android:padding="@dimen/dp_five"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:textColor="#000"
@@ -191,7 +192,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/lightGray"
-                    android:padding="@dimen/dp_five"
+                    android:padding="@dimen/dp_ten"
+
                     android:weightSum="3">
 
                     <TextView
@@ -249,9 +251,7 @@
                 android:layout_marginTop="@dimen/dp_fifty"
                 android:layout_toLeftOf="@id/imageIv"
                 android:background="@color/lightGray"
-                android:padding="@dimen/dp_five"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
+                android:padding="@dimen/dp_ten"
                 android:text="السعر الاجمالي"
                 android:textColor="#000"
                 android:textSize="15sp"

@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="3dp"
+        app:cardCornerRadius="@dimen/dp_ten"
+
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
 
@@ -65,10 +67,11 @@
 
             <ImageView
                 android:id="@+id/imageIv"
-                android:layout_width="121dp"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/herb_pic" />
+                android:src="@drawable/placeholder" />
 
             <LinearLayout
                 android:id="@+id/linear_cart"
