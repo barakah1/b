@@ -10,8 +10,10 @@
         android:id="@+id/cardOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_five"
-        app:cardElevation="3dp"
+        android:layout_margin="@dimen/dp_ten"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/dp_ten"
+
         app:cardUseCompatPadding="true">
 
         <LinearLayout
