@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_gravity="center_horizontal"
-                    android:text="The order"
+                    android:text="تفاصيل الطلب"
                     android:textAlignment="center" />
 
             </LinearLayout>

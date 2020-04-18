@@ -194,7 +194,7 @@ public class RegisterFragment extends Fragment {
                             } else {
                                 closeProgress();
 
-                                Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "هناك خطأ يرجى المحاولة مره اخرى", Toast.LENGTH_SHORT).show();
 
                             }
                         } else {

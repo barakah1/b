@@ -126,7 +126,7 @@
                     android:layout_marginStart="@dimen/dp_fifty"
                     android:layout_marginLeft="70dp"
                     android:background="@color/colorPrimary"
-                    android:text="اضافه الي السله"
+                    android:text="اضافه الى السله"
                     android:textColor="@color/white" />
 
                 <ImageButton
