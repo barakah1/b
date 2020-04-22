@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,7 +73,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
         binding.navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        toolbar.setTitle("الصفحة الرئيسية");
+       toolbar.setTitle("الصفحة الرئيسية");
+
+
         fragment = FragmentHome.newInstance();
         loadFragment(fragment);
     }
