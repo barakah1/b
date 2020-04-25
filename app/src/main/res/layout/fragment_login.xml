@@ -45,7 +45,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="كلمة السر"
+            android:hint="كلمة المرور"
             android:inputType="textPassword"
             android:textAlignment="viewStart"
             tools:ignore="RtlCompat" />
@@ -70,7 +70,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
 
-            android:text="Forgot password"
+            android:text="هل نسيت كلمة المرور؟"
             android:textColor="#FF7BBD7F"
             android:textSize="18sp"
             android:textStyle="bold" />

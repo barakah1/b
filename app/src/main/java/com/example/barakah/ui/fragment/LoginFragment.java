@@ -159,7 +159,7 @@ public class LoginFragment extends Fragment {
                         } else {
                             closeProgress();
                             System.out.println("something" + task);
-                            Toast.makeText(getActivity(),"كلمة المرور او البريد الالكتروني غير صحيح في حال تم فقدان كلمة المرور تواصل مع AdminBarakha@gmail.com لاعادة تعيين كلمة المرور", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"كلمة المرور او البريد الالكتروني غير صحيح", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
