@@ -96,7 +96,7 @@ public class SelectHerbVendorFragment extends Fragment {
                             }
                         }
                     } else {
-                        Toast.makeText(getActivity(), "" + cartherb.get(i).getCartModel().getHerb_type() + " as " + cartherb.get(i).getHerbModel().getName() + getResources().getString(R.string.medecine_out_of_stock), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "" + cartherb.get(i).getCartModel().getHerb_type() + ".  " + cartherb.get(i).getHerbModel().getName() + getResources().getString(R.string.medecine_out_of_stock), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
