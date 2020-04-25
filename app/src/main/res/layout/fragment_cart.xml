@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -21,8 +22,8 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:elevation="@dimen/dp_four"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img"
@@ -49,24 +50,59 @@
                     android:textSize="@dimen/dp_twenty"
                     android:textStyle="bold" />
 
-            <!--    <TextView
-                    android:id="@+id/noData"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img"
-                    android:layout_marginStart="@dimen/dp_five"
-                    android:layout_toEndOf="@id/oops"
-                    android:text="@string/no_data_found"
+                <!--    <TextView
+                        android:id="@+id/noData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img"
+                        android:layout_marginStart="@dimen/dp_five"
+                        android:layout_toEndOf="@id/oops"
+                        android:text="@string/no_data_found"
 
-                    />-->
+                        />-->
 
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvCurrentOrders"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/llCardNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/dp_ten"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+
+                <TextView
+                    android:id="@+id/herb_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/imageIv"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:text="اسم العشبة"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+
+                    />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvCurrentOrders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_five" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnAddToCart"
@@ -78,6 +114,7 @@
             android:background="#FF7BBD7F"
             android:text="اطلب"
             android:textColor="@color/white"
+            android:visibility="gone"
 
             />
     </FrameLayout>

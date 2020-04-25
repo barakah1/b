@@ -143,6 +143,7 @@ public class CartFragment extends Fragment {
                     //   adapter.setData(herbsModels);
 
                     if (herbsModels.size() > 0) {
+
                         getAllHerbs(herbsModels);
                     } else {
 
@@ -206,6 +207,7 @@ public class CartFragment extends Fragment {
                     }
                     if (herbsCartModels.size() > 0) {
                         binding.btnAddToCart.setVisibility(View.VISIBLE);
+                        binding.llCardNote.setVisibility(View.VISIBLE);
 
 
                     } else {
