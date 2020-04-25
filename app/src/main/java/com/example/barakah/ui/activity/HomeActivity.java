@@ -17,6 +17,7 @@ import com.example.barakah.databinding.ActivityHomeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.models.OrderModel;
+import com.example.barakah.ui.fragment.ChangePasswordFragment;
 import com.example.barakah.ui.fragment.HealthStatusFragment;
 import com.example.barakah.ui.fragment.HerbsDetailFragment;
 import com.example.barakah.ui.fragment.LoginFragment;
@@ -66,26 +67,33 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                         HealthStatusFragment.newInstance(), HealthStatusFragment.TAG
                 );
             }
-            if (fragmentType.equals(BarakahConstants.HERBS_DETAILS)) {
+          else  if (fragmentType.equals(BarakahConstants.HERBS_DETAILS)) {
                 getSupportActionBar().setHomeButtonEnabled(true);
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         HerbsDetailFragment.newInstance(herbModel), HerbsDetailFragment.TAG
                 );
             }
-            if (fragmentType.equals(BarakahConstants.SELECT_HERBS_VENDOR)) {
+           else if (fragmentType.equals(BarakahConstants.SELECT_HERBS_VENDOR)) {
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         SelectHerbVendorFragment.newInstance(cartHerbList), SelectHerbVendorFragment.TAG
                 );
             }
-            if (fragmentType.equals(BarakahConstants.ORDER_DETAILS)) {
+          else  if (fragmentType.equals(BarakahConstants.ORDER_DETAILS)) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         OrderDetailFragment.newInstance(orderModel), OrderDetailFragment.TAG
                 );
+            } else  if (fragmentType.equals(BarakahConstants.CHANGE_PASSWORD)) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                BarakahUtils.setCurrentFragment(
+                        HomeActivity.this, R.id.homeContainer,
+                        ChangePasswordFragment.newInstance(), ChangePasswordFragment.TAG
+                );
             }
+
 
         }
 

@@ -13,7 +13,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.barakah.R;
+import com.example.barakah.ui.fragment.LoginFragment;
 import com.example.barakah.ui.fragment.RegisterFragment;
+
+import java.util.regex.Pattern;
 
 public class BarakahUtils {
 
@@ -21,7 +24,8 @@ public class BarakahUtils {
     public static void setCurrentFragment(FragmentActivity activity, int pContainerId, Fragment pFragment, String tag) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (pFragment instanceof RegisterFragment
+        if (/*pFragment instanceof RegisterFragment
+        ||*/pFragment instanceof LoginFragment
         ) {
             fragmentTransaction.replace(pContainerId, pFragment, tag);
         } else {
@@ -103,6 +107,18 @@ public class BarakahUtils {
     public static void toastMessgae(Context context, String message, int time) {
         Toast.makeText(context, message, time).show();
 
+    }
+
+    public static boolean isValidEmailId(String email) {
+
+        return Pattern.compile(
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+        ).matcher(email).matches();
     }
 
 }

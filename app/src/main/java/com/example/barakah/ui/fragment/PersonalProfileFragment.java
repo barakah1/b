@@ -117,6 +117,20 @@ public class PersonalProfileFragment extends Fragment {
 
 
         });
+
+          binding.tvChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.CHANGE_PASSWORD);
+                getActivity().startActivity(intent);
+            }
+
+
+        });
+
+
     }
 
     private void setUserData() {
@@ -150,15 +164,15 @@ public class PersonalProfileFragment extends Fragment {
 
     private void checkValidation() {
         String name = binding.etName.getText().toString().trim();
-        String password = binding.etPass.getText().toString().trim();
+       // String password = binding.etPass.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String address = binding.etAddress.getText().toString().trim();
         String mobile = binding.etMobile.getText().toString().trim();
         if (name.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.name_req), Toast.LENGTH_SHORT).show();
-        } else if (password.isEmpty()) {
+        } /*else if (password.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();
-        } else if (email.isEmpty()) {
+        }*/ else if (email.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.email_req), Toast.LENGTH_SHORT).show();
         } else if (address.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.address_req), Toast.LENGTH_SHORT).show();
@@ -171,26 +185,26 @@ public class PersonalProfileFragment extends Fragment {
             registerModel.setEmail(email);
             registerModel.setMobile(mobile);
             progressDialog = BarakahUtils.customProgressDialog(getActivity());
-            login(email, password);
+            login(email);
         }
     }
 
-    private void login(String email, final String password) {
+    private void login(String email) {
         final FirebaseUser user = mAuth.getCurrentUser();
         user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isComplete()) {
-                    user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                  /*  user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete()) {
+                            if (task.isComplete()) {*/
                                 updateUserData(user);
-                            } else closeProgress();
+                 /*           } else closeProgress();
                         }
-                    });
+                    });*/
                 }
-                    closeProgress();
+                closeProgress();
 
             }
         });
@@ -231,7 +245,7 @@ public class PersonalProfileFragment extends Fragment {
     }
 
     public void closeProgress() {
-        if (progressDialog != null&&progressDialog.isShowing()) {
+        if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }

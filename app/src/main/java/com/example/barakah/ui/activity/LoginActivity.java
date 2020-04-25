@@ -58,49 +58,42 @@ public class LoginActivity extends AppCompatActivity implements FragmentManager.
 
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         super.onBackPressed();
         fragment = getSupportFragmentManager().findFragmentById(R.id.loginContainer);
-        if (fragment instanceof LoginFragment
+     *//*   if (fragment instanceof LoginFragment
 
 
         ) {
             finish();
-        } else {
+        } else {*//*
             super.onBackPressed();
-        }
-    }
+       // }
+    }*/
 
     @Override
     public void onBackStackChanged() {
         fragment = getSupportFragmentManager().findFragmentById(R.id.loginContainer);
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            System.out.println(getSupportFragmentManager().getBackStackEntryCount());
             //  getSupportActionBar()!!.setDis(true)
             // supportActionBar!!.setHomeButtonEnabled(true)
-            /*binding.toolbarMain!!.setNavigationOnClickListener {
-                if (mFragment is ProfileFragment
-                    || mFragment is MyUnitFragment
-                        || mFragment is MyBulletinsFragment
-                    || mFragment is MessagingFragment
-                        || mFragment is SelectLanguageFragment
-                    || mFragment is HomeFragment
-                        || mFragment is HomeFragment
-                    || mFragment is SignInFragment
-                        || mFragment is ForgotPasswordFragment
-                    || mFragment is AddEmergencyContactFragment
-                        || mFragment is Scan_ORCode_Fragment
-                    || mFragment is VisitorDetailsFragment
-                        || mFragment is CreatePostFragment
-                    || mFragment is UpdateBulletinsFragment
+            binding.toolbarHome.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (fragment instanceof LoginFragment
+
                 ) {
-                    this@MainActivity.finish()
-                } else {
-                    supportFragmentManager.popBackStack()
+                       finish();
+                    } else {
+                        getSupportFragmentManager().popBackStack();
+                    }
                 }
-            }*/
+            });
+
         } else {
-            // supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
 

@@ -45,6 +45,7 @@ public class LoginFragment extends Fragment {
     private EditText etPassowrd;
     private Button loginBtn;
     private TextView registerBtn;
+    private TextView forgotPassword;
 
 
     public LoginFragment() {
@@ -114,6 +115,19 @@ public class LoginFragment extends Fragment {
 
 
         });
+          forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BarakahUtils.setCurrentFragment(
+                        getActivity(), R.id.loginContainer,
+                        ForgotPasswordFragment.newInstance(), ForgotPasswordFragment.TAG
+                );
+
+            }
+
+
+        });
+
 
     }
 
@@ -153,6 +167,7 @@ public class LoginFragment extends Fragment {
 
     private void initializeViews(View view) {
         etEmail = view.findViewById(R.id.etEmail);
+        forgotPassword = view.findViewById(R.id.tvForgotPassword);
         etPassowrd = view.findViewById(R.id.etPass);
         registerBtn = view.findViewById(R.id.tvSignup);
         loginBtn = view.findViewById(R.id.btnSignin);

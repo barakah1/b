@@ -59,6 +59,17 @@
     <string name="no_previous_order">يا سناب! لا توجد أوامر سابقة</string>
     <string name="personal_profile">الملف الشخصي</string>
     <string name="favourites">المفضلة</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="reset_pass_email_sent">تم إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور</string>
+    <string name="forgot_pass">هل نسيت كلمة المرور</string>
+    <string name="invalid_email">بريد إلكتروني خاطئ</string>
+    <string name="password">كلمة السر</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="confirm_pass_req">تأكيد كلمة المرور المطلوبة</string>
+    <string name="confirm_pass_not_matched">كلمة المرور وتأكيد كلمة المرور غير متطابقة</string>
+    <string name="pass_change_success">تم تغيير الرقم السري بنجاح</string>
+    <string name="submit">إرسال</string>
+    <string name="change_pass">تغيير كلمة المرور</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

@@ -1,6 +1,7 @@
 package com.example.barakah.utils;
 
 public class BarakahConstants {
+    public static final String CHANGE_PASSWORD = "CHANGE_PASSWORD";
     public static final String HOME_ACTIVITY = "HOME_ACTIVITY";
     public static final String HEALTH_STATUS_FM = "HEALTH_STATUS_FM";
     public static final String HEALTH_STATUS_DATA = "HEALTH_STATUS_DATA";
