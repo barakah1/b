@@ -37,6 +37,7 @@ public class ChangePasswordFragment extends Fragment {
     public ChangePasswordFragment() {
         // Required empty public constructor
     }
+
     public static ChangePasswordFragment newInstance() {
         ChangePasswordFragment fragment = new ChangePasswordFragment();
         Bundle args = new Bundle();
@@ -50,6 +51,7 @@ public class ChangePasswordFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_password, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.reset_pass));
 
         initialization(view);
         return view;

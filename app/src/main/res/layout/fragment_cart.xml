@@ -87,7 +87,7 @@
                     android:layout_toLeftOf="@id/imageIv"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
-                    android:text="اسم العشبة"
+                    android:text="ملاحظة: الكمية تساوي علبة واحدة وهي ١٢٠ جرام"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"

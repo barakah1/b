@@ -45,7 +45,7 @@
                 android:background="@drawable/et_bg"
 
                 android:ems="10"
-                android:hint="اسم"
+                android:hint="الاسم"
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten" />
             <!--
@@ -74,7 +74,7 @@
 
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="رقم الهاتف المحمول"
+                android:hint="رقم الجوال "
                 android:inputType="textPersonName"
                 android:padding="@dimen/dp_ten" />
 
@@ -97,7 +97,7 @@
                 android:layout_marginTop="@dimen/dp_ten"
                 android:background="@drawable/et_bg"
                 android:ems="10"
-                android:hint="عنوان"
+                android:hint="العنوان"
                 android:inputType="textPersonName"
 
                 android:padding="@dimen/dp_ten"
@@ -147,7 +147,6 @@
                 android:background="@drawable/bg"
                 android:text="حفظ التعديلات"
                 android:textColor="@color/white" />
-
 
             <Button
                 android:id="@+id/btnLogout"

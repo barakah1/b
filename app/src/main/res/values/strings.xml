@@ -7,7 +7,7 @@
     <string name="mobile_req">رقم الجوال مطلوب</string>
 
     <string name="hello_blank_fragment"> مرحبا</string>
-    <string name="success_login">مرحبا بك تم تسجيل الدخول بنجاح</string>
+    <string name="success_login">مرحبا بك </string>
     <string name="reg_success"> تم التسجيل بنجاح</string>
     <string name="home">الصفحة الرئيسية</string>
     <string name="cart">السلة</string>
@@ -19,12 +19,12 @@
     <string name="benefit">"فوائدها "</string>
     <string name="site_effect">"استخدامها  "</string>
     <string name="conflict">التعارضات</string>
-    <string name="herb_fav_success">تم الاضافة الى المفضلة بنجاح </string>
+    <string name="herb_fav_success">تمت الاضافة الى المفضلة بنجاح </string>
     <string name="health_status_title">الحالة الصحية</string>
     <string name="herb_details">عن العشبة</string>
     <string name="current_orders">الطلبات الحالية</string>
     <string name="previous_orders">الطلبات السابقة</string>
-    <string name="ok">موافق</string>
+    <string name="ok">اضافة الى السلة</string>
     <string name="capsule">كابسولات</string>
     <string name="raw">خام</string>
     <string name="dialog_title">Dialog Title</string>
@@ -60,15 +60,16 @@
     <string name="favourites">المفضلة</string>
     <string name="email">البريد الإلكتروني</string>
     <string name="reset_pass_email_sent">تم إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور</string>
-    <string name="forgot_pass">هل نسيت كلمة المرور</string>
-    <string name="invalid_email">بريد إلكتروني خاطئ</string>
-    <string name="password">كلمة السر</string>
-    <string name="confirm_password">تأكيد كلمة المرور</string>
-    <string name="confirm_pass_req">تأكيد كلمة المرور المطلوبة</string>
-    <string name="confirm_pass_not_matched">كلمة المرور وتأكيد كلمة المرور غير متطابقة</string>
-    <string name="pass_change_success">تم تغيير الرقم السري بنجاح</string>
-    <string name="submit">إرسال</string>
+    <string name="forgot_pass">هل نسيت كلمة المرور؟</string>
+    <string name="invalid_email">البريد الالكتروني غير صحيح</string>
+    <string name="password">كلمة المرور الجديدة</string>
+    <string name="confirm_password">تأكيد كلمة المرورالجديدة</string>
+    <string name="confirm_pass_req">تأكيد كلمة المرور مطلوبة</string>
+    <string name="confirm_pass_not_matched">كلمة المرور وتأكيد كلمة المرور غير متطابقتين</string>
+    <string name="pass_change_success">تم تغيير كلمة المرور بنجاح</string>
+    <string name="submit">اعادة تعيين</string>
     <string name="change_pass">تغيير كلمة المرور</string>
+    <string name="reset_pass">اعادة تعيين كلمة المرور</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

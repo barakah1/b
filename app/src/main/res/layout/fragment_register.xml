@@ -61,7 +61,7 @@
             android:ems="10"
             android:textAlignment="viewStart"
             tools:ignore="RtlCompat"
-            android:hint="كلمة السر"
+            android:hint="كلمة المرور"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.56"
