@@ -48,7 +48,8 @@
             android:hint="كلمة المرور"
             android:inputType="textPassword"
             android:textAlignment="viewStart"
-            tools:ignore="RtlCompat" />
+            tools:ignore="RtlCompat"
+            />
 
         <Button
             android:id="@+id/btnSignin"
