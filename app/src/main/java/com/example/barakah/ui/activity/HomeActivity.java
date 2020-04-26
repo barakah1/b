@@ -91,6 +91,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
                 BarakahUtils.setCurrentFragment(
                         HomeActivity.this, R.id.homeContainer,
                         ChangePasswordFragment.newInstance(), ChangePasswordFragment.TAG
+
                 );
             }
 

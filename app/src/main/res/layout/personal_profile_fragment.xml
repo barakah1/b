@@ -115,38 +115,54 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnHealth"
-                    android:layout_width="161dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg"
-                    android:text="اختر"
-                    android:textColor="@color/white"
-
-
-                    />
-
                 <TextView
                     android:id="@+id/medical"
                     android:layout_width="118dp"
                     android:layout_height="39dp"
-                    android:layout_marginStart="@dimen/twenty"
+                    android:layout_marginEnd="10dp"
                     android:text="الحالة الصحية*"
                     android:textColor="#FF7BBD7F"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnHealth"
+                    android:layout_width="161dp"
+                    android:layout_height="40dp"
+
+
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/bg"
+                    android:baselineAligned="false"
+                    android:text="اختر"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
 
             <Button
                 android:id="@+id/btnUpdate"
-                android:layout_width="wrap_content"
+                android:layout_width="145dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/thirty_five"
+
                 android:background="@drawable/bg"
                 android:text="حفظ التعديلات"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/tvChangePass"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_twenty"
+                android:background="@drawable/bg"
+                android:padding="@dimen/dp_ten"
+                android:text="@string/change_pass"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/btnLogout"
@@ -159,17 +175,6 @@
                 android:text="تسجيل خروج"
                 android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/tvChangePass"
-                android:layout_width="wrap_content"
-                android:layout_height="39dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/bg"
-                android:padding="@dimen/dp_ten"
-                android:text="@string/change_pass"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
