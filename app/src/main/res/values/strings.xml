@@ -66,15 +66,15 @@
     <string name="confirm_password">تأكيد كلمة المرورالجديدة</string>
     <string name="confirm_pass_req">تأكيد كلمة المرور مطلوبة</string>
     <string name="confirm_pass_not_matched">كلمة المرور وتأكيد كلمة المرور غير متطابقتين</string>
-    <string name="pass_change_success">تم تغيير كلمة المرور بنجاح</string>
+    <string name="pass_change_success">تم تعيين كلمة المرور بنجاح</string>
     <string name="submit">اعادة تعيين</string>
     <string name="change_pass">تغيير كلمة المرور</string>
     <string name="reset_pass">اعادة تعيين كلمة المرور</string>
-    <string name="old_pass">كلمة سر قديمة</string>
-    <string name="new_pass">كلمة السر الجديدة</string>
+    <string name="old_pass">كلمةالمرور السابقة</string>
+    <string name="new_pass">كلمة المرور الجديدة</string>
     <string name="plz_enter_new_pass">يرجى إدخال كلمة المرور الجديدة</string>
-    <string name="plz_enter_old_pass">يرجى إدخال كلمة المرور القديمة</string>
-    <string name="invalid_credentials">بيانات الاعتماد غير صالحة</string>
+    <string name="plz_enter_old_pass">يرجى إدخال كلمة المرور السابقة</string>
+    <string name="invalid_credentials">بيانات المدخله غير صحيحة</string>
     <string name="pass_update_fail">فشل تحديث كلمة المرور</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
