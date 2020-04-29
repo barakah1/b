@@ -3,6 +3,7 @@ package com.example.barakah.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
@@ -60,7 +61,7 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
-            CartHerbModel cartHerbModel = herbsList.get(position);
+            final CartHerbModel cartHerbModel = herbsList.get(position);
             VendorStoreItemModel vendor = herbsList.get(position).getVendor();
             final HerbsModel herb = herbsList.get(position).getHerbModel();
             //   final VendorStoreItemModel herb = herbsList.get(position).getVendor();
@@ -86,6 +87,27 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
                 holder.binding.receiveFromHome.setChecked(true);
 
             }
+            holder.binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (checkedId == R.id.receiveFromHome) {
+                        cartHerbModel.setDeliveryType("1");
+                    } else if (checkedId == R.id.radioHomeDelivery) {
+                        cartHerbModel.setDeliveryType("0");
+
+                    }
+                    // This will get the radiobutton that has changed in its check state
+                    //  RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
+                    // This puts the value (true/false) into the variable
+                    // boolean isChecked = checkedRadioButton.isChecked();
+                    // If the radiobutton that has changed in check state is now checked...
+                  /*  if (isChecked)
+                    {
+                        // Changes the textview's text to "Checked: example radiobutton text"
+                        tv.setText("Checked:" + checkedRadioButton.getText());
+                    }*/
+
+                }
+            });
           /*  if (holder.binding.radioHomeDelivery.isChecked()) {
                 cartHerbModel.setDeliveryType("0");
             } else {

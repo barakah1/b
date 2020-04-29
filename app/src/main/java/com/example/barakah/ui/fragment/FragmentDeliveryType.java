@@ -105,7 +105,9 @@ public class FragmentDeliveryType extends Fragment {
                     orderModel.setHerb_type(model.getCartModel().getHerb_type());
                     orderModel.setHerb_name(model.getHerbModel().getName());
                     orderModel.setHerb_id(model.getHerbModel().getId());
+
                     orderModel.setDelivery_type(model.getDeliveryType());
+
                     orderModel.setOrder_status("0");
                     try {
                         int quantity = orderModel.getQuantity();

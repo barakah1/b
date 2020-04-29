@@ -10,9 +10,9 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="@dimen/dp_five"
         android:layout_margin="@dimen/dp_five"
+        app:cardCornerRadius="@dimen/dp_five"
+        app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
 
 
@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-android:padding="@dimen/dp_ten"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/dp_ten">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,9 +74,9 @@ android:padding="@dimen/dp_ten"
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_five"
                     android:background="@color/silver"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_five">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -139,6 +139,7 @@ android:padding="@dimen/dp_ten"
             </LinearLayout>
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_ten"
