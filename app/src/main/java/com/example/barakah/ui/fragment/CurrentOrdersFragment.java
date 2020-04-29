@@ -78,7 +78,7 @@ public class CurrentOrdersFragment extends Fragment {
     private void getCurrentOrdersList() {
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").startAt("0").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").equalTo("0").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
@@ -111,7 +111,7 @@ public class CurrentOrdersFragment extends Fragment {
     private void getProgressOrders() {
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").startAt("1").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").equalTo("1").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
