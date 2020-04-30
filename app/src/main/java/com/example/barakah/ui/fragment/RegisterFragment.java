@@ -137,7 +137,12 @@ public class RegisterFragment extends Fragment {
         if (name.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.name_req), Toast.LENGTH_SHORT).show();
         } else if (password.isEmpty()) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();}
+
+            else if (password.length()<8) {
+                Toast.makeText(getActivity(), "كلمة المرور يجب ان لا تكون اقل من 8", Toast.LENGTH_SHORT).show();
+
+
 
         } else if (email.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.email_req), Toast.LENGTH_SHORT).show();
@@ -148,7 +153,11 @@ public class RegisterFragment extends Fragment {
         } else if (mobile.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.mobile_req), Toast.LENGTH_SHORT).show();
 
-        } else {
+        } else if ( mobile.length()<10) {
+        Toast.makeText(getActivity(), "رقم الجوال يجب ان يكون صحيح", Toast.LENGTH_SHORT).show();
+
+    }
+            else {
             registerModel = new RegisterModel();
             registerModel.setAddress(address);
             registerModel.setName(name);
@@ -193,14 +202,15 @@ public class RegisterFragment extends Fragment {
 
                             } else {
                                 closeProgress();
-
+                                System.out.println("something" + task);
                                 Toast.makeText(getActivity(), "هناك خطأ يرجى المحاولة مره اخرى", Toast.LENGTH_SHORT).show();
 
                             }
+
                         } else {
                             closeProgress();
-                            System.out.println("something" + task.getException().getMessage());
-                            System.out.println("something" + task);
+                            System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task.getException().getMessage());
+                            System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task);
                         }
                     }
                 });
