@@ -22,6 +22,7 @@ public class BarakahConstants {
         String STOREITEM = "STOREITEM";
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";
+        String HERB_KEY = "herb";
         String FAVOURITE = "FAVOURITE";
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
         String MEDICAL_HISTORY = "MEDICAL_HISTORY";

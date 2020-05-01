@@ -4,23 +4,37 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class OrderModel implements Serializable {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("herb_id")
+    @SerializedName("order_key")
     @Expose
-    private String herb_id;
+    private String order_key;
+
     @SerializedName("vendor_id")
     @Expose
     private String vendor_id;
+
+    @SerializedName("herb_id")
+    @Expose
+    private String herb_id;
     @SerializedName("quantity")
     @Expose
     private int quantity;
     @SerializedName("herb_name")
     @Expose
     private String herb_name;
+    @SerializedName("order_price")
+    @Expose
+    private String order_price;
+    @SerializedName("herb_type")
+    @Expose
+    private String herb_type;
+
+
     @SerializedName("vendor_name")
     @Expose
     private String vendor_name;
@@ -28,18 +42,19 @@ public class OrderModel implements Serializable {
     @SerializedName("order_status")
     @Expose
     private String order_status;
-    @SerializedName("order_price")
-    @Expose
-    private String order_price;
-    @SerializedName("herb_type")
-    @Expose
-    private String herb_type;
+
+
     @SerializedName("order_id")
     @Expose
     private String order_id;
-      @SerializedName("delivery_type")
+
+    @SerializedName("delivery_type")
     @Expose
     private String delivery_type;
+
+    /*    @SerializedName("delivery_type")
+      @Expose*/
+    private ArrayList<OrderSubItemModel> herbs;
 
 
     public String getId() {
@@ -50,6 +65,14 @@ public class OrderModel implements Serializable {
         this.id = id;
     }
 
+    public String getVendor_id() {
+        return vendor_id;
+    }
+
+    public void setVendor_id(String vendor_id) {
+        this.vendor_id = vendor_id;
+    }
+
     public String getHerb_id() {
         return herb_id;
     }
@@ -58,12 +81,12 @@ public class OrderModel implements Serializable {
         this.herb_id = herb_id;
     }
 
-    public String getVendor_id() {
-        return vendor_id;
+    public String getOrder_key() {
+        return order_key;
     }
 
-    public void setVendor_id(String vendor_id) {
-        this.vendor_id = vendor_id;
+    public void setOrder_key(String order_key) {
+        this.order_key = order_key;
     }
 
     public int getQuantity() {
@@ -128,5 +151,13 @@ public class OrderModel implements Serializable {
 
     public void setDelivery_type(String delivery_type) {
         this.delivery_type = delivery_type;
+    }
+
+    public ArrayList<OrderSubItemModel> getHerbs() {
+        return herbs;
+    }
+
+    public void setHerbs(ArrayList<OrderSubItemModel> herbs) {
+        this.herbs = herbs;
     }
 }

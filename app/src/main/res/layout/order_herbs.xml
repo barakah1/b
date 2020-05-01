@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <!-- <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="30dp"
+             android:weightSum="3">-->
+
+        <TextView
+            android:id="@+id/tvHerb"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1" />
+
+
+        <!--
+            </LinearLayout>
+        -->
+    </LinearLayout>
+</layout>
