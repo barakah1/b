@@ -23,6 +23,8 @@ public class BarakahConstants {
         String CUSTOMER = "CUSTOMER";
         String HERB = "HERB";
         String HERB_KEY = "herb";
+        String ORDER_ID = "id";
+        String TOTAL_PRICE = "total_price";
         String FAVOURITE = "FAVOURITE";
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
         String MEDICAL_HISTORY = "MEDICAL_HISTORY";

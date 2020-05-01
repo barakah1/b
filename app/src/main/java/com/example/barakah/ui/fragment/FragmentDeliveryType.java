@@ -27,6 +27,7 @@ import com.example.barakah.utils.BarakahUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +35,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.example.barakah.utils.BarakahConstants.CART_DATA;
 
@@ -53,6 +57,7 @@ public class FragmentDeliveryType extends Fragment {
     private ArrayList<CartHerbModel> cartHerbList;
     private CartHerbModel orders;
     private OrderModel sameVendorOrder;
+    private ArrayList<CartHerbModel> orderArray;
 
     public FragmentDeliveryType() {
         // Required empty public constructor
@@ -142,6 +147,7 @@ public class FragmentDeliveryType extends Fragment {
                     }
 
                 }*/
+                orderArray = al;
                 saveOrderData(al);
                 System.out.println("Same vendor different deliverytype" + al);
 
@@ -154,7 +160,7 @@ public class FragmentDeliveryType extends Fragment {
     private void saveOrderData(final ArrayList<CartHerbModel> al) {
         final Iterator<CartHerbModel> iterator = al.iterator();
         while (iterator.hasNext()) {
-            final CartHerbModel model=iterator.next();
+            final CartHerbModel model = iterator.next();
 
      /*   for (final CartHerbModel model :
                 al) {*/
@@ -201,17 +207,17 @@ public class FragmentDeliveryType extends Fragment {
                         mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(model.getOid()).child(BarakahConstants.DbTABLE.HERB_KEY).child(keys).setValue(orderSubItemModel);
                         mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
                         BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                        boolean status=false;
+                        boolean status = false;
                         if (!iterator.hasNext()) {
-                            status=true;
+                            status = true;
                             //last name
                         }
-                        updateStoreData(orderModel, orderSubItemModel,status);
+                        updateStoreData(orderModel, orderSubItemModel, status);
 
                     }
                 }
             });
-       }
+        }
     }
 /*
 
@@ -382,7 +388,7 @@ public class FragmentDeliveryType extends Fragment {
     }
 */
 
-    private void updateStoreData(final OrderModel orderModel, final OrderSubItemModel orderSubItemModel, boolean status) {
+    private void updateStoreData(final OrderModel orderModel, final OrderSubItemModel orderSubItemModel, final boolean status) {
         mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderSubItemModel.getHerb_id()).child(orderModel.getVendor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -402,12 +408,10 @@ public class FragmentDeliveryType extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isComplete()) {
-                                    Intent intentt = new Intent(getActivity(), MainActivity.class);
-                                    intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intentt);
-                                    getActivity().finish();
+                                    if (status) {
+                                        updateTotalPrice();
+                                    }
+                                    //  gotToMainActivity();
                                 }
                             }
                         });
@@ -419,12 +423,11 @@ public class FragmentDeliveryType extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isComplete()) {
-                                    Intent intentt = new Intent(getActivity(), MainActivity.class);
-                                    intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intentt);
-                                    getActivity().finish();
+                                    if (status) {
+                                        updateTotalPrice();
+
+                                    }
+                                    // gotToMainActivity();
                                 }
                             }
                         });
@@ -443,5 +446,103 @@ public class FragmentDeliveryType extends Fragment {
         });
 
 
+    }
+
+    public void gotToMainActivity() {
+        Intent intentt = new Intent(getActivity(), MainActivity.class);
+        intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intentt.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intentt);
+        getActivity().finish();
+    }
+
+    private void updateTotalPrice() {
+        if (orderArray != null) {
+            HashSet<String> orders = new HashSet();
+            for (CartHerbModel cart : orderArray) {
+                orders.add(cart.getOid());
+            }
+            ArrayList<String> order = new ArrayList(orders);
+
+            if (order.size() > 0) {
+                udpdatePrice(order, 0);
+
+            }
+
+        }
+    }
+
+    private void udpdatePrice(final ArrayList<String> orders, final int position) {
+        if (position <= orders.size() - 1) {
+            final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+            mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).child(orders.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
+
+                        Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                     //   while (data.hasNext()) {
+                          //  DataSnapshot da = data.next();
+                          //  OrderModel model = da.getValue(OrderModel.class);
+                           // DataSnapshot orderKey = dataSnapshot.child(BarakahConstants.DbTABLE.ORDER_ID);
+                            //String key=orderKey.getValue();
+                        String key=dataSnapshot.getKey();
+                            DataSnapshot child = dataSnapshot.child(BarakahConstants.DbTABLE.HERB_KEY);
+
+                            if (child.hasChildren()) {
+                                Iterator<DataSnapshot> dataa = child.getChildren().iterator();
+
+                                ArrayList<OrderSubItemModel> al = new ArrayList<>();
+                                while (dataa.hasNext()) {
+                                    DataSnapshot daa = dataa.next();
+
+                                    OrderSubItemModel orderItem = daa.getValue(OrderSubItemModel.class);
+                                    orderItem.setHerb_id(daa.getKey());
+                                    al.add(orderItem);
+
+                                }
+
+                                double totalPrice = 0.0;
+                                for (OrderSubItemModel h : al) {
+
+                                    try {
+                                        int quantity = h.getQuantity();
+                                        if (h.getHerb_type() != null || !h.getHerb_type().isEmpty()) {
+                                           // if (h.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                                            //    double price = quantity * Double.valueOf(orderArray.get(position).getVendor().getRaw_price());
+                                             //   totalPrice = totalPrice + price;
+                                                // h.setOrder_price(String.valueOf(price));
+                                          //  } else if (h.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                                                double price = quantity * Double.valueOf(h.getOrder_price());
+
+                                                //  h.setOrder_price(String.valueOf(price));
+                                                totalPrice = totalPrice + price;
+
+                                           // }
+
+                                        }
+                                    } catch (Exception e
+                                    ) {
+                                    }
+                                }
+                                mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).child(BarakahConstants.DbTABLE.TOTAL_PRICE).setValue(String.valueOf(totalPrice));
+                        }
+                        udpdatePrice(orders,position+1);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    //  getProgressOrders();
+                    udpdatePrice(orders,position);
+
+                }
+            });
+        }else{
+            gotToMainActivity();
+        }
     }
 }
