@@ -17,8 +17,11 @@ public class OrderModel implements Serializable {
     @SerializedName("vendor_id")
     @Expose
     private String vendor_id;
+ @SerializedName("total_price")
+    @Expose
+    private String total_price;
 
-    @SerializedName("herb_id")
+   /* @SerializedName("herb_id")
     @Expose
     private String herb_id;
     @SerializedName("quantity")
@@ -32,7 +35,7 @@ public class OrderModel implements Serializable {
     private String order_price;
     @SerializedName("herb_type")
     @Expose
-    private String herb_type;
+    private String herb_type;*/
 
 
     @SerializedName("vendor_name")
@@ -72,14 +75,14 @@ public class OrderModel implements Serializable {
     public void setVendor_id(String vendor_id) {
         this.vendor_id = vendor_id;
     }
-
+/*
     public String getHerb_id() {
         return herb_id;
     }
 
     public void setHerb_id(String herb_id) {
         this.herb_id = herb_id;
-    }
+    }*/
 
     public String getOrder_key() {
         return order_key;
@@ -88,7 +91,7 @@ public class OrderModel implements Serializable {
     public void setOrder_key(String order_key) {
         this.order_key = order_key;
     }
-
+/*
     public int getQuantity() {
         return quantity;
     }
@@ -103,7 +106,7 @@ public class OrderModel implements Serializable {
 
     public void setHerb_name(String herb_name) {
         this.herb_name = herb_name;
-    }
+    }*/
 
     public String getVendor_name() {
         return vendor_name;
@@ -121,6 +124,14 @@ public class OrderModel implements Serializable {
         this.order_status = order_status;
     }
 
+    public String getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
+/*
     public String getOrder_price() {
         return order_price;
     }
@@ -135,7 +146,7 @@ public class OrderModel implements Serializable {
 
     public void setHerb_type(String herb_type) {
         this.herb_type = herb_type;
-    }
+    }*/
 
     public String getOrder_id() {
         return order_id;

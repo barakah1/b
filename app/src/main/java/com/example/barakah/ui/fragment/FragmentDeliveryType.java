@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.barakah.R;
 import com.example.barakah.adapters.HerbOfVendorAdapter;
-import com.example.barakah.adapters.SelectVendorAdapter;
 import com.example.barakah.databinding.FragmentDeliveryTypeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.OrderModel;
@@ -36,11 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.example.barakah.utils.BarakahConstants.CART_DATA;
 
@@ -104,15 +99,15 @@ public class FragmentDeliveryType extends Fragment {
                     for (int j = 0; j < al.size(); j++) {
                         if (al.get(i).getVendor().getVendor_id().equals(al.get(j).getVendor().getVendor_id())) {
                             if (al.get(i).getDeliveryType().equals(al.get(j).getDeliveryType())) {
-                                if(!al.get(i).getOid().isEmpty()){
-                                   // long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                                if (!al.get(i).getOid().isEmpty()) {
+                                    // long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
                                     al.get(j).setOid(String.valueOf(al.get(i).getOid()));
-                                }else{
+                                } else {
                                     long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
                                     al.get(i).setOid(String.valueOf(number));
                                 }
-                            }else{
-                                if(al.get(i).getOid().isEmpty()){
+                            } else {
+                                if (al.get(i).getOid().isEmpty()) {
                                     long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
                                     al.get(i).setOid(String.valueOf(number));
                                 }
@@ -147,7 +142,7 @@ public class FragmentDeliveryType extends Fragment {
                     }
 
                 }*/
-            saveOrderData(al);
+                saveOrderData(al);
                 System.out.println("Same vendor different deliverytype" + al);
 
             }
@@ -157,10 +152,14 @@ public class FragmentDeliveryType extends Fragment {
     }
 
     private void saveOrderData(final ArrayList<CartHerbModel> al) {
+        final Iterator<CartHerbModel> iterator = al.iterator();
+        while (iterator.hasNext()) {
+            final CartHerbModel model=iterator.next();
 
-        for (final CartHerbModel model :
-                al) {
-          //  long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+     /*   for (final CartHerbModel model :
+                al) {*/
+
+            //  long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
             final OrderModel orderModel = new OrderModel();
             orderModel.setId(String.valueOf(model.getOid()));
             orderModel.setVendor_name(model.getVendor().getVendor_name());
@@ -202,13 +201,19 @@ public class FragmentDeliveryType extends Fragment {
                         mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(model.getOid()).child(BarakahConstants.DbTABLE.HERB_KEY).child(keys).setValue(orderSubItemModel);
                         mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
                         BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                         updateStoreData(orderModel,orderSubItemModel);
+                        boolean status=false;
+                        if (!iterator.hasNext()) {
+                            status=true;
+                            //last name
+                        }
+                        updateStoreData(orderModel, orderSubItemModel,status);
 
                     }
                 }
             });
-        }
+       }
     }
+/*
 
     private void addHerbToOrder(CartHerbModel order, final CartHerbModel herb) {
         long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
@@ -253,7 +258,7 @@ public class FragmentDeliveryType extends Fragment {
 
                     mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
                     BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                    updateStoreData(orderModel, orderSubItemModel);
+                   // updateStoreData(orderModel, orderSubItemModel, status);
 
                 }
             }
@@ -277,7 +282,9 @@ public class FragmentDeliveryType extends Fragment {
         }
 
     }
+*/
 
+/*
     private void saveOrder(CartHerbModel order, final CartHerbModel herb) {
         final OrderSubItemModel orderSubItemModel = new OrderSubItemModel();
         orderSubItemModel.setHerb_type(herb.getCartModel().getHerb_type());
@@ -315,7 +322,7 @@ public class FragmentDeliveryType extends Fragment {
                     mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
                     BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
                     // sameVendorOrder = orderModel;
-                    updateStoreData(sameVendorOrder, orderSubItemModel);
+                    updateStoreData(sameVendorOrder, orderSubItemModel, status);
 
                 }
             }
@@ -367,14 +374,15 @@ public class FragmentDeliveryType extends Fragment {
                     mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).child(keys).setValue(orderSubItemModel);
                     mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
                     BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                    updateStoreData(orderModel, orderSubItemModel);
+                  //  updateStoreData(orderModel, orderSubItemModel, status);
 
                 }
             }
         });
     }
+*/
 
-    private void updateStoreData(final OrderModel orderModel, final OrderSubItemModel orderSubItemModel) {
+    private void updateStoreData(final OrderModel orderModel, final OrderSubItemModel orderSubItemModel, boolean status) {
         mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderSubItemModel.getHerb_id()).child(orderModel.getVendor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
