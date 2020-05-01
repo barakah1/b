@@ -10,6 +10,7 @@ public class CartHerbModel implements Serializable {
     VendorStoreItemModel vendor;
     //0=home, 1= self service
     String deliveryType = "0";
+    String oid = "";
 
     public CartModel getCartModel() {
         return cartModel;
@@ -49,5 +50,13 @@ public class CartHerbModel implements Serializable {
 
     public void setDeliveryType(String deliveryType) {
         this.deliveryType = deliveryType;
+    }
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 }

@@ -36,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/twenty"
                 android:orientation="horizontal"
-                app:stpi_labels="@array/stepLabels"
+                android:weightSum="3"
 
-                android:weightSum="3">
+                app:stpi_labels="@array/stepLabels">
 
                 <TextView
 
@@ -47,8 +47,8 @@
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
                     android:paddingTop="@dimen/dp_ten"
-                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:text="تم التوصيل"
                     android:textColor="#000"
                     android:textSize="15sp"
@@ -63,23 +63,24 @@
                     android:layout_weight="1"
                     android:paddingTop="@dimen/dp_ten"
                     android:paddingBottom="@dimen/dp_ten"
-                    android:textAlignment="center"
                     android:text="تحت االعمل"
+                    android:textAlignment="center"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
 
                     />
-             <TextView
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
-                 android:textAlignment="textEnd"
                     android:paddingTop="@dimen/dp_ten"
-                 android:paddingEnd="@dimen/dp_ten"
+                    android:paddingEnd="@dimen/dp_ten"
                     android:paddingBottom="@dimen/dp_ten"
                     android:text="تم تاكيد الطلب"
+                    android:textAlignment="textEnd"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -87,7 +88,7 @@
                     />
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/twenty"
@@ -102,8 +103,8 @@
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
                     android:paddingTop="@dimen/dp_ten"
-                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:text="رقم الطلب"
                     android:textColor="#000"
                     android:textSize="15sp"
@@ -117,8 +118,8 @@
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
                     android:paddingTop="@dimen/dp_ten"
-                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:text=" المتجر"
                     android:textColor="#000"
                     android:textSize="15sp"
@@ -142,8 +143,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
-                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:text="رقم الطلب"
                     android:textColor="@color/gray"
                     android:textSize="15sp"
@@ -157,8 +158,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imageIv"
                     android:layout_weight="1"
-                    android:paddingBottom="@dimen/dp_ten"
                     android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_ten"
                     android:text="المتجر"
                     android:textColor="@color/gray"
                     android:textSize="15sp"
@@ -168,14 +169,14 @@
             </LinearLayout>
 
             <TextView
-                android:padding="@dimen/dp_ten"
-
                 android:id="@+id/deliveryMethod"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_ten"
                 android:layout_toLeftOf="@id/imageIv"
                 android:background="@color/lightGray"
+                android:padding="@dimen/dp_ten"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:textColor="#000"
@@ -217,31 +218,35 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvHerb"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:weightSum="3">
+                    android:layout_height="wrap_content" />
+                <!--  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="30dp"
+                      android:weightSum="3">
 
-                    <TextView
-                        android:id="@+id/tvHerb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:layout_weight="1" />
+                      <TextView
+                          android:id="@+id/tvHerb"
+                          android:layout_width="wrap_content"
+                          android:layout_height="25dp"
+                          android:layout_weight="1" />
 
-                    <TextView
-                        android:id="@+id/tvPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:layout_weight="1" />
+                      <TextView
+                          android:id="@+id/tvPrice"
+                          android:layout_width="wrap_content"
+                          android:layout_height="25dp"
+                          android:layout_weight="1" />
 
-                    <TextView
-                        android:id="@+id/tvQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:layout_weight="1" />
+                      <TextView
+                          android:id="@+id/tvQuantity"
+                          android:layout_width="wrap_content"
+                          android:layout_height="25dp"
+                          android:layout_weight="1" />
 
 
-                </LinearLayout>
+                  </LinearLayout>-->
             </LinearLayout>
 
             <TextView
@@ -256,10 +261,7 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvOrderItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />-->
+
         </LinearLayout>
     </ScrollView>
 </layout>

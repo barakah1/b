@@ -16,6 +16,7 @@ import com.example.barakah.R;
 import com.example.barakah.adapters.CurrentOrderAdapter;
 import com.example.barakah.databinding.FragmentPreviousOrdersBinding;
 import com.example.barakah.models.OrderModel;
+import com.example.barakah.models.OrderSubItemModel;
 import com.example.barakah.utils.BarakahConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -85,13 +86,38 @@ public class PreviousOrdersFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
+                  /*  ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
                         System.out.println(da.getValue());
                         OrderModel model = da.getValue(OrderModel.class);
                         herbsModels.add(model);
+                    }*/
+                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
+                    while (data.hasNext()) {
+                        DataSnapshot da = data.next();
+                        //System.out.println();
+                        OrderModel model = da.getValue(OrderModel.class);
+                        DataSnapshot child = da.child(BarakahConstants.DbTABLE.HERB_KEY);
+
+                        if (child.hasChildren()) {
+                            Iterator<DataSnapshot> dataa = child.getChildren().iterator();
+
+                            ArrayList<OrderSubItemModel> al = new ArrayList<>();
+                            while (dataa.hasNext()) {
+                                DataSnapshot daa = dataa.next();
+                                OrderSubItemModel orderItem = daa.getValue(OrderSubItemModel.class);
+                                al.add(orderItem);
+
+                            }
+                            model.setHerbs(al);
+                        }
+                        herbsModels.add(model);
                     }
+                    adapter.setData(herbsModels);
+                    adapter.notifyDataSetChanged();
+                  //  getProgressOrders();
                     if (herbsModels.size() > 0) {
                         adapter.setData(herbsModels);
                         adapter.notifyDataSetChanged();

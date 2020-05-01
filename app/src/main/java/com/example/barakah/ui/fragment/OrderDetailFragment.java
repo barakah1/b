@@ -6,12 +6,15 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.barakah.R;
+import com.example.barakah.adapters.AdapterOrderHerb;
+import com.example.barakah.adapters.CurrentOrderAdapter;
 import com.example.barakah.databinding.FragmentOrderDetailBinding;
 import com.example.barakah.models.OrderModel;
 import com.example.barakah.utils.BarakahConstants;
@@ -26,6 +29,7 @@ public class OrderDetailFragment extends Fragment {
 
     private FragmentOrderDetailBinding binding;
     private OrderModel orderModel;
+    private AdapterOrderHerb adapter;
 
     public OrderDetailFragment() {
         // Required empty public constructor
@@ -60,7 +64,12 @@ public class OrderDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         if (orderModel != null) {
+            binding.rcvHerb.setLayoutManager(new LinearLayoutManager(getActivity()));
+            adapter = new AdapterOrderHerb(getActivity(),orderModel.getHerbs());
+            binding.rcvHerb.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
             if (orderModel.getOrder_status() != null) {
                 if (orderModel.getOrder_status().equals("0")) {
                     binding.stepper.setCurrentStep(1);
@@ -75,19 +84,19 @@ public class OrderDetailFragment extends Fragment {
             }
             if (orderModel.getDelivery_type() != null) {
                 if (orderModel.getDelivery_type().equals("0")) {
-                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method,getResources().getString(R.string.home_delivery)));
+                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method, getResources().getString(R.string.home_delivery)));
 
                 } else if (orderModel.getDelivery_type().equals("1")) {
-                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method,getResources().getString(R.string.receive_from_home)));
+                    binding.deliveryMethod.setText(getResources().getString(R.string.delivery_method, getResources().getString(R.string.receive_from_home)));
 
                 }
             }
-            binding.orderNumber.setText( orderModel.getId());
-          //  binding.deliveryMethod.setText(getResources().getString(R.string.order_id, orderModel.getOrder_status()));
-            binding.tvVendroName.setText( orderModel.getVendor_name());
-            binding.tvPrice.setText(orderModel.getOrder_price());
+            binding.orderNumber.setText(orderModel.getId());
+            //  binding.deliveryMethod.setText(getResources().getString(R.string.order_id, orderModel.getOrder_status()));
+            binding.tvVendroName.setText(orderModel.getVendor_name());
+         /*   binding.tvPrice.setText(orderModel.getOrder_price());
             binding.tvQuantity.setText(String.valueOf(orderModel.getQuantity()));
-            binding.tvHerb.setText(orderModel.getHerb_name());
+            binding.tvHerb.setText(orderModel.getHerb_name());*/
             if (orderModel.getOrder_price() != null) {
                 binding.tvTotalPrice.setText(getResources().getString(R.string.total_price, orderModel.getOrder_price()));
             }

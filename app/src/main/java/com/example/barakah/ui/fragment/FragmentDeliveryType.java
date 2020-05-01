@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.barakah.adapters.SelectVendorAdapter;
 import com.example.barakah.databinding.FragmentDeliveryTypeBinding;
 import com.example.barakah.models.CartHerbModel;
 import com.example.barakah.models.OrderModel;
+import com.example.barakah.models.OrderSubItemModel;
 import com.example.barakah.models.StoreItemModel;
 import com.example.barakah.models.VendorStoreItemModel;
 import com.example.barakah.ui.activity.MainActivity;
@@ -34,8 +36,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.example.barakah.utils.BarakahConstants.CART_DATA;
 
@@ -51,6 +56,8 @@ public class FragmentDeliveryType extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ArrayList<CartHerbModel> cartHerbList;
+    private CartHerbModel orders;
+    private OrderModel sameVendorOrder;
 
     public FragmentDeliveryType() {
         // Required empty public constructor
@@ -92,63 +99,283 @@ public class FragmentDeliveryType extends Fragment {
             @Override
             public void onClick(View v) {
                 ArrayList<CartHerbModel> al = adapter.getHerbCartList();
-
-                for (final CartHerbModel model :
-                        al) {
-                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-                    final OrderModel orderModel = new OrderModel();
-                    orderModel.setId(String.valueOf(number));
-                    orderModel.setVendor_name(model.getVendor().getVendor_name());
-                    orderModel.setVendor_id(model.getVendor().getVendor_id());
-                    orderModel.setQuantity(model.getCartModel().getQuantity());
-                    orderModel.setVendor_name(model.getVendor().getVendor_name());
-                    orderModel.setHerb_type(model.getCartModel().getHerb_type());
-                    orderModel.setHerb_name(model.getHerbModel().getName());
-                    orderModel.setHerb_id(model.getHerbModel().getId());
-                    orderModel.setDelivery_type(model.getDeliveryType());
-                    orderModel.setOrder_status("0");
-                    try {
-                        int quantity = orderModel.getQuantity();
-                        if (orderModel.getHerb_type() != null || !orderModel.getHerb_type().isEmpty()) {
-                            if (orderModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
-                                double price = quantity * Double.valueOf(model.getVendor().getRaw_price());
-
-                                orderModel.setOrder_price(String.valueOf(price));
-                            } else if (orderModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
-                                double price = quantity * Double.valueOf(model.getVendor().getCapsule_price());
-
-                                orderModel.setOrder_price(String.valueOf(price));
-
-
+                //  ArrayList<CartHerbModel> ventors = new ArrayList<>(al);
+                for (int i = 0; i < al.size(); i++) {
+                    for (int j = 0; j < al.size(); j++) {
+                        if (al.get(i).getVendor().getVendor_id().equals(al.get(j).getVendor().getVendor_id())) {
+                            if (al.get(i).getDeliveryType().equals(al.get(j).getDeliveryType())) {
+                                if(!al.get(i).getOid().isEmpty()){
+                                   // long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                                    al.get(j).setOid(String.valueOf(al.get(i).getOid()));
+                                }else{
+                                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                                    al.get(i).setOid(String.valueOf(number));
+                                }
+                            }else{
+                                if(al.get(i).getOid().isEmpty()){
+                                    long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                                    al.get(i).setOid(String.valueOf(number));
+                                }
                             }
-
                         }
-                    } catch (Exception e
-                    ) {
+
                     }
-                    DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).push();
-                    String key = db.getKey();
-                    //orderModel.setId(key);
-                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete()) {
-                                mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
-                                BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
-                                updateStoreData(orderModel);
+                }
+            /*    List<CartHerbModel> ventors = new CopyOnWriteArrayList<CartHerbModel>(al);
+                Iterator<CartHerbModel> iterator = ventors.iterator();
+                while (iterator.hasNext()) {
+                    CartHerbModel cart = iterator.next();
+                    Iterator<CartHerbModel> iterator1 = ventors.iterator();
+                    while (iterator1.hasNext()) {
+                        CartHerbModel model = iterator1.next();
+
+                        if (cart.getVendor().getVendor_id().equals(model.getVendor().getVendor_id())) {
+                            if (cart.getDeliveryType().equals(model.getDeliveryType())) {
+                                System.out.println("Same vendor same deliverytype");
+                                System.out.println("VendorSize" + ventors.size());
+                               // if (model.equals(cart)) {
+                                  //  addHerbToOrderRecursive(cart, model);
+                                  //  ventors.remove(model);
+                                //}
+
+                            } else {
+                                System.out.println("Same vendor different deliverytype");
+                              //  addHerbToOrder(cart, model);
 
                             }
                         }
-                    });
-                }
+                    }
+
+                }*/
+            saveOrderData(al);
+                System.out.println("Same vendor different deliverytype" + al);
+
             }
         });
         adapter.setData(cartHerbList);
         adapter.notifyDataSetChanged();
     }
 
-    private void updateStoreData(final OrderModel orderModel) {
-        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void saveOrderData(final ArrayList<CartHerbModel> al) {
+
+        for (final CartHerbModel model :
+                al) {
+          //  long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+            final OrderModel orderModel = new OrderModel();
+            orderModel.setId(String.valueOf(model.getOid()));
+            orderModel.setVendor_name(model.getVendor().getVendor_name());
+            orderModel.setVendor_id(model.getVendor().getVendor_id());
+            orderModel.setVendor_name(model.getVendor().getVendor_name());
+            orderModel.setDelivery_type(model.getDeliveryType());
+            orderModel.setOrder_status("0");
+            final OrderSubItemModel orderSubItemModel = new OrderSubItemModel();
+            orderSubItemModel.setHerb_type(model.getCartModel().getHerb_type());
+            orderSubItemModel.setHerb_name(model.getHerbModel().getName());
+            orderSubItemModel.setQuantity(model.getCartModel().getQuantity());
+            orderSubItemModel.setHerb_id(model.getHerbModel().getId());
+            try {
+                int quantity = orderSubItemModel.getQuantity();
+                if (orderSubItemModel.getHerb_type() != null || !orderSubItemModel.getHerb_type().isEmpty()) {
+                    if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                        double price = quantity * Double.valueOf(model.getVendor().getRaw_price());
+                        orderSubItemModel.setOrder_price(String.valueOf(price));
+                    } else if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                        double price = quantity * Double.valueOf(model.getVendor().getCapsule_price());
+                        orderSubItemModel.setOrder_price(String.valueOf(price));
+                    }
+
+                }
+            } catch (Exception e
+            ) {
+            }
+            mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(model.getOid()).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isComplete()) {
+
+                     /*   for (final CartHerbModel subCartModel :
+                                al) {
+                        }*/
+                        DatabaseReference dbb = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child(model.getOid()).push();
+                        String keys = dbb.getKey();
+
+                        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(model.getOid()).child(BarakahConstants.DbTABLE.HERB_KEY).child(keys).setValue(orderSubItemModel);
+                        mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(model.getCartModel().getId()).removeValue();
+                        BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
+                         updateStoreData(orderModel,orderSubItemModel);
+
+                    }
+                }
+            });
+        }
+    }
+
+    private void addHerbToOrder(CartHerbModel order, final CartHerbModel herb) {
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+        final OrderModel orderModel = new OrderModel();
+        orderModel.setId(String.valueOf(number));
+        orderModel.setVendor_name(order.getVendor().getVendor_name());
+        orderModel.setVendor_id(order.getVendor().getVendor_id());
+        orderModel.setVendor_name(order.getVendor().getVendor_name());
+        orderModel.setDelivery_type(order.getDeliveryType());
+        orderModel.setOrder_status("0");
+        final OrderSubItemModel orderSubItemModel = new OrderSubItemModel();
+        orderSubItemModel.setHerb_type(herb.getCartModel().getHerb_type());
+        orderSubItemModel.setHerb_name(herb.getHerbModel().getName());
+        orderSubItemModel.setQuantity(herb.getCartModel().getQuantity());
+        orderSubItemModel.setHerb_id(herb.getHerbModel().getId());
+        try {
+            int quantity = orderSubItemModel.getQuantity();
+            if (orderSubItemModel.getHerb_type() != null || !orderSubItemModel.getHerb_type().isEmpty()) {
+                if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getRaw_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                } else if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getCapsule_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                }
+
+            }
+        } catch (Exception e
+        ) {
+        }
+        DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).push();
+        final String key = db.getKey();
+        orderModel.setOrder_key(key);
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isComplete()) {
+                    DatabaseReference dbb = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child(key).push();
+                    String keys = dbb.getKey();
+
+                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).child(keys).setValue(orderSubItemModel);
+
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
+                    BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
+                    updateStoreData(orderModel, orderSubItemModel);
+
+                }
+            }
+        });
+    }
+
+    private void addHerbToOrderRecursive(CartHerbModel order, final CartHerbModel herb) {
+        if (orders != null) {
+            if (sameVendorOrder != null) {
+                if (order.equals(sameVendorOrder)) {
+                    saveOrder(order, herb);
+                } else {
+                    recursiveOrder(order, herb);
+
+                }
+            }
+
+        } else {
+            this.orders = order;
+            recursiveOrder(order, herb);
+        }
+
+    }
+
+    private void saveOrder(CartHerbModel order, final CartHerbModel herb) {
+        final OrderSubItemModel orderSubItemModel = new OrderSubItemModel();
+        orderSubItemModel.setHerb_type(herb.getCartModel().getHerb_type());
+        orderSubItemModel.setHerb_name(herb.getHerbModel().getName());
+        orderSubItemModel.setQuantity(herb.getCartModel().getQuantity());
+        orderSubItemModel.setHerb_id(herb.getHerbModel().getId());
+        try {
+            int quantity = orderSubItemModel.getQuantity();
+            if (orderSubItemModel.getHerb_type() != null || !orderSubItemModel.getHerb_type().isEmpty()) {
+                if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getRaw_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                } else if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getCapsule_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                }
+
+            }
+        } catch (Exception e
+        ) {
+        }
+        DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child(sameVendorOrder.getOrder_key()).push();
+        final String key = db.getKey();
+        // sameVendorOrder.setOrder_key(key);
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(sameVendorOrder.getOrder_key()).child(key).setValue(orderSubItemModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isComplete()) {
+                    DatabaseReference dbb = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child(key).push();
+                    String keys = dbb.getKey();
+
+                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).child(keys).setValue(orderSubItemModel);
+
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
+                    BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
+                    // sameVendorOrder = orderModel;
+                    updateStoreData(sameVendorOrder, orderSubItemModel);
+
+                }
+            }
+        });
+    }
+
+    private void recursiveOrder(CartHerbModel order, final CartHerbModel herb) {
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+        final OrderModel orderModel = new OrderModel();
+        orderModel.setId(String.valueOf(number));
+        orderModel.setVendor_name(order.getVendor().getVendor_name());
+        orderModel.setVendor_id(order.getVendor().getVendor_id());
+        orderModel.setVendor_name(order.getVendor().getVendor_name());
+        orderModel.setDelivery_type(order.getDeliveryType());
+        orderModel.setOrder_status("0");
+        final OrderSubItemModel orderSubItemModel = new OrderSubItemModel();
+        orderSubItemModel.setHerb_type(herb.getCartModel().getHerb_type());
+        orderSubItemModel.setHerb_name(herb.getHerbModel().getName());
+        orderSubItemModel.setQuantity(herb.getCartModel().getQuantity());
+        orderSubItemModel.setHerb_id(herb.getHerbModel().getId());
+        try {
+            int quantity = orderSubItemModel.getQuantity();
+            if (orderSubItemModel.getHerb_type() != null || !orderSubItemModel.getHerb_type().isEmpty()) {
+                if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.raw))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getRaw_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                } else if (orderSubItemModel.getHerb_type().equals(getActivity().getResources().getString(R.string.capsule))) {
+                    double price = quantity * Double.valueOf(herb.getVendor().getCapsule_price());
+                    orderSubItemModel.setOrder_price(String.valueOf(price));
+                }
+
+            }
+        } catch (Exception e
+        ) {
+        }
+        DatabaseReference db = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).push();
+        final String key = db.getKey();
+        orderModel.setOrder_key(key);
+        sameVendorOrder = orderModel;
+
+        mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).setValue(orderModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isComplete()) {
+                    DatabaseReference dbb = mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child(key).push();
+                    String keys = dbb.getKey();
+
+                    mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(mAuth.getCurrentUser().getUid()).child(key).child(keys).setValue(orderSubItemModel);
+                    mDatabase.child(BarakahConstants.DbTABLE.CART).child(mAuth.getCurrentUser().getUid()).child(herb.getCartModel().getId()).removeValue();
+                    BarakahUtils.toastMessgae(getActivity(), getResources().getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT);
+                    updateStoreData(orderModel, orderSubItemModel);
+
+                }
+            }
+        });
+    }
+
+    private void updateStoreData(final OrderModel orderModel, final OrderSubItemModel orderSubItemModel) {
+        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderSubItemModel.getHerb_id()).child(orderModel.getVendor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
@@ -161,9 +388,9 @@ public class FragmentDeliveryType extends Fragment {
                     model.setHerb_id(modell.getHerb_id());
                     model.setVendor_id(modell.getVendor_id());
                     model.setVendor_name(modell.getVendor_name());
-                    if (orderModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.raw))) {
-                        model.setRaw_quantity(model.getRaw_quantity() - orderModel.getQuantity());
-                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    if (orderSubItemModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.raw))) {
+                        model.setRaw_quantity(model.getRaw_quantity() - orderSubItemModel.getQuantity());
+                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderSubItemModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isComplete()) {
@@ -178,9 +405,9 @@ public class FragmentDeliveryType extends Fragment {
                         });
 
 
-                    } else if (orderModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.capsule))) {
-                        model.setCapsule_quantity(model.getCapsule_quantity() - orderModel.getQuantity());
-                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    } else if (orderSubItemModel.getHerb_type().equalsIgnoreCase(getActivity().getResources().getString(R.string.capsule))) {
+                        model.setCapsule_quantity(model.getCapsule_quantity() - orderSubItemModel.getQuantity());
+                        mDatabase.child(BarakahConstants.DbTABLE.STOREITEM).child(orderSubItemModel.getHerb_id()).child(orderModel.getVendor_id()).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isComplete()) {
@@ -199,7 +426,6 @@ public class FragmentDeliveryType extends Fragment {
 
                 }
             }
-            //  System.out.println(da.getValue());
 
 
             @Override
