@@ -42,7 +42,7 @@
     <string name="add_to_cart_message">اقر بأنني اطلعت على التعارضات الممكنه بين الاعشاب و الادوية الخاصة بي ، و بأنني المسؤول عن اي مضاعفات قد تحدث لي </string>
     <string name="no">غير موافق</string>
     <string name="yes"> موافق</string>
-    <string name="conflict_msg">هذه العشبة تتعارض مع حالتك الصحية %s</string>
+    <string name="conflict_msg">هذه العشبة تتعارض مع  %s</string>
     <string name="conflict_title">تنبيه !</string>
     <string name="order_placed_successfully">تم تاكيد الطلب بنجاح!</string>
     <string name="added_to_cart">تمت الاضافة الى السلة</string>
@@ -76,7 +76,7 @@
     <string name="plz_enter_old_pass">يرجى إدخال كلمة المرور السابقة</string>
     <string name="invalid_credentials">كلمة المرور السابقة غير صحيحة</string>
     <string name="pass_update_fail">يجب ان تكون كلمة المرور الجديدة 8 خانات فأكثر</string>
-    <string name="no_herb_found">هذه العشبة غير متوفره</string>
+    <string name="no_herb_found">العشبة التي يتم البحث عنها غير متوفرة</string>
     <string name="plz_enter_valid_mob">الرجاء إدخال رقم الجوال بشكل صحيح</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
