@@ -83,6 +83,7 @@ public class HerbOfVendorAdapter extends RecyclerView.Adapter<HerbOfVendorAdapte
             holder.binding.tvQuantity.setText(String.valueOf(cart.getQuantity()));
             if (cartHerbModel.getDeliveryType().equals("0")) {
                 holder.binding.radioHomeDelivery.setChecked(true);
+
             } else {
                 holder.binding.receiveFromHome.setChecked(true);
 

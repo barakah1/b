@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_gravity="center_horizontal"
-                    android:text="تفاصيل الطلب"
+                    android:text="اختر طريقة الحصول على الطلب"
                     android:textAlignment="center" />
 
             </LinearLayout>

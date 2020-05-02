@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">بركة</string>
     <string name="name_req">الاسم مطلوب</string>
-    <string name="pass_req">كلمة المرور مطلوبة</string>
+    <string name="pass_req">كلمة المرور مطلوبة </string>
     <string name="email_req">البريد الإلكتروني مطلوب</string>
     <string name="address_req">العنوان مطلوب</string>
-    <string name="mobile_req">رقم الجوال مطلوب</string>
+    <string name="mobile_req">رقم الجوال مطلوب </string>
 
     <string name="hello_blank_fragment"> مرحبا</string>
     <string name="success_login">مرحبا بك </string>
