@@ -24,6 +24,7 @@ import com.example.barakah.databinding.FragmentHomeBinding;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
+import com.example.barakah.utils.OnViewHideListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,7 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentHome extends Fragment {
+public class FragmentHome extends Fragment implements OnViewHideListener {
 
     private FragmentHomeBinding binding;
     private Dialog progressDialog;
@@ -82,8 +83,9 @@ public class FragmentHome extends Fragment {
         progressDialog = BarakahUtils.customProgressDialog(getActivity());
         getHomeData();
         binding.rcvHome.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        adapter = new HomeAdapter(getActivity());
+        adapter = new HomeAdapter(getActivity(), this);
         binding.rcvHome.setAdapter(adapter);
+        adapter.setViews(binding);
         binding.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -102,10 +104,13 @@ public class FragmentHome extends Fragment {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                              adapter.getFilter().filter(s);
+                            adapter.getFilter().filter(s);
 
                         }
                     }, 500);
+
+                }else{
+                    adapter.getFilter().filter("");
 
                 }
             }
@@ -128,11 +133,11 @@ public class FragmentHome extends Fragment {
 
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
-                    if (progressDialog != null&&progressDialog.isShowing()) {
+                    if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 } else {
-                    if (progressDialog != null&&progressDialog.isShowing()) {
+                    if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 }
@@ -140,7 +145,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                if (progressDialog != null&&progressDialog.isShowing()) {
+                if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
             }
@@ -148,4 +153,16 @@ public class FragmentHome extends Fragment {
     }
 
 
+    @Override
+    public void onViewHide(boolean isHide) {
+        if (isHide) {
+            binding.rcvHome.setVisibility(View.GONE);
+            binding.llNoData.setVisibility(View.VISIBLE);
+        } else {
+
+            binding.rcvHome.setVisibility(View.VISIBLE);
+            binding.llNoData.setVisibility(View.GONE);
+
+        }
+    }
 }

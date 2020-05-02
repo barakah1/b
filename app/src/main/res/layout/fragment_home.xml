@@ -6,17 +6,22 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/white"
         android:orientation="vertical"
         tools:context=".ui.fragment.FragmentHome">
+
         <LinearLayout
+            android:id="@+id/llSearch"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_fifty"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/fifteen"
             android:layout_marginTop="@dimen/dp_ten"
             android:layout_marginEnd="@dimen/fifteen"
@@ -53,11 +58,56 @@
 
         </LinearLayout>
 
-     <androidx.recyclerview.widget.RecyclerView
-         android:layout_marginTop="@dimen/dp_ten"
-         android:layout_width="match_parent"
-         android:id="@+id/rcvHome"
-         android:layout_height="match_parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/llSearch"
+            android:layout_marginTop="@dimen/dp_ten" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:elevation="@dimen/dp_four"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_no_herb_found" />
+
+
+            <TextView
+                android:id="@+id/oops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/twenty"
+                android:text="@string/no_herb_found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_twenty"
+                android:textStyle="bold" />
+
+            <!--    <TextView
+                    android:id="@+id/noData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img"
+                    android:layout_marginStart="@dimen/dp_five"
+                    android:layout_toEndOf="@id/oops"
+                    android:text="@string/no_data_found"
+
+                    />-->
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </layout>

@@ -32,4 +32,5 @@
     <dimen name="stpi_done_icon_size">18dp</dimen>
     <dimen name="three">3dp</dimen>
     <dimen name="one_h">100dp</dimen>
+    <dimen name="eighty">80dp</dimen>
 </resources>

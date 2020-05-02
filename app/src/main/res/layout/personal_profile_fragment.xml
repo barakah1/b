@@ -75,7 +75,8 @@
                 android:background="@drawable/et_bg"
                 android:ems="10"
                 android:hint="رقم الجوال "
-                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:inputType="number"
                 android:padding="@dimen/dp_ten" />
 
             <EditText

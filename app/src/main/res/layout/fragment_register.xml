@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true"
     android:background="@color/white"
-    android:fillViewport="true">
+    android:clickable="true"
+    android:fillViewport="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,15 +59,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fifteen"
             android:ems="10"
-            android:textAlignment="viewStart"
-            tools:ignore="RtlCompat"
             android:hint="كلمة المرور"
             android:inputType="textPassword"
+            android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.56"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EmailF"
-            app:layout_constraintVertical_bias="0.199" />
+            app:layout_constraintVertical_bias="0.199"
+            tools:ignore="RtlCompat" />
 
         <EditText
             android:id="@+id/PhoneF"
@@ -76,7 +76,8 @@
             android:layout_marginTop="@dimen/fifteen"
             android:ems="10"
             android:hint="رقم الجوال"
-            android:inputType="textPersonName"
+            android:inputType="number"
+            android:maxLength="10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.56"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fifteen"
             android:ems="10"
-
             android:hint=" العنوان"
-            android:inputType="textPersonName"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.56"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,10 +119,10 @@
             android:layout_width="257dp"
             android:layout_height="55dp"
             android:layout_marginTop="@dimen/thirty_five"
+            android:layout_marginBottom="@dimen/dp_fifty"
             android:background="#FF7BBD7F"
             android:text="تسجيل"
             android:textColor="@color/white"
-            android:layout_marginBottom="@dimen/dp_fifty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signoutB"
@@ -133,11 +133,11 @@
             android:layout_width="118dp"
             android:layout_height="39dp"
             android:layout_marginTop="@dimen/fifteen"
+            android:layout_marginEnd="@dimen/dp_ten"
             android:text="الحالة الصحية*"
             android:textColor="#FF7BBD7F"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginEnd="@dimen/dp_ten"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.849"
             app:layout_constraintStart_toStartOf="parent"

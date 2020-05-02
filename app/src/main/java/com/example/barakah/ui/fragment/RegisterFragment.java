@@ -142,13 +142,19 @@ public class RegisterFragment extends Fragment {
         } else if (email.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.email_req), Toast.LENGTH_SHORT).show();
 
+        } else if (!BarakahUtils.isValidEmailId(email)) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.invalid_email), Toast.LENGTH_SHORT).show();
+
         } else if (address.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.address_req), Toast.LENGTH_SHORT).show();
 
         } else if (mobile.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.mobile_req), Toast.LENGTH_SHORT).show();
 
-        } else {
+        }else if (mobile.length()<10) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.plz_enter_valid_mob), Toast.LENGTH_SHORT).show();
+        }
+        else {
             registerModel = new RegisterModel();
             registerModel.setAddress(address);
             registerModel.setName(name);
@@ -199,7 +205,9 @@ public class RegisterFragment extends Fragment {
                             }
                         } else {
                             closeProgress();
-                            System.out.println("something" + task.getException().getMessage());
+                            //System.out.println("something" + task.getException().getMessage());
+                            Toast.makeText(getActivity(),task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+
                             System.out.println("something" + task);
                         }
                     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
@@ -15,9 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.barakah.R;
 import com.example.barakah.databinding.AdapterHomeBinding;
+import com.example.barakah.databinding.FragmentHomeBinding;
 import com.example.barakah.models.HerbsModel;
 import com.example.barakah.ui.activity.HomeActivity;
+import com.example.barakah.ui.fragment.FragmentHome;
 import com.example.barakah.utils.BarakahConstants;
+import com.example.barakah.utils.OnViewHideListener;
 
 import java.util.ArrayList;
 
@@ -26,10 +30,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     private String[] mDataset;
     private ArrayList<HerbsModel> herbsList;
     private ArrayList<HerbsModel> contactListFiltered;
+    private RecyclerView recycler;
+    private OnViewHideListener onViewHideListener;
+    private FragmentHomeBinding bind;
 
     public void setData(ArrayList<HerbsModel> herbsModels) {
         this.herbsList = herbsModels;
         this.contactListFiltered = herbsModels;
+    }
+
+
+
+    public void setViews(FragmentHomeBinding binding) {
+        this.bind=binding;
     }
 
 
@@ -42,8 +55,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         }
     }
 
-    public HomeAdapter(Context mContext) {
+    public HomeAdapter(Context mContext, OnViewHideListener fragmentHome) {
         this.mContext = mContext;
+        this.onViewHideListener=fragmentHome;
     }
 
     @Override
@@ -58,7 +72,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (herbsList != null && herbsList.size() > 0) {
             holder.binding.rvTitle.setText(herbsList.get(position).getName());
-                Glide.with(mContext).load(herbsList.get(position).getImage()).into(holder.binding.imgHome);
+            Glide.with(mContext).load(herbsList.get(position).getImage()).into(holder.binding.imgHome);
             holder.binding.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,7 +100,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    herbsList= contactListFiltered ;
+                    herbsList = contactListFiltered;
                 } else {
                     ArrayList<HerbsModel> filteredList = new ArrayList<>();
                     for (HerbsModel row : herbsList) {
@@ -108,6 +122,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 herbsList = (ArrayList<HerbsModel>) filterResults.values;
 
                 notifyDataSetChanged();
+                if (herbsList == null||herbsList.size()==0) {
+                    onViewHideListener.onViewHide(true);
+                } else {
+                    onViewHideListener.onViewHide(false);
+                }
             }
         };
     }
