@@ -56,7 +56,7 @@ public class AdapterOrderHerb extends RecyclerView.Adapter<AdapterOrderHerb.MyVi
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (data != null && data.size() > 0) {
             OrderSubItemModel model = data.get(position);
-            holder.tvPrice.setText(model.getOrder_price());
+            holder.tvPrice.setText(model.getOrder_price()+" ر.س ");
             holder.tvQuantity.setText(String.valueOf(model.getQuantity()));
             holder.tvHerb.setText(model.getHerb_name());
         /*    if (model.getHerb_type() != null || !model.getHerb_type().isEmpty()) {
