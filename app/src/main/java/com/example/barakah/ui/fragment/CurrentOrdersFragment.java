@@ -158,7 +158,7 @@ public class CurrentOrdersFragment extends Fragment {
                     }
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
-                    getProgressOrders();
+                  //  getProgressOrders();
                 }
                 checkPreviousOrders();
             }
