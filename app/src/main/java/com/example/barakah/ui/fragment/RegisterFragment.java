@@ -217,7 +217,7 @@ public class RegisterFragment extends Fragment {
 
                             System.out.println("something" + task);
                             System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task.getException().getMessage());
-                            System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task);
+                            System.out.println("هناك خطأ يرجى المحا ولة مره اخرى" + task);
                         }
                     }
                 });
