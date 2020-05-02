@@ -3,6 +3,7 @@ package com.example.barakah.ui.fragment;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -318,7 +320,7 @@ public class HerbsDetailFragment extends Fragment {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
                         if (herb.getId().equalsIgnoreCase(health.trim())) {
                             result.add(true);
-                            herb.getName();
+                            problem.add(herb.getName());
                         }
                     }
                 }
@@ -336,7 +338,19 @@ public class HerbsDetailFragment extends Fragment {
         if (getActivity() != null) {
            String str= TextUtils.join(", ",problem);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(getActivity().getResources().getString(R.string.conflict_msg,str)).setTitle(R.string.conflict_title)
+          String s=  getActivity().getResources().getString(R.string.conflict_msg,"<font color='#80bc76'>"+str+"</font>");
+          //  String styledText = "<font color='#FF8C00'>$userName</font> ${resources.getString(R.string.tv_logout)}";
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                builder.setMessage(
+                        Html.fromHtml(s, Html.FROM_HTML_MODE_LEGACY)
+
+                );
+            } else {
+                builder.setMessage(Html.fromHtml(s));
+            }
+
+           // builder.setMessage(getActivity().getResources().getString(R.string.conflict_msg,str));
+                    builder.setTitle(R.string.conflict_title)
                     .setCancelable(false)
                     .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
