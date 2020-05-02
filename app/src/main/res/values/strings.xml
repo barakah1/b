@@ -74,10 +74,10 @@
     <string name="new_pass">كلمة المرور الجديدة</string>
     <string name="plz_enter_new_pass">يرجى إدخال كلمة المرور الجديدة</string>
     <string name="plz_enter_old_pass">يرجى إدخال كلمة المرور السابقة</string>
-    <string name="invalid_credentials">بيانات المدخله غير صحيحة</string>
-    <string name="pass_update_fail">فشل تحديث كلمة المرور</string>
-    <string name="no_herb_found">عشب غير موجود!</string>
-    <string name="plz_enter_valid_mob">الرجاء إدخال رقم هاتف صحيح</string>
+    <string name="invalid_credentials">كلمة المرور السابقة غير صحيحة</string>
+    <string name="pass_update_fail">يجب ان تكون كلمة المرور الجديدة 8 خانات فأكثر</string>
+    <string name="no_herb_found">هذه العشبة غير متوفره</string>
+    <string name="plz_enter_valid_mob">الرجاء إدخال رقم الجوال بشكل صحيح</string>
     <string-array name="stepLabels">
         <item>تم التوصيل</item>
         <item>تحت االعمل</item>

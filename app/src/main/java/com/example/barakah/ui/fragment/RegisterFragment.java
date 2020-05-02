@@ -213,7 +213,7 @@ public class RegisterFragment extends Fragment {
                         } else {
                             closeProgress();
                             //System.out.println("something" + task.getException().getMessage());
-                            Toast.makeText(getActivity(),task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"البريد الالكتروني المدخل مسجل مسبقا" , Toast.LENGTH_SHORT).show();
 
                             System.out.println("something" + task);
                             System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task.getException().getMessage());
