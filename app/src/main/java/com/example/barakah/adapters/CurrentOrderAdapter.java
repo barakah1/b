@@ -62,7 +62,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         if (herbsList != null && herbsList.size() > 0) {
             final OrderModel model = herbsList.get(position);
             if (model.getTotal_price() != null) {
-                holder.binding.orderPrice.setText(mContext.getResources().getString(R.string.total_price, model.getTotal_price()));
+                holder.binding.orderPrice.setText(mContext.getResources().getString(R.string.total_price, model.getTotal_price())+" ر.س ");
 
             }
             if (model.getId() != null) {

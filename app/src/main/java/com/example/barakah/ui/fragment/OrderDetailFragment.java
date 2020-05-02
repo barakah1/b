@@ -98,7 +98,7 @@ public class OrderDetailFragment extends Fragment {
             binding.tvQuantity.setText(String.valueOf(orderModel.getQuantity()));
             binding.tvHerb.setText(orderModel.getHerb_name());*/
             if (orderModel.getTotal_price() != null) {
-                binding.tvTotalPrice.setText(getResources().getString(R.string.total_price, orderModel.getTotal_price()));
+                binding.tvTotalPrice.setText(getResources().getString(R.string.total_price, orderModel.getTotal_price())+" ر.س ");
             }
         }
 

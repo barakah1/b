@@ -61,10 +61,10 @@ public class AdapterVendors extends RecyclerView.Adapter<AdapterVendors.MyViewHo
             VendorStoreItemModel model = data.get(position);
             if (herb_type != null || !herb_type.isEmpty()) {
                 if (herb_type.equals(context.getResources().getString(R.string.raw))) {
-                    holder.tvPrice.setText(String.valueOf(model.getRaw_price()));
+                    holder.tvPrice.setText(String.valueOf(model.getRaw_price())+" ر.س ");
 
                 } else if (herb_type.equals(context.getResources().getString(R.string.capsule))) {
-                    holder.tvPrice.setText(String.valueOf(model.getCapsule_price()));
+                    holder.tvPrice.setText(String.valueOf(model.getCapsule_price())+" ر.س ");
 
                 }
 
