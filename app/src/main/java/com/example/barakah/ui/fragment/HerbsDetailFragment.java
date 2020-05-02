@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -309,6 +310,7 @@ public class HerbsDetailFragment extends Fragment {
 
     private void checkHerbConflict(String uid, int which, ArrayList<String> healthStatusList, ArrayList<HealthStatusModel> medicalHistory) {
         ArrayList<Boolean> result = new ArrayList<>();
+        ArrayList<String> problem = new ArrayList<>();
 
         for (String health : healthStatusList) {
             for (HealthStatusModel herb : medicalHistory) {
@@ -316,24 +318,25 @@ public class HerbsDetailFragment extends Fragment {
                     if (herb.getConflict().containsValue(herbsModel.getId())) {
                         if (herb.getId().equalsIgnoreCase(health.trim())) {
                             result.add(true);
+                            herb.getName();
                         }
                     }
                 }
             }
         }
         if (result.size() > 0) {
-            doalogConflict(uid, which);
+            doalogConflict(uid, which,problem);
         } else {
             addHerbToCart(uid, which);
 
         }
     }
 
-    private void doalogConflict(final String uid, final int which) {
+    private void doalogConflict(final String uid, final int which, ArrayList<String> problem) {
         if (getActivity() != null) {
-
+           String str= TextUtils.join(", ",problem);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(R.string.conflict_msg).setTitle(R.string.conflict_title)
+            builder.setMessage(getActivity().getResources().getString(R.string.conflict_msg,str)).setTitle(R.string.conflict_title)
                     .setCancelable(false)
                     .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
