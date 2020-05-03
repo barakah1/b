@@ -54,6 +54,8 @@ public class HerbsDetailFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FragmentHerbsDetailBinding binding;
     private HerbsModel herbsModel;
+    int checkedItem = 0;
+
     public HerbsDetailFragment() {
         // Required empty public constructor
     }
@@ -136,25 +138,51 @@ public class HerbsDetailFragment extends Fragment {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
             alertDialog.setTitle(getResources().getString(R.string.select_herb_title));
             String[] items = {getResources().getString(R.string.capsule), getResources().getString(R.string.raw)};
-            final int checkedItem = 0;
             alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
                         case 0:
-                            checkUserMedicalHistory(which);
-                            dialog.dismiss();
+                            checkedItem=which;
+                          //  checkUserMedicalHistory(which);
+                          //  dialog.dismiss();
 
                             break;
                         case 1:
-                            checkUserMedicalHistory(which);
-                            dialog.dismiss();
+                            checkedItem=which;
+
+                            // checkUserMedicalHistory(which);
+                           // dialog.dismiss();
                             break;
                     }
                 }
             });
+           // alertDialog.
+            alertDialog.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                   /* switch (which) {
+                        case 0:*/
+                            checkUserMedicalHistory(checkedItem);
+                            dialogInterface.dismiss();
+
+                        /*    break;
+                        case 1:*/
+                   /*         checkUserMedicalHistory(which);
+                            dialogInterface.dismiss();
+                            break;
+                    }*/
+                }
+            });
+            alertDialog.setNegativeButton( getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
 
             AlertDialog alert = alertDialog.create();
+
             alert.setCanceledOnTouchOutside(false);
             alert.show();
         }
