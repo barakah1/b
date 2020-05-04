@@ -2,9 +2,6 @@ package com.example.barakah.ui.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +26,9 @@ import com.example.barakah.utils.BarakahConstants;
 import com.example.barakah.utils.BarakahUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,16 +41,11 @@ import java.util.ArrayList;
 
 public class PersonalProfileFragment extends Fragment {
     private PersonalProfileFragmentBinding binding;
-
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private ArrayList<HealthStatusModel> arrayList;
     private RegisterModel registerModel;
     private Dialog progressDialog;
-
-    // public static PersonalProfileFragment newInstance() {
-   /*     return new PersonalProfileFragment();
-    }*/
 
     public static PersonalProfileFragment newInstance() {
         PersonalProfileFragment fragment = new PersonalProfileFragment();
@@ -108,7 +102,6 @@ public class PersonalProfileFragment extends Fragment {
         binding.btnHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.HEALTH_STATUS_FM);
                 startActivityForResult(intent, BarakahConstants.GET_HEALTH_STATUS);
@@ -121,7 +114,6 @@ public class PersonalProfileFragment extends Fragment {
           binding.tvChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 intent.putExtra(BarakahConstants.HOME_ACTIVITY, BarakahConstants.CHANGE_PASSWORD);
                 getActivity().startActivity(intent);
@@ -129,13 +121,18 @@ public class PersonalProfileFragment extends Fragment {
 
 
         });
+       String em= BarakahUtils.getPref(BarakahConstants.USER_PREF.EMAIL, getActivity());
+     String pass=   BarakahUtils.getPref(BarakahConstants.USER_PREF.PASSWORD, getActivity());
+
+     if(em!=null&&pass!=null) {
+         recentLogin(em,pass);
+     }
 
 
     }
 
     private void setUserData() {
         progressDialog = BarakahUtils.customProgressDialog(getActivity());
-
         FirebaseUser user = mAuth.getCurrentUser();
         mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -151,8 +148,6 @@ public class PersonalProfileFragment extends Fragment {
                 closeProgress();
 
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 closeProgress();
@@ -164,19 +159,14 @@ public class PersonalProfileFragment extends Fragment {
 
     private void checkValidation() {
         String name = binding.etName.getText().toString().trim();
-       // String password = binding.etPass.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String address = binding.etAddress.getText().toString().trim();
         String mobile = binding.etMobile.getText().toString().trim();
         if (name.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.name_req), Toast.LENGTH_SHORT).show();
-        } /*else if (password.isEmpty()) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.pass_req), Toast.LENGTH_SHORT).show();
-        }*/ else if (email.isEmpty()) {
-
+        } else if (email.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.email_req), Toast.LENGTH_SHORT).show();
         }else if (!BarakahUtils.isValidEmailId(email)) {
-
             Toast.makeText(getActivity(), getResources().getString(R.string.invalid_email), Toast.LENGTH_SHORT).show();
         } else if (address.isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.address_req), Toast.LENGTH_SHORT).show();
@@ -196,20 +186,16 @@ public class PersonalProfileFragment extends Fragment {
         }
     }
 
-    private void login(String email) {
+    private void login(final String email) {
         final FirebaseUser user = mAuth.getCurrentUser();
         user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isComplete()) {
-                  /*  user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete()) {*/
+                  if(task.isSuccessful()){
+                      BarakahUtils.putPref(BarakahConstants.USER_PREF.EMAIL, email, getActivity());
+                  }
                                 updateUserData(user);
-                 /*           } else closeProgress();
-                        }
-                    });*/
                 }
                 closeProgress();
 
@@ -221,7 +207,6 @@ public class PersonalProfileFragment extends Fragment {
     private void updateUserData(FirebaseUser user) {
         if (registerModel != null) {
             mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).setValue(registerModel);
-
             if (arrayList != null && arrayList.size() > 0) {
                 DatabaseReference dr = mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER_HEALTH_STATUS).child(user.getUid());
                 dr.removeValue();
@@ -232,10 +217,7 @@ public class PersonalProfileFragment extends Fragment {
                 }
             }
             closeProgress();
-
             Toast.makeText(getActivity(), getResources().getString(R.string.profile_update_success), Toast.LENGTH_SHORT).show();
-           /* startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();*/
         }
 
 
@@ -255,6 +237,13 @@ public class PersonalProfileFragment extends Fragment {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+      private void recentLogin(final String email, final String password) {
+          final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+          AuthCredential credential = EmailAuthProvider
+                  .getCredential(email, password);
+          user.reauthenticate(credential);
     }
 
 }

@@ -94,7 +94,6 @@ public class ForgotPasswordFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            // Log.d(TAG, "Email sent.");
                             Toast.makeText(getActivity(), getResources().getString(R.string.reset_pass_email_sent), Toast.LENGTH_SHORT).show();
                             getActivity().getSupportFragmentManager().popBackStack();
                         }

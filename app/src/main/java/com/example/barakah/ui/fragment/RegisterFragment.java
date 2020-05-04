@@ -84,9 +84,6 @@ public class RegisterFragment extends Fragment {
         return view;
     }
 
-    public void onButtonPressed(Uri uri) {
-
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -171,13 +168,16 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-    private void login(String email, String password) {
+    private void login(final String email, final String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             final FirebaseUser user = mAuth.getCurrentUser();
+                            BarakahUtils.putPref(BarakahConstants.USER_PREF.EMAIL, email, getActivity());
+                            BarakahUtils.putPref(BarakahConstants.USER_PREF.PASSWORD, password, getActivity());
+
                             if (registerModel != null) {
                                 mDatabase.child(BarakahConstants.DbTABLE.CUSTOMER).child(user.getUid()).setValue(registerModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -212,9 +212,7 @@ public class RegisterFragment extends Fragment {
 
                         } else {
                             closeProgress();
-                            //System.out.println("something" + task.getException().getMessage());
                             Toast.makeText(getActivity(),"البريد الالكتروني المدخل مسجل مسبقا" , Toast.LENGTH_SHORT).show();
-
                             System.out.println("something" + task);
                             System.out.println("هناك خطأ يرجى المحاولة مره اخرى" + task.getException().getMessage());
                             System.out.println("هناك خطأ يرجى المحا ولة مره اخرى" + task);
@@ -230,7 +228,6 @@ public class RegisterFragment extends Fragment {
         signUpPhoneTextInput = view.findViewById(R.id.PhoneF);
         signUpaddresTextInput = view.findViewById(R.id.addreddF);
         signUpButton = view.findViewById(R.id.signinB);
-       // errorView = view.findViewById(R.id.signUpErrorView);
         medical = view.findViewById(R.id.medical);
         signoutB = view.findViewById(R.id.signoutB);
 

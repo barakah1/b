@@ -69,9 +69,7 @@ public class FragmentHome extends Fragment implements OnViewHideListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //   return inflater.inflate(R.layout.fragment_home, container, false);
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+      binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.home));
 
         return binding.getRoot();
@@ -99,7 +97,6 @@ public class FragmentHome extends Fragment implements OnViewHideListener {
 
             @Override
             public void afterTextChanged(final Editable s) {
-                //s.toString().isEmpty())_
                 if (!s.toString().isEmpty()) {
                     new Handler().postDelayed(new Runnable() {
                         @Override

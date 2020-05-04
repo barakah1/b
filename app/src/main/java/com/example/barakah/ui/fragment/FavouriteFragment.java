@@ -71,9 +71,7 @@ public class FavouriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //  return inflater.inflate(R.layout.fragment_favourite, container, false);
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favourite, container, false);
+         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favourite, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.favourites));
 
         return binding.getRoot();
@@ -169,9 +167,6 @@ public class FavouriteFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-               /* if (progressDialog != null) {
-                    progressDialog.dismiss();
-                }*/
             }
         });
     }

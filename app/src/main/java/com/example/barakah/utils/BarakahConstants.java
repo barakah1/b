@@ -33,6 +33,8 @@ public class BarakahConstants {
 
     public interface USER_PREF {
         String IS_LOGEDIN = "IS_LOGEDIN";
+        String PASSWORD = "PASSWORD";
+        String EMAIL = "EMAIL";
         String CUSTOMER = "CUSTOMER";
         String CUSTOMER_HEALTH_STATUS = "CUSTOMER_HEALTH_STATUS";
 

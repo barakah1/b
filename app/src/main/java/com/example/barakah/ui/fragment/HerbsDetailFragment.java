@@ -144,34 +144,18 @@ public class HerbsDetailFragment extends Fragment {
                     switch (which) {
                         case 0:
                             checkedItem=which;
-                          //  checkUserMedicalHistory(which);
-                          //  dialog.dismiss();
-
                             break;
                         case 1:
                             checkedItem=which;
-
-                            // checkUserMedicalHistory(which);
-                           // dialog.dismiss();
                             break;
                     }
                 }
             });
-           // alertDialog.
             alertDialog.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int which) {
-                   /* switch (which) {
-                        case 0:*/
                             checkUserMedicalHistory(checkedItem);
                             dialogInterface.dismiss();
-
-                        /*    break;
-                        case 1:*/
-                   /*         checkUserMedicalHistory(which);
-                            dialogInterface.dismiss();
-                            break;
-                    }*/
                 }
             });
             alertDialog.setNegativeButton( getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -367,7 +351,6 @@ public class HerbsDetailFragment extends Fragment {
            String str= TextUtils.join(", ",problem);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
           String s=  getActivity().getResources().getString(R.string.conflict_msg,"<font color='#80bc76'>"+str+"</font>");
-          //  String styledText = "<font color='#FF8C00'>$userName</font> ${resources.getString(R.string.tv_logout)}";
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 builder.setMessage(
                         Html.fromHtml(s, Html.FROM_HTML_MODE_LEGACY)
@@ -377,7 +360,6 @@ public class HerbsDetailFragment extends Fragment {
                 builder.setMessage(Html.fromHtml(s));
             }
 
-           // builder.setMessage(getActivity().getResources().getString(R.string.conflict_msg,str));
                     builder.setTitle(R.string.conflict_title)
                     .setCancelable(false)
                     .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {

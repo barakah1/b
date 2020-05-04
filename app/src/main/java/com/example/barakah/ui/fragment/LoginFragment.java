@@ -144,13 +144,16 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void login(String email, String password) {
+    private void login(final String email, final String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            BarakahUtils.putPref(BarakahConstants.USER_PREF.EMAIL, email, getActivity());
+                            BarakahUtils.putPref(BarakahConstants.USER_PREF.PASSWORD, password, getActivity());
+
                             closeProgress();
                             Toast.makeText(getActivity(), getResources().getString(R.string.success_login), Toast.LENGTH_SHORT).show();
                             BarakahUtils.putPrefBoolean(BarakahConstants.USER_PREF.IS_LOGEDIN, true, getActivity());

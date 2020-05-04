@@ -81,10 +81,8 @@ public class HealthStatusFragment extends Fragment {
     private void initializeView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.rcvHealth);
         btnSubmit = (Button) view.findViewById(R.id.btnSignin);
-        // use a linear layout manager
         layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        // specify an adapter (see also next example)
         mAdapter = new AdapterHealthStatus(getActivity());
         recyclerView.setAdapter(mAdapter);
 

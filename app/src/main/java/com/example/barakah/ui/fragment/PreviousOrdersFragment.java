@@ -64,8 +64,6 @@ public class PreviousOrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //  return inflater.inflate(R.layout.fragment_previous_orders, container, false);
         binding = FragmentPreviousOrdersBinding.inflate(inflater);
         return binding.getRoot();
     }
@@ -86,24 +84,13 @@ public class PreviousOrdersFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
-                  /*  ArrayList<OrderModel> herbsModels = new ArrayList<OrderModel>();
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
-                        System.out.println(da.getValue());
-                        OrderModel model = da.getValue(OrderModel.class);
-                        herbsModels.add(model);
-                    }*/
-                    Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
-                    while (data.hasNext()) {
-                        DataSnapshot da = data.next();
-                        //System.out.println();
                         OrderModel model = da.getValue(OrderModel.class);
                         DataSnapshot child = da.child(BarakahConstants.DbTABLE.HERB_KEY);
-
                         if (child.hasChildren()) {
                             Iterator<DataSnapshot> dataa = child.getChildren().iterator();
-
                             ArrayList<OrderSubItemModel> al = new ArrayList<>();
                             while (dataa.hasNext()) {
                                 DataSnapshot daa = dataa.next();
@@ -117,7 +104,6 @@ public class PreviousOrdersFragment extends Fragment {
                     }
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
-                  //  getProgressOrders();
                     if (herbsModels.size() > 0) {
                         adapter.setData(herbsModels);
                         adapter.notifyDataSetChanged();

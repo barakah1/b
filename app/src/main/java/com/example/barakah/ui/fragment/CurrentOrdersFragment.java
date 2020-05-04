@@ -59,8 +59,6 @@ public class CurrentOrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_current_orders, container, false);
         binding = FragmentCurrentOrdersBinding.inflate(inflater);
         return binding.getRoot();
     }
@@ -86,13 +84,10 @@ public class CurrentOrdersFragment extends Fragment {
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
-                        //System.out.println();
                         OrderModel model = da.getValue(OrderModel.class);
                         DataSnapshot child = da.child(BarakahConstants.DbTABLE.HERB_KEY);
-
                         if (child.hasChildren()) {
                             Iterator<DataSnapshot> dataa = child.getChildren().iterator();
-
                             ArrayList<OrderSubItemModel> al = new ArrayList<>();
                             while (dataa.hasNext()) {
                                 DataSnapshot daa = dataa.next();
@@ -121,30 +116,17 @@ public class CurrentOrdersFragment extends Fragment {
 
     private void getProgressOrders() {
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
         mDatabase.child(BarakahConstants.DbTABLE.ORDERS).child(firebaseUser.getUid()).orderByChild("order_status").equalTo("1").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                  /*  Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
-                    while (data.hasNext()) {
-                        DataSnapshot da = data.next();
-                        System.out.println(da.getValue());
-                        OrderModel model = da.getValue(OrderModel.class);
-                        herbsModels.add(model);
-                    }
-                    adapter.setData(herbsModels);
-                    adapter.notifyDataSetChanged();*/
                     Iterator<DataSnapshot> data = dataSnapshot.getChildren().iterator();
                     while (data.hasNext()) {
                         DataSnapshot da = data.next();
-                        //System.out.println();
                         OrderModel model = da.getValue(OrderModel.class);
                         DataSnapshot child = da.child(BarakahConstants.DbTABLE.HERB_KEY);
-
                         if (child.hasChildren()) {
                             Iterator<DataSnapshot> dataa = child.getChildren().iterator();
-
                             ArrayList<OrderSubItemModel> al = new ArrayList<>();
                             while (dataa.hasNext()) {
                                 DataSnapshot daa = dataa.next();
@@ -158,11 +140,9 @@ public class CurrentOrdersFragment extends Fragment {
                     }
                     adapter.setData(herbsModels);
                     adapter.notifyDataSetChanged();
-                  //  getProgressOrders();
                 }
                 checkPreviousOrders();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -170,7 +150,6 @@ public class CurrentOrdersFragment extends Fragment {
     }
 
     private void checkPreviousOrders() {
-        //   ArrayList<OrderModel> herb=   adapter.getHerb();
         if (herbsModels.size() > 0) {
             adapter.setData(herbsModels);
             adapter.notifyDataSetChanged();
